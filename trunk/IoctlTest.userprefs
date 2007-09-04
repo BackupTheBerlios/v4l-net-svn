@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<UserCombinePreferences filename="/home/tim/Projects/IoctlTest/IoctlTest.mds">
+<UserCombinePreferences filename="/home/tim/v4l-net/trunk/IoctlTest.mds">
   <Files>
     <File filename="./IoctlTest/Main.cs" />
     <File filename="./IoctlTest/Video4Linux/V4LDevice.cs" />
@@ -11,10 +11,9 @@
         <Node expanded="True">
           <Node name="IoctlTest" expanded="True">
             <Node name="Video4Linux" expanded="True">
-              <Node name="APIv2" expanded="True">
-                <Node name="Enums.cs" expanded="False" selected="True" />
-              </Node>
+              <Node name="APIv2" expanded="True" />
             </Node>
+            <Node name="Main.cs" expanded="False" selected="True" />
           </Node>
         </Node>
       </TreeView>
@@ -37,7 +36,7 @@
   </Views>
   <Properties>
     <Properties>
-      <Property key="ActiveWindow" value="/home/tim/Projects/IoctlTest/IoctlTest/Video4Linux/APIv2/Enums.cs" />
+      <Property key="ActiveWindow" value="/home/tim/v4l-net/trunk/IoctlTest/Main.cs" />
       <Property key="ActiveConfiguration" value="Debug" />
     </Properties>
   </Properties>

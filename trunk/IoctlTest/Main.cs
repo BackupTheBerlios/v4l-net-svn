@@ -23,9 +23,16 @@ namespace IoctlTest
 			dev.Standard = (ulong)Video4Linux.APIv2.v4l2_std_id.Composite_PAL_BG;
 			System.Console.WriteLine("Current Standard: " + dev.Standard);
 			
-			/*v4l2_std_id std_id = V4L2_STD_PAL_BG;
-			if (ioctl(fd, VIDIOC_S_STD, &std_id) < 0)
-				printf("err: cant set vid std\n");*/
+			/*/ set image format	
+			struct v4l2_format imgformat;
+			imgformat.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+			memset( &(imgformat.fmt.pix), 0, sizeof( struct v4l2_pix_format ) );
+			imgformat.fmt.pix.width = 720;
+			imgformat.fmt.pix.height = 576;
+			imgformat.fmt.pix.pixelformat = V4L2_PIX_FMT_YUYV;
+			imgformat.fmt.pix.field = V4L2_FIELD_INTERLACED;
+			if (ioctl(fd, VIDIOC_S_FMT, &imgformat) < 0)
+				printf("err: cant set img fmt\n");*/
 		}
 	}
 }

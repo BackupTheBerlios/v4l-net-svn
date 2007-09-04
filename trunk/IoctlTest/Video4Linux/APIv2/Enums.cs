@@ -129,4 +129,43 @@ namespace Video4Linux.APIv2
 		NoAccess             = 0x02000000, // Conditional access denied.
 		VTR                  = 0x04000000 // VTR time constant. [?]
 	}
+	
+	public enum v4l2_buf_type : byte
+	{
+		VideoCapture       = 1,
+		VideoOutput        = 2,
+		VideoOverlay       = 3,
+		VBICapture         = 4,
+		VBIOutput          = 5,
+		SlicedVBICapture   = 6,
+		SlicedVBIOutput    = 7,
+		VideoOutputOverlay = 8,
+		Private            = 0x80
+	}
+	
+	public enum v4l2_field : byte
+	{
+		Any                 = 0,
+		None                = 1,
+		Top                 = 2,
+		Bottom              = 3,
+		Interlaced          = 4,
+		SequentialTopBottom = 5,
+		SequentialBottomTop = 6,
+		Alternate           = 7,
+		InterlacedTopBottom = 8,
+		InterlacedBottomTop = 9
+	}
+	
+	public enum v4l2_colorspace : byte
+	{
+		SMPTE170M     = 1,
+		SMPTE240M     = 2,
+		REC709        = 3,
+		BT878         = 4,
+		470_SYSTEM_M  = 5,
+		470_SYSTEM_BG = 6,
+		JPEG          = 7,
+		SRGB          = 8
+	}
 }
