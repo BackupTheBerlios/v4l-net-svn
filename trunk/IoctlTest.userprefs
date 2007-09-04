@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<UserCombinePreferences filename="/home/tim/Projects/IoctlTest/IoctlTest.mds">
+  <Files>
+    <File filename="./IoctlTest/Main.cs" />
+    <File filename="./IoctlTest/Video4Linux/V4LDevice.cs" />
+    <File filename="./IoctlTest/Video4Linux/APIv2/Enums.cs" />
+  </Files>
+  <Views>
+    <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
+      <TreeView>
+        <Node expanded="True">
+          <Node name="IoctlTest" expanded="True">
+            <Node name="Video4Linux" expanded="True">
+              <Node name="APIv2" expanded="True">
+                <Node name="Enums.cs" expanded="False" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </Node>
+      </TreeView>
+    </ViewMemento>
+    <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ClassPad">
+      <TreeView>
+        <Node expanded="True" />
+      </TreeView>
+    </ViewMemento>
+    <ViewMemento Id="MonoQuery.DatabasePad">
+      <TreeView>
+        <Node expanded="False" />
+      </TreeView>
+    </ViewMemento>
+    <ViewMemento Id="MonoDevelop.NUnit.TestPad">
+      <TreeView>
+        <Node expanded="False" />
+      </TreeView>
+    </ViewMemento>
+  </Views>
+  <Properties>
+    <Properties>
+      <Property key="ActiveWindow" value="/home/tim/Projects/IoctlTest/IoctlTest/Video4Linux/APIv2/Enums.cs" />
+      <Property key="ActiveConfiguration" value="Debug" />
+    </Properties>
+  </Properties>
+</UserCombinePreferences>
