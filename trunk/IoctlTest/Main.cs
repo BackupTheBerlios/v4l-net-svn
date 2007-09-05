@@ -23,7 +23,7 @@ namespace IoctlTest
 			dev.Standard = (ulong)Video4Linux.APIv2.v4l2_std_id.Composite_PAL_BG;
 			System.Console.WriteLine("Current Standard: " + dev.Standard);
 			
-			/*/ set image format	
+			/*/ set image format
 			struct v4l2_format imgformat;
 			imgformat.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 			memset( &(imgformat.fmt.pix), 0, sizeof( struct v4l2_pix_format ) );

@@ -72,9 +72,9 @@ namespace Video4Linux.APIv2
 		public v4l2_rect w;
 		public v4l2_field field;
 		public uint chromakey;
-		public v4l2_clip clips; // v4l2_clip*
+		public unsafe v4l2_clip *clips;
 		public uint clipcount;
-		public uint bitmap; // void*
+		public unsafe void *bitmap;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]
@@ -90,7 +90,7 @@ namespace Video4Linux.APIv2
 	public struct v4l2_clip
 	{
 		public v4l2_rect c;
-		public v4l2_clip next; // v4l2_clip*
+		public unsafe v4l2_clip *next;
 	}
 	
 	[StructLayout(LayoutKind.Sequential)]

@@ -163,8 +163,8 @@ namespace Video4Linux.APIv2
 		SMPTE240M     = 2,
 		REC709        = 3,
 		BT878         = 4,
-		470_SYSTEM_M  = 5,
-		470_SYSTEM_BG = 6,
+		SYSTEM_M_470  = 5,
+		SYSTEM_BG_470 = 6,
 		JPEG          = 7,
 		SRGB          = 8
 	}

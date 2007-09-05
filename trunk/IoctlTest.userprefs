@@ -1,9 +1,7 @@
 <?xml version="1.0"?>
-<UserCombinePreferences filename="/home/tim/v4l-net/trunk/IoctlTest.mds">
+<UserCombinePreferences filename="/mnt/crypted/coding/mono/v4l-net/trunk/IoctlTest.mds">
   <Files>
     <File filename="./IoctlTest/Main.cs" />
-    <File filename="./IoctlTest/Video4Linux/V4LDevice.cs" />
-    <File filename="./IoctlTest/Video4Linux/APIv2/Enums.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
@@ -23,11 +21,6 @@
         <Node expanded="True" />
       </TreeView>
     </ViewMemento>
-    <ViewMemento Id="MonoQuery.DatabasePad">
-      <TreeView>
-        <Node expanded="False" />
-      </TreeView>
-    </ViewMemento>
     <ViewMemento Id="MonoDevelop.NUnit.TestPad">
       <TreeView>
         <Node expanded="False" />
@@ -36,7 +29,7 @@
   </Views>
   <Properties>
     <Properties>
-      <Property key="ActiveWindow" value="/home/tim/v4l-net/trunk/IoctlTest/Main.cs" />
+      <Property key="ActiveWindow" value="/mnt/crypted/coding/mono/v4l-net/trunk/IoctlTest/Main.cs" />
       <Property key="ActiveConfiguration" value="Debug" />
     </Properties>
   </Properties>
