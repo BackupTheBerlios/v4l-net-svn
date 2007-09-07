@@ -35,6 +35,11 @@ namespace Video4Linux
 			ioctl(int device,
 			      APIv2.v4l2_operation_id request,
 			      ref APIv2.v4l2_format fmt);
+		[DllImport("libc")]
+		private static extern int
+			ioctl(int device,
+			      APIv2.v4l2_operation_id request,
+			      ref APIv2.v4l2_tuner tuner);
 		
 		/***************************************************/
 		
@@ -47,7 +52,10 @@ namespace Video4Linux
 		
 		private int deviceHandle;
 		private APIv2.v4l2_capability? _capabilities;
+		
 		private List<V4LInput> inputs;
+		private List<V4LTuner> tuners;
+		
 		private V4LFormatMap formatMap;
 		
 		public V4LDevice()
@@ -85,6 +93,21 @@ namespace Video4Linux
 			while (ioctl(deviceHandle, APIv2.v4l2_operation_id.EnumerateInputs, ref cur) == 0)
 			{
 				inputs.Add(new V4LInput(this, cur));
+				cur.index++;
+			}
+		}
+		
+		private void fetchTuners()
+		{
+			tuners = new List<V4LTuner>();
+			APIv2.v4l2_tuner cur = new APIv2.v4l2_tuner();
+			
+			// TODO: zero out the tuner field
+			
+			cur.index = 0;
+			while (ioctl(deviceHandle, APIv2.v4l2_operation_id.GetTuner, ref cur) == 0)
+			{
+				tuners.Add(new V4LTuner(this, cur));
 				cur.index++;
 			}
 		}
@@ -141,6 +164,17 @@ namespace Video4Linux
 					fetchInputs();
 				
 				return inputs;
+			}
+		}
+		
+		public List<V4LTuner> Tuners
+		{
+			get
+			{
+				if (tuners == null)
+					fetchTuners();
+				
+				return tuners;
 			}
 		}
 				

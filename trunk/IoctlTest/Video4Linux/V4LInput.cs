@@ -42,10 +42,9 @@ namespace Video4Linux
 			get { return input.audioset; }
 		}
 		
-		public uint Tuner
+		public V4LTuner Tuner
 		{
-			// TODO: return this.device.Tuners[input.tuner]!
-			get { return input.tuner; }
+			get { return this.device.Tuners[(int)input.tuner]; }
 		}
 		
 		public ulong SupportedStandards

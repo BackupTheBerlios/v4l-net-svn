@@ -13,6 +13,9 @@ namespace Video4Linux.APIv2
 		SetInput          = -1073457625, // VIDIOC_S_INPUT
 		GetFormat         = -1060350460, // VIDIOC_G_FMT
 		SetFormat         = -1060350459, // VIDIOC_S_FMT
+		GetTuner          = -1068214755, // VIDIOC_G_TUNER
+		SetTuner          =  1079268894, // VIDIOC_S_TUNER
+		GetFrequency      = -1070836168, // VIDIOC_G_FREQUENCY
 		SetFrequency      =  1076647481, // VIDIOC_S_FREQUENCY
 		RequireBuffers    = -1072409080, // VIDIOC_REQBUFS
 		QueryBuffer       = -1069263351, // VIDIOC_QUERYBUF
@@ -214,5 +217,36 @@ namespace Video4Linux.APIv2
 		SN9C10X  =  808532307, // S910
 		WNVA     = 1096175191, // WNVA
 		YYUV     = 1448434009  // YYUV
+	}
+	
+	public enum v4l2_tuner_type
+	{
+		Radio    = 1,
+		AnalogTV = 2
+	}
+	
+	public enum v4l2_tuner_capability_id
+	{
+		Low   = 0x0001, // tuning frequencies are expressed in units of 62.5 Hz, otherwise in units of 62.5 kHz.
+		Norm  = 0x0002, // Multi-standard tuner; the video standard can or must be switched, only v4l2_tuner_type.AnalogTV
+		Lang1 = 0x0040, // Primary Language, only v4l2_tuner_type.AnalogTV
+		Lang2 = 0x0020  // Secondary Language, only v4l2_tuner_type.AnalogTV
+	}
+	
+	public enum v4l2_tuner_audio_reception
+	{
+		Mono   = 0x0001,
+		Stereo = 0x0002,
+		Lang1  = 0x0008, // Primary Language, only v4l2_tuner_type.AnalogTV
+		Lang2  = 0x0004  // Secondary Language, only v4l2_tuner_type.AnalogTV
+	}
+	
+	public enum v4l2_tuner_audio_mode
+	{
+		Mono        = 0,
+		Stereo      = 1,
+		Lang1       = 3,
+		Lang2       = 2,
+		Lang1_Lang2 = 4
 	}
 }

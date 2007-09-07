@@ -19,6 +19,10 @@ namespace IoctlTest
 				System.Console.WriteLine(input.Name);
 			System.Console.WriteLine();
 			
+			foreach (V4LTuner tuner in dev.Tuners)
+				System.Console.WriteLine(tuner.Name);
+			System.Console.WriteLine();
+			
 			System.Console.WriteLine("Current Input: " + dev.Input.Name);
 			dev.Standard = (ulong)Video4Linux.APIv2.v4l2_std_id.Composite_PAL_BG;
 			System.Console.WriteLine("Current Standard: " + dev.Standard);
@@ -37,6 +41,14 @@ namespace IoctlTest
 			System.Console.WriteLine(fmt.fmt.pix.pixelformat);
 			System.Console.WriteLine(fmt.fmt.pix.field);
 			System.Console.WriteLine(fmt.fmt.pix.width + "x" + fmt.fmt.pix.height);
+			
+			/*/ set frequency
+			struct v4l2_frequency freq;
+			freq.tuner = 0;
+			freq.type = V4L2_TUNER_ANALOG_TV;
+			freq.frequency = 217250 / 1000 * 16;
+			if (ioctl(fd, VIDIOC_S_FREQUENCY, &freq) < 0)
+				printf("err: cant set freq\n");*/
 		}
 	}
 }
