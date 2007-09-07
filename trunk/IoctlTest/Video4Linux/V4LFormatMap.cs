@@ -32,7 +32,6 @@ namespace Video4Linux
 			if (this.device.IOControl(v4l2_operation_id.GetFormat, ref fmt) < 0)
 				throw new Exception("Could not get the current format.");
 			
-			// TODO: fetch the real format
 			return fmt;
 		}
 		
