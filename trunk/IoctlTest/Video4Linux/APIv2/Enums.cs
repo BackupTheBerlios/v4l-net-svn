@@ -215,15 +215,4 @@ namespace Video4Linux.APIv2
 		WNVA     = 1096175191, // WNVA
 		YYUV     = 1448434009  // YYUV
 	}
-	
-	class keks
-	{
-		public static uint bla(string fourcc)
-		{
-			return ((uint)fourcc[3]) << 24 |
-				((uint)fourcc[2]) << 16 |
-				((uint)fourcc[1]) << 8 |
-				((uint)fourcc[0]);
-		}
-	}
 }
