@@ -40,12 +40,22 @@ namespace Video4Linux
 			ioctl(int device,
 			      APIv2.v4l2_operation_id request,
 			      ref APIv2.v4l2_tuner tuner);
+		[DllImport("libc")]
+		private static extern int
+			ioctl(int device,
+			      APIv2.v4l2_operation_id request,
+			      ref APIv2.v4l2_frequency freq);
 		
 		/***************************************************/
 		
 		public int IOControl(APIv2.v4l2_operation_id request, ref APIv2.v4l2_format fmt)
 		{
 			return ioctl(deviceHandle, request, ref fmt);
+		}
+		
+		public int IOControl(APIv2.v4l2_operation_id request, ref APIv2.v4l2_frequency freq)
+		{
+			return ioctl(deviceHandle, request, ref freq);
 		}
 		
 		/***************************************************/

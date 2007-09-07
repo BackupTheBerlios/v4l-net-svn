@@ -41,6 +41,10 @@ namespace IoctlTest
 			System.Console.WriteLine(fmt.fmt.pix.pixelformat);
 			System.Console.WriteLine(fmt.fmt.pix.field);
 			System.Console.WriteLine(fmt.fmt.pix.width + "x" + fmt.fmt.pix.height);
+			System.Console.WriteLine();
+			
+			// get the current frequency
+			System.Console.WriteLine(dev.Tuners[0].Frequency.frequency);
 			
 			/*/ set frequency
 			struct v4l2_frequency freq;
