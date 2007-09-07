@@ -44,6 +44,7 @@ namespace Video4Linux
 		
 		public uint Tuner
 		{
+			// TODO: return this.device.Tuners[input.tuner]!
 			get { return input.tuner; }
 		}
 		

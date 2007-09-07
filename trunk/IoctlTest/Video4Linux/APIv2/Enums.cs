@@ -11,6 +11,7 @@ namespace Video4Linux.APIv2
 		SetStandard       =  1074288152, // VIDIOC_S_STD
 		GetInput          = -2147199450, // VIDIOC_G_INPUT
 		SetInput          = -1073457625, // VIDIOC_S_INPUT
+		GetFormat         = -1060350460, // VIDIOC_G_FMT
 		SetFormat         = -1060350459, // VIDIOC_S_FMT
 		SetFrequency      =  1076647481, // VIDIOC_S_FREQUENCY
 		RequireBuffers    = -1072409080, // VIDIOC_REQBUFS
@@ -132,14 +133,19 @@ namespace Video4Linux.APIv2
 	
 	public enum v4l2_buf_type : byte
 	{
+		// v4l2_pix_format
 		VideoCapture       = 1,
 		VideoOutput        = 2,
+		// v4l2_window
 		VideoOverlay       = 3,
+		VideoOutputOverlay = 8, // TODO: ensure that v4l2_window is filled!
+		// v4l2_vbi_format
 		VBICapture         = 4,
 		VBIOutput          = 5,
+		// v4l2_sliced_vbi_format
 		SlicedVBICapture   = 6,
 		SlicedVBIOutput    = 7,
-		VideoOutputOverlay = 8,
+		// byte[] raw
 		Private            = 0x80
 	}
 	
@@ -167,5 +173,45 @@ namespace Video4Linux.APIv2
 		SYSTEM_BG_470 = 6,
 		JPEG          = 7,
 		SRGB          = 8
+	}
+	
+	// image format - fourcc
+	public enum v4l2_pix_format_id : uint
+	{
+		// RGB formats
+		RGB332  =  826427218, // RGB1
+		RGB444  =  875836498, // R444
+		RGB555  = 1329743698, // RGBO
+		RGB565  = 1346520914, // RGBP
+		RGB555X = 1363298130, // RGBQ
+		RGB565X = 1380075346, // RGBR
+		BGR24   =  861030210, // BGR3
+		RGB24   =  859981650, // RGB3
+		BGR32   =  877807426, // BGR4
+		RGB32   =  876758866,  // RGB4
+		
+		// YUV formats
+		GREY    = 1497715271, // GREY
+		YUYV    = 1448695129, // YUYV
+		UYVY    = 1498831189, // UYVY
+		Y41P    = 1345401945, // Y41P
+		YVU420  =  842094169, // YV12
+		YUV420  =  842093913, // YU12
+		YVU410  =  961893977, // YVU9
+		YUV410  =  961959257, // YUV9
+		YUV422P = 1345466932, // 422P
+		NV12    =  842094158, // NV12
+		NV21    =  825382478 // NV21
+	}
+	
+	class keks
+	{
+		public static uint bla(string fourcc)
+		{
+			return ((uint)fourcc[3]) << 24 |
+				((uint)fourcc[2]) << 16 |
+				((uint)fourcc[1]) << 8 |
+				((uint)fourcc[0]);
+		}
 	}
 }

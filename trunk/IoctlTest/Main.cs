@@ -23,16 +23,20 @@ namespace IoctlTest
 			dev.Standard = (ulong)Video4Linux.APIv2.v4l2_std_id.Composite_PAL_BG;
 			System.Console.WriteLine("Current Standard: " + dev.Standard);
 			
-			/*/ set image format
-			struct v4l2_format imgformat;
-			imgformat.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
-			memset( &(imgformat.fmt.pix), 0, sizeof( struct v4l2_pix_format ) );
-			imgformat.fmt.pix.width = 720;
-			imgformat.fmt.pix.height = 576;
-			imgformat.fmt.pix.pixelformat = V4L2_PIX_FMT_YUYV;
-			imgformat.fmt.pix.field = V4L2_FIELD_INTERLACED;
-			if (ioctl(fd, VIDIOC_S_FMT, &imgformat) < 0)
-				printf("err: cant set img fmt\n");*/
+			// set the format
+			Video4Linux.APIv2.v4l2_format fmt = new Video4Linux.APIv2.v4l2_format();
+			fmt.fmt.pix.width = 720;
+			fmt.fmt.pix.height = 576;
+			//fmt.fmt.pix.pixelformat = 1448695129; // V4L2_PIX_FMT_YUYV
+			fmt.fmt.pix.pixelformat = Video4Linux.APIv2.v4l2_pix_format_id.RGB32;
+			fmt.fmt.pix.field = Video4Linux.APIv2.v4l2_field.Interlaced;
+			dev.Format[Video4Linux.APIv2.v4l2_buf_type.VideoCapture] = fmt;
+			
+			// get the current format
+			fmt = dev.Format[Video4Linux.APIv2.v4l2_buf_type.VideoCapture];
+			System.Console.WriteLine("Fmt Type: " + fmt.type);
+			System.Console.WriteLine(fmt.fmt.pix.field);
+			System.Console.WriteLine(fmt.fmt.pix.width + "x" + fmt.fmt.pix.height);
 		}
 	}
 }

@@ -30,20 +30,32 @@ namespace Video4Linux
 			ioctl(int device,
 			      APIv2.v4l2_operation_id request,
 			      ref ulong misc);
+		[DllImport("libc")]
+		private static extern int
+			ioctl(int device,
+			      APIv2.v4l2_operation_id request,
+			      ref APIv2.v4l2_format fmt);
+		
+		/***************************************************/
+		
+		public int IOControl(APIv2.v4l2_operation_id request, ref APIv2.v4l2_format fmt)
+		{
+			return ioctl(deviceHandle, request, ref fmt);
+		}
 		
 		/***************************************************/
 		
 		private int deviceHandle;
 		private APIv2.v4l2_capability? _capabilities;
 		private List<V4LInput> inputs;
+		private V4LFormatMap formatMap;
 		
 		public V4LDevice()
-			: this("/dev/video")
+			: this("/dev/video0")
 		{}
 		
 		public V4LDevice(string devicePath)
 		{
-			// open the video device
 			deviceHandle = Syscall.open(devicePath, OpenFlags.O_RDONLY | OpenFlags.O_NONBLOCK);
 		}
 		
@@ -163,7 +175,19 @@ namespace Video4Linux
 			}
 			set
 			{
-				ioctl(deviceHandle, APIv2.v4l2_operation_id.SetStandard, ref value);
+				if (ioctl(deviceHandle, APIv2.v4l2_operation_id.SetStandard, ref value) < 0)
+					throw new Exception("Could not set the given standard.");
+			}
+		}
+		
+		public V4LFormatMap Format
+		{
+			get
+			{
+				if (formatMap == null)
+					formatMap = new V4LFormatMap(this);
+				
+				return formatMap;
 			}
 		}
 	}
