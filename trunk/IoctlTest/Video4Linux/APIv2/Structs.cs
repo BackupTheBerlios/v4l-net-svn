@@ -163,4 +163,55 @@ namespace Video4Linux.APIv2
 		[MarshalAs(UnmanagedType.ByValArray, SizeConst=2)]
 		public uint[] reserverd;
 	}
+	
+	[StructLayout(LayoutKind.Sequential)]
+	public struct v4l2_buffer
+	{
+		public uint index;
+		public v4l2_buf_type type;
+		public uint bytesused;
+		public uint flags;
+		public v4l2_field field;
+		public timeval timestamp;
+		public v4l2_timecode timecode;
+		public uint sequence;
+		public v4l2_memory memory;
+		
+		// TODO: form into a union
+		// union m
+		// {
+		//   _u32 offset
+		//   ulong userptr
+		// }
+		// HACK: temporary implementation
+		public struct m_union
+		{
+			public uint offset;
+		}
+		public m_union m;
+		
+		public uint length;
+		public uint input;
+		public uint reserved;
+	}
+	
+	[StructLayout(LayoutKind.Sequential)]
+	public struct v4l2_timecode
+	{
+		public uint type;
+		public uint flags;
+		public byte frames;
+		public byte seconds;
+		public byte minutes;
+		public byte hours;
+		[MarshalAs(UnmanagedType.ByValArray, SizeConst=4)]
+		public byte[] userbits;
+	}
+	
+	[StructLayout(LayoutKind.Sequential)]
+	public struct timeval
+	{
+		public ulong tv_sec;
+		public ulong tv_usec;
+	}
 }

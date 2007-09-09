@@ -256,4 +256,18 @@ namespace Video4Linux.APIv2
 		UserPointer   = 2, // The buffer is used for user pointer I/O.
 		MemoryOverlay = 3
 	}
+	
+	/*Table 3-6. Timecode Types
+	V4L2_TC_TYPE_24FPS	1	24 frames per second, i. e. film.
+	V4L2_TC_TYPE_25FPS	2	25 frames per second, i. e. PAL or SECAM video.
+	V4L2_TC_TYPE_30FPS	3	30 frames per second, i. e. NTSC video.
+	V4L2_TC_TYPE_50FPS	4	 
+	V4L2_TC_TYPE_60FPS	5	 
+
+	Table 3-7. Timecode Flags
+	V4L2_TC_FLAG_DROPFRAME	0x0001	Indicates "drop frame" semantics for counting frames in 29.97 fps material. When set, frame numbers 0 and 1 at the start of each minute, except minutes 0, 10, 20, 30, 40, 50 are omitted from the count.
+	V4L2_TC_FLAG_COLORFRAME	0x0002	The "color frame" flag.
+	V4L2_TC_USERBITS_field	0x000C	Field mask for the "binary group flags".
+	V4L2_TC_USERBITS_USERDEFINED	0x0000	Unspecified format.
+	V4L2_TC_USERBITS_8BITCHARS	0x0008	8-bit ISO characters.*/
 }

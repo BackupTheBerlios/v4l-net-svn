@@ -4,8 +4,6 @@ using System.Runtime.InteropServices;
 
 using Mono.Unix.Native;
 
-/* Syscall.mmap(); */
-
 namespace Video4Linux
 {
 	public class V4LDevice
@@ -50,6 +48,11 @@ namespace Video4Linux
 			ioctl(int device,
 			      APIv2.v4l2_operation_id request,
 			      ref APIv2.v4l2_requestbuffers req);
+		[DllImport("libc")]
+		private static extern int
+			ioctl(int device,
+			      APIv2.v4l2_operation_id request,
+			      ref APIv2.v4l2_buffer buf);
 		
 		/***************************************************/
 		
@@ -66,6 +69,11 @@ namespace Video4Linux
 		public int IOControl(APIv2.v4l2_operation_id request, ref APIv2.v4l2_requestbuffers req)
 		{
 			return ioctl(deviceHandle, request, ref req);
+		}
+		
+		public int IOControl(APIv2.v4l2_operation_id request, ref APIv2.v4l2_buffer buf)
+		{
+			return ioctl(deviceHandle, request, ref buf);
 		}
 		
 		/***************************************************/
@@ -150,6 +158,11 @@ namespace Video4Linux
 		/***************************************************/
 		/* Public Getters and Setters                      */
 		/***************************************************/
+		
+		public int DeviceHandle
+		{
+			get { return deviceHandle; }
+		}
 		
 		public string Name
 		{

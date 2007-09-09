@@ -64,14 +64,34 @@ namespace IoctlTest
 			else
 				System.Console.WriteLine("Requested a buffer.");
 			
-			/*/ query buffer info
-			struct v4l2_buffer buffer;
-			memset(&buffer, 0, sizeof(buffer));
-			buffer.type = req.type;
-			buffer.memory = V4L2_MEMORY_MMAP;
-			buffer.index = 0;
-			if (ioctl(fd, VIDIOC_QUERYBUF, &buffer) < 0)
-				printf("err: cant query buf\n");*/
+			// query the buffer
+			Video4Linux.APIv2.v4l2_buffer buf = new Video4Linux.APIv2.v4l2_buffer();
+			buf.type = req.type;
+			buf.memory = req.memory;
+			buf.index = 0;
+			res = dev.IOControl
+				(Video4Linux.APIv2.v4l2_operation_id.QueryBuffer,
+				 ref buf);
+			if (res < 0)
+				throw new Exception("Could not query the buffer.");
+			else
+				System.Console.WriteLine("Queried the buffer.");
+			
+			// map the data
+			IntPtr start = Mono.Unix.Native.Syscall.mmap
+				(IntPtr.Zero,
+				 buf.length,
+				 Mono.Unix.Native.MmapProts.PROT_READ | Mono.Unix.Native.MmapProts.PROT_WRITE,
+				 Mono.Unix.Native.MmapFlags.MAP_SHARED,
+				 dev.DeviceHandle,
+				 buf.m.offset);
+			System.Console.WriteLine(start);
+			if (start.ToInt32() == -1)
+				throw new Exception("Memory mapping failed.");
+			
+			/*/ start streaming
+			if (ioctl(fd, VIDIOC_STREAMON, &buffer.type) < 0)
+				printf("err: cant set stream on\n");*/
 		}
 	}
 }
