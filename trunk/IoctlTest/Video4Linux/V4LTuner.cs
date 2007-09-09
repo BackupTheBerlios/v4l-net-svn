@@ -41,6 +41,12 @@ namespace Video4Linux
 				
 				return freq;
 			}
+			set
+			{
+				value.tuner = tuner.index;
+				if (this.device.IOControl(v4l2_operation_id.SetFrequency, ref value) < 0)
+					throw new Exception("Could not set the current frequency.");
+			}
 		}
 	}
 }

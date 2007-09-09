@@ -44,15 +44,34 @@ namespace IoctlTest
 			System.Console.WriteLine();
 			
 			// get the current frequency
-			System.Console.WriteLine(dev.Tuners[0].Frequency.frequency);
-			
-			/*/ set frequency
-			struct v4l2_frequency freq;
-			freq.tuner = 0;
-			freq.type = V4L2_TUNER_ANALOG_TV;
+			Video4Linux.APIv2.v4l2_frequency freq = dev.Tuners[0].Frequency;
+			// set the current frequency
 			freq.frequency = 217250 / 1000 * 16;
-			if (ioctl(fd, VIDIOC_S_FREQUENCY, &freq) < 0)
-				printf("err: cant set freq\n");*/
+			dev.Tuners[0].Frequency = freq;
+			System.Console.WriteLine("Frequency: " + dev.Tuners[0].Frequency.frequency);
+			System.Console.WriteLine();
+			
+			// request one buffer
+			Video4Linux.APIv2.v4l2_requestbuffers req = new Video4Linux.APIv2.v4l2_requestbuffers();
+			req.count = 1;
+			req.type = Video4Linux.APIv2.v4l2_buf_type.VideoCapture;
+			req.memory = Video4Linux.APIv2.v4l2_memory.MemoryMapping;
+			int res = dev.IOControl
+				(Video4Linux.APIv2.v4l2_operation_id.RequestBuffers,
+				 ref req);
+			if (res < 0)
+				throw new Exception("Could not request buffers.");
+			else
+				System.Console.WriteLine("Requested a buffer.");
+			
+			/*/ query buffer info
+			struct v4l2_buffer buffer;
+			memset(&buffer, 0, sizeof(buffer));
+			buffer.type = req.type;
+			buffer.memory = V4L2_MEMORY_MMAP;
+			buffer.index = 0;
+			if (ioctl(fd, VIDIOC_QUERYBUF, &buffer) < 0)
+				printf("err: cant query buf\n");*/
 		}
 	}
 }

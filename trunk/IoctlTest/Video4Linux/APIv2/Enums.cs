@@ -17,7 +17,7 @@ namespace Video4Linux.APIv2
 		SetTuner          =  1079268894, // VIDIOC_S_TUNER
 		GetFrequency      = -1070836168, // VIDIOC_G_FREQUENCY
 		SetFrequency      =  1076647481, // VIDIOC_S_FREQUENCY
-		RequireBuffers    = -1072409080, // VIDIOC_REQBUFS
+		RequestBuffers    = -1072409080, // VIDIOC_REQBUFS
 		QueryBuffer       = -1069263351, // VIDIOC_QUERYBUF
 		StreamingOn       =  1074026002, // VIDIOC_STREAMON
 		StreamingOff      =  1074026003, // VIDIOC_STREAMOFF
@@ -248,5 +248,12 @@ namespace Video4Linux.APIv2
 		Lang1       = 3,
 		Lang2       = 2,
 		Lang1_Lang2 = 4
+	}
+	
+	public enum v4l2_memory
+	{
+		MemoryMapping = 1, // The buffer is used for memory mapping I/O.
+		UserPointer   = 2, // The buffer is used for user pointer I/O.
+		MemoryOverlay = 3
 	}
 }

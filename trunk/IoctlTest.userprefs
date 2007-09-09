@@ -2,6 +2,8 @@
 <UserCombinePreferences filename="/mnt/crypted/coding/mono/v4l-net/trunk/IoctlTest.mds">
   <Files>
     <File filename="./IoctlTest/Main.cs" />
+    <File filename="./IoctlTest/Video4Linux/V4LDevice.cs" />
+    <File filename="./IoctlTest/Video4Linux/V4LTuner.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
@@ -10,8 +12,8 @@
           <Node name="IoctlTest" expanded="True">
             <Node name="Video4Linux" expanded="True">
               <Node name="APIv2" expanded="True" />
+              <Node name="V4LTuner.cs" expanded="False" selected="True" />
             </Node>
-            <Node name="Main.cs" expanded="False" selected="True" />
           </Node>
         </Node>
       </TreeView>
@@ -29,7 +31,7 @@
   </Views>
   <Properties>
     <Properties>
-      <Property key="ActiveWindow" value="/mnt/crypted/coding/mono/v4l-net/trunk/IoctlTest/Main.cs" />
+      <Property key="ActiveWindow" value="/mnt/crypted/coding/mono/v4l-net/trunk/IoctlTest/Video4Linux/V4LTuner.cs" />
       <Property key="ActiveConfiguration" value="Debug" />
     </Properties>
   </Properties>
