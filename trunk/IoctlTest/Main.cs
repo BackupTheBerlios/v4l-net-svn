@@ -1,6 +1,9 @@
 using System;
 using Video4Linux;
 
+/*Mono.Unix.Native.Stdlib.GetLastError();
+Mono.Unix.UnixMarshal.GetErrorDescription(errno);*/
+
 namespace IoctlTest
 {
 	class MainClass
@@ -53,7 +56,7 @@ namespace IoctlTest
 			
 			// request one buffer
 			Video4Linux.APIv2.v4l2_requestbuffers req = new Video4Linux.APIv2.v4l2_requestbuffers();
-			req.count = 4;
+			req.count = 1;
 			req.type = Video4Linux.APIv2.v4l2_buf_type.VideoCapture;
 			req.memory = Video4Linux.APIv2.v4l2_memory.MemoryMapping;
 			int res = dev.IOControl
@@ -91,9 +94,17 @@ namespace IoctlTest
 			if (start == Mono.Unix.Native.Syscall.MAP_FAILED)
 				throw new Exception("Memory mapping failed.");
 			
-			/*/ start streaming
-			if (ioctl(fd, VIDIOC_STREAMON, &buffer.type) < 0)
-				printf("err: cant set stream on\n");*/
+			// start streaming
+			res = dev.IOControl
+				(Video4Linux.APIv2.v4l2_operation_id.StreamingOn, ref buf.type);
+			if (res < 0)
+			{
+				Mono.Unix.Native.Errno errno = Mono.Unix.Native.Stdlib.GetLastError();
+				System.Console.WriteLine(errno);
+				System.Console.WriteLine(Mono.Unix.UnixMarshal.GetErrorDescription(errno));
+				
+				throw new Exception("Could not start streaming.");
+			}
 		}
 	}
 }

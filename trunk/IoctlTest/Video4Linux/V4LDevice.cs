@@ -53,6 +53,11 @@ namespace Video4Linux
 			ioctl(int device,
 			      APIv2.v4l2_operation_id request,
 			      ref APIv2.v4l2_buffer buf);
+		[DllImport("libc", SetLastError=true)]
+		private static extern int
+			ioctl(int device,
+			      APIv2.v4l2_operation_id request,
+			      ref APIv2.v4l2_buf_type type);
 		
 		/***************************************************/
 		
@@ -74,6 +79,11 @@ namespace Video4Linux
 		public int IOControl(APIv2.v4l2_operation_id request, ref APIv2.v4l2_buffer buf)
 		{
 			return ioctl(deviceHandle, request, ref buf);
+		}
+		
+		public int IOControl(APIv2.v4l2_operation_id request, ref APIv2.v4l2_buf_type type)
+		{
+			return ioctl(deviceHandle, request, ref type);
 		}
 		
 		/***************************************************/
