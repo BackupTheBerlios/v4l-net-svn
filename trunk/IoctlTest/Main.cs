@@ -53,7 +53,7 @@ namespace IoctlTest
 			
 			// request one buffer
 			Video4Linux.APIv2.v4l2_requestbuffers req = new Video4Linux.APIv2.v4l2_requestbuffers();
-			req.count = 1;
+			req.count = 4;
 			req.type = Video4Linux.APIv2.v4l2_buf_type.VideoCapture;
 			req.memory = Video4Linux.APIv2.v4l2_memory.MemoryMapping;
 			int res = dev.IOControl
@@ -63,6 +63,7 @@ namespace IoctlTest
 				throw new Exception("Could not request buffers.");
 			else
 				System.Console.WriteLine("Requested a buffer.");
+			System.Console.WriteLine("Buffer Count: " + req.count);
 			
 			// query the buffer
 			Video4Linux.APIv2.v4l2_buffer buf = new Video4Linux.APIv2.v4l2_buffer();
@@ -76,6 +77,7 @@ namespace IoctlTest
 				throw new Exception("Could not query the buffer.");
 			else
 				System.Console.WriteLine("Queried the buffer.");
+			System.Console.WriteLine();
 			
 			// map the data
 			IntPtr start = Mono.Unix.Native.Syscall.mmap
@@ -85,8 +87,8 @@ namespace IoctlTest
 				 Mono.Unix.Native.MmapFlags.MAP_SHARED,
 				 dev.DeviceHandle,
 				 buf.m.offset);
-			System.Console.WriteLine(start);
-			if (start.ToInt32() == -1)
+			
+			if (start == Mono.Unix.Native.Syscall.MAP_FAILED)
 				throw new Exception("Memory mapping failed.");
 			
 			/*/ start streaming

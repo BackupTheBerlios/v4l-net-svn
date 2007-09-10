@@ -134,7 +134,7 @@ namespace Video4Linux.APIv2
 		VTR                  = 0x04000000 // VTR time constant. [?]
 	}
 	
-	public enum v4l2_buf_type : byte
+	public enum v4l2_buf_type : uint
 	{
 		// v4l2_pix_format
 		VideoCapture       = 1,
@@ -152,7 +152,7 @@ namespace Video4Linux.APIv2
 		Private            = 0x80
 	}
 	
-	public enum v4l2_field : byte
+	public enum v4l2_field : uint
 	{
 		Any                 = 0,
 		None                = 1,
@@ -250,7 +250,7 @@ namespace Video4Linux.APIv2
 		Lang1_Lang2 = 4
 	}
 	
-	public enum v4l2_memory
+	public enum v4l2_memory : uint
 	{
 		MemoryMapping = 1, // The buffer is used for memory mapping I/O.
 		UserPointer   = 2, // The buffer is used for user pointer I/O.

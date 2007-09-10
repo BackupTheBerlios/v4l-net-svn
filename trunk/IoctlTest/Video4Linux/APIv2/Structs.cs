@@ -172,21 +172,27 @@ namespace Video4Linux.APIv2
 		public uint bytesused;
 		public uint flags;
 		public v4l2_field field;
+		
+		//public Mono.Unix.Native.Timeval timestamp;
+		[StructLayout(LayoutKind.Sequential)]
+		public struct timeval
+		{
+			public uint tv_sec;
+			public uint tv_usec;
+		}
 		public timeval timestamp;
+		
 		public v4l2_timecode timecode;
 		public uint sequence;
 		public v4l2_memory memory;
 		
-		// TODO: form into a union
-		// union m
-		// {
-		//   _u32 offset
-		//   ulong userptr
-		// }
-		// HACK: temporary implementation
+		[StructLayout(LayoutKind.Explicit)]
 		public struct m_union
 		{
+			[FieldOffset(0)]
 			public uint offset;
+			[FieldOffset(0)]
+			public uint userptr;
 		}
 		public m_union m;
 		
@@ -206,12 +212,5 @@ namespace Video4Linux.APIv2
 		public byte hours;
 		[MarshalAs(UnmanagedType.ByValArray, SizeConst=4)]
 		public byte[] userbits;
-	}
-	
-	[StructLayout(LayoutKind.Sequential)]
-	public struct timeval
-	{
-		public ulong tv_sec;
-		public ulong tv_usec;
 	}
 }

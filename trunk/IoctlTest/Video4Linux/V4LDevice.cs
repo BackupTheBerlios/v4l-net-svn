@@ -8,47 +8,47 @@ namespace Video4Linux
 {
 	public class V4LDevice
 	{
-		[DllImport("libc")]
+		[DllImport("libc", SetLastError=true)]
 		private static extern int
 			ioctl(int device,
 			      APIv2.v4l2_operation_id request,
 			      ref APIv2.v4l2_capability cap);
-		[DllImport("libc")]
+		[DllImport("libc", SetLastError=true)]
 		private static extern int
 			ioctl(int device,
 			      APIv2.v4l2_operation_id request,
 			      ref APIv2.v4l2_input input);
-		[DllImport("libc")]
+		[DllImport("libc", SetLastError=true)]
 		private static extern int
 			ioctl(int device,
 			      APIv2.v4l2_operation_id request,
 			      ref int misc);
-		[DllImport("libc")]
+		[DllImport("libc", SetLastError=true)]
 		private static extern int
 			ioctl(int device,
 			      APIv2.v4l2_operation_id request,
 			      ref ulong misc);
-		[DllImport("libc")]
+		[DllImport("libc", SetLastError=true)]
 		private static extern int
 			ioctl(int device,
 			      APIv2.v4l2_operation_id request,
 			      ref APIv2.v4l2_format fmt);
-		[DllImport("libc")]
+		[DllImport("libc", SetLastError=true)]
 		private static extern int
 			ioctl(int device,
 			      APIv2.v4l2_operation_id request,
 			      ref APIv2.v4l2_tuner tuner);
-		[DllImport("libc")]
+		[DllImport("libc", SetLastError=true)]
 		private static extern int
 			ioctl(int device,
 			      APIv2.v4l2_operation_id request,
 			      ref APIv2.v4l2_frequency freq);
-		[DllImport("libc")]
+		[DllImport("libc", SetLastError=true)]
 		private static extern int
 			ioctl(int device,
 			      APIv2.v4l2_operation_id request,
 			      ref APIv2.v4l2_requestbuffers req);
-		[DllImport("libc")]
+		[DllImport("libc", SetLastError=true)]
 		private static extern int
 			ioctl(int device,
 			      APIv2.v4l2_operation_id request,
@@ -92,7 +92,7 @@ namespace Video4Linux
 		
 		public V4LDevice(string devicePath)
 		{
-			deviceHandle = Syscall.open(devicePath, OpenFlags.O_RDONLY | OpenFlags.O_NONBLOCK);
+			deviceHandle = Syscall.open(devicePath, OpenFlags.O_RDWR);
 		}
 		
 		~V4LDevice()
