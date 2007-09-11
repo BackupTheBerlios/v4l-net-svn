@@ -49,6 +49,9 @@ namespace IoctlTest
 			// get the current frequency
 			Video4Linux.APIv2.v4l2_frequency freq = dev.Tuners[0].Frequency;
 			// set the current frequency
+			// RTL: 217250
+			// Pro7: 294250
+			// Super RTL: 303250
 			freq.frequency = 217250 / 1000 * 16;
 			dev.Tuners[0].Frequency = freq;
 			System.Console.WriteLine("Frequency: " + dev.Tuners[0].Frequency.frequency);
@@ -112,19 +115,80 @@ namespace IoctlTest
 				dev.IOControl
 					(Video4Linux.APIv2.v4l2_operation_id.QueryBuffer, ref buf);
 			
-			// convert to rgb bitmap
-			System.Drawing.Bitmap bm = new System.Drawing.Bitmap(720, 576);
+			System.Console.WriteLine();
+			System.Console.Write("Field: " + buf.field);
+			
+			// read the yuyv bitmap
+			System.Drawing.Bitmap bm = ReadYUYVFrame(start, 720, 576);
+			bm.Save("/home/tim/test.bmp");
+			
+			// dequeue the buffer
+			res = dev.IOControl(Video4Linux.APIv2.v4l2_operation_id.DequeueBuffer, ref buf);
+			if (res < 0)
+				throw new Exception("Could not dequeue the buffer.");
+			
+			// re-enqueue the buffer
+			res = dev.IOControl
+				(Video4Linux.APIv2.v4l2_operation_id.EnqueueBuffer, ref buf);
+			if (res < 0)
+				throw new Exception("Could not enqueue the buffer.");
+			
+			// wait 'til data is received
+			while (buf.bytesused == 0)
+				dev.IOControl
+					(Video4Linux.APIv2.v4l2_operation_id.QueryBuffer, ref buf);
+			
+			System.Console.WriteLine();
+			System.Console.Write("Field: " + buf.field);
+			
+			// read the yuyv bitmap
+			System.Drawing.Bitmap bm2 = ReadYUYVFrame(start, 720, 576);
+			bm2.Save("/home/tim/test2.bmp");
+			
+			// dequeue the buffer
+			res = dev.IOControl(Video4Linux.APIv2.v4l2_operation_id.DequeueBuffer, ref buf);
+			if (res < 0)
+				throw new Exception("Could not dequeue the buffer.");
+			
+			// re-enqueue the buffer
+			res = dev.IOControl
+				(Video4Linux.APIv2.v4l2_operation_id.EnqueueBuffer, ref buf);
+			if (res < 0)
+				throw new Exception("Could not enqueue the buffer.");
+			
+			// wait 'til data is received
+			while (buf.bytesused == 0)
+				dev.IOControl
+					(Video4Linux.APIv2.v4l2_operation_id.QueryBuffer, ref buf);
+			
+			System.Console.WriteLine();
+			System.Console.Write("Field: " + buf.field);
+			
+			// read the yuyv bitmap
+			System.Drawing.Bitmap bm3 = ReadYUYVFrame(start, 720, 576);
+			bm3.Save("/home/tim/test3.bmp");
+			
+			// stop streaming
+			res = dev.IOControl
+				(Video4Linux.APIv2.v4l2_operation_id.StreamingOff, ref buf.type);
+			if (res < 0)
+				throw new Exception("Could not stop streaming.");
+		}
+		
+		private static System.Drawing.Bitmap ReadYUYVFrame(IntPtr ptr, int width, int height)
+		{
+			System.Drawing.Bitmap bm = new System.Drawing.Bitmap(width, height);
 			
 			int
 				x = 0,
 				y = 0;
-			for (int i=0; i<720*576/2; i++) // 720*576
+			for (int i=0; i<width*height/2; i++)
 			{
 				byte
-					y1 = System.Runtime.InteropServices.Marshal.ReadByte(start, i*4),
-					u = System.Runtime.InteropServices.Marshal.ReadByte(start, i*4+1),
-					y2 = System.Runtime.InteropServices.Marshal.ReadByte(start, i*4+2),
-					v = System.Runtime.InteropServices.Marshal.ReadByte(start, i*4+3);
+					y1 = System.Runtime.InteropServices.Marshal.ReadByte(ptr, i*4),
+					u = System.Runtime.InteropServices.Marshal.ReadByte(ptr, i*4+1),
+					y2 = System.Runtime.InteropServices.Marshal.ReadByte(ptr, i*4+2),
+					v = System.Runtime.InteropServices.Marshal.ReadByte(ptr, i*4+3);
 				
 				bm.SetPixel(x++, y, YUYVtoRGB(y1, u, v));
 				bm.SetPixel(x++, y+1, YUYVtoRGB(y2, u, v));
@@ -136,13 +200,7 @@ namespace IoctlTest
 				}
 			}
 			
-			bm.Save("/home/tim/test.bmp");
-			
-			// stop streaming
-			res = dev.IOControl
-				(Video4Linux.APIv2.v4l2_operation_id.StreamingOff, ref buf.type);
-			if (res < 0)
-				throw new Exception("Could not stop streaming.");
+			return bm;
 		}
 		
 		private static System.Drawing.Color YUYVtoRGB(byte y, byte u, byte v)
