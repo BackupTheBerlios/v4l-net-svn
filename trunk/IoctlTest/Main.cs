@@ -115,12 +115,9 @@ namespace IoctlTest
 				dev.IOControl
 					(Video4Linux.APIv2.v4l2_operation_id.QueryBuffer, ref buf);
 			
-			System.Console.WriteLine();
-			System.Console.Write("Field: " + buf.field);
-			
-			// read the yuyv bitmap
-			System.Drawing.Bitmap bm = ReadYUYVFrame(start, 720, 576);
-			bm.Save("/home/tim/test.bmp");
+			// read the yuyv image
+			new YUYVFrame(start, 720, 576).toBitmap().
+				Save("/home/tim/test1.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
 			
 			// dequeue the buffer
 			res = dev.IOControl(Video4Linux.APIv2.v4l2_operation_id.DequeueBuffer, ref buf);
@@ -138,12 +135,9 @@ namespace IoctlTest
 				dev.IOControl
 					(Video4Linux.APIv2.v4l2_operation_id.QueryBuffer, ref buf);
 			
-			System.Console.WriteLine();
-			System.Console.Write("Field: " + buf.field);
-			
-			// read the yuyv bitmap
-			System.Drawing.Bitmap bm2 = ReadYUYVFrame(start, 720, 576);
-			bm2.Save("/home/tim/test2.bmp");
+			// read the yuyv image
+			new YUYVFrame(start, 720, 576).toBitmap().
+				Save("/home/tim/test2.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
 			
 			// dequeue the buffer
 			res = dev.IOControl(Video4Linux.APIv2.v4l2_operation_id.DequeueBuffer, ref buf);
@@ -161,75 +155,15 @@ namespace IoctlTest
 				dev.IOControl
 					(Video4Linux.APIv2.v4l2_operation_id.QueryBuffer, ref buf);
 			
-			System.Console.WriteLine();
-			System.Console.Write("Field: " + buf.field);
-			
-			// read the yuyv bitmap
-			System.Drawing.Bitmap bm3 = ReadYUYVFrame(start, 720, 576);
-			bm3.Save("/home/tim/test3.bmp");
+			// read the yuyv image
+			new YUYVFrame(start, 720, 576).toBitmap().
+				Save("/home/tim/test3.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
 			
 			// stop streaming
 			res = dev.IOControl
 				(Video4Linux.APIv2.v4l2_operation_id.StreamingOff, ref buf.type);
 			if (res < 0)
 				throw new Exception("Could not stop streaming.");
-		}
-		
-		private static System.Drawing.Bitmap ReadYUYVFrame(IntPtr ptr, int width, int height)
-		{
-			System.Drawing.Bitmap bm = new System.Drawing.Bitmap(width, height);
-			
-			int
-				x = 0,
-				y = 0;
-			for (int i=0; i<width*height/2; i++)
-			{
-				byte
-					y1 = System.Runtime.InteropServices.Marshal.ReadByte(ptr, i*4),
-					u = System.Runtime.InteropServices.Marshal.ReadByte(ptr, i*4+1),
-					y2 = System.Runtime.InteropServices.Marshal.ReadByte(ptr, i*4+2),
-					v = System.Runtime.InteropServices.Marshal.ReadByte(ptr, i*4+3);
-				
-				bm.SetPixel(x++, y, YUYVtoRGB(y1, u, v));
-				bm.SetPixel(x++, y+1, YUYVtoRGB(y2, u, v));
-				
-				if (x == 720)
-				{
-					x = 0;
-					y++;
-				}
-			}
-			
-			return bm;
-		}
-		
-		private static System.Drawing.Color YUYVtoRGB(byte y, byte u, byte v)
-		{
-			int
-				r = (int)(y + 1.370705 * (v-128)),
-				g = (int)(y - 0.698001 * (v-128) - 0.337633 * (u-128)),
-				b = (int)(y + 1.732446 * (u-128));
-			
-			if (r < 0)
-				r = 0;
-			else if (r > 255)
-				r = 255;
-			
-			if (g < 0)
-				g = 0;
-			else if (g > 255)
-				g = 255;
-			
-			if (b < 0)
-				b = 0;
-			else if (b > 255)
-				b = 255;
-			
-			r = r * 220 / 256;
-			g = g * 220 / 256;
-			b = b * 220 / 256;
-			
-			return System.Drawing.Color.FromArgb(r, g, b);
 		}
 	}
 }

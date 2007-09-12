@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <UserCombinePreferences filename="/mnt/crypted/coding/mono/v4l-net/trunk/IoctlTest.mds">
   <Files>
-    <File filename="./IoctlTest/Main.cs" />
     <File filename="./IoctlTest/Video4Linux/V4LDevice.cs" />
     <File filename="./IoctlTest/Video4Linux/V4LTuner.cs" />
+    <File filename="./IoctlTest/Main.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
