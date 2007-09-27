@@ -2,14 +2,14 @@
 /* 
  * Copyright (C) 2007 Tim Taubert (twenty-three@users.berlios.de)
  * 
- * This file is part of video4linux-net.
+ * This file is part of Video4Linux.Net.
  *
- * Video4linux-net is free software; you can redistribute it and/or modify
+ * Video4Linux.Net is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * Video4linux-net is distributed in the hope that it will be useful,
+ * Video4Linux.Net is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
@@ -59,8 +59,6 @@ namespace Video4Linux
         /// <summary>
         /// Creates a Video4Linux device.
         /// </summary>
-        /// <param name="width">Width of surface</param>
-        /// <param name="height">Height of surface</param>
 		public V4LDevice()
 			: this("/dev/video0")
 		{}
@@ -84,6 +82,8 @@ namespace Video4Linux
 		}
 	
 		#endregion Constructors and Destructors
+		
+		#region Private Methods
 		
 		private void fetchAudioInputs()
 		{
@@ -240,7 +240,9 @@ namespace Video4Linux
 			}
 		}
 		
-		/**************************************************/
+		#endregion Private Methods
+		
+		#region Public Methods
 
 		public void StartStreaming()
 		{
@@ -267,7 +269,9 @@ namespace Video4Linux
 				throw new Exception("VIDIOC_STREAMOFF");
 		}
 		
-		/**************************************************/
+		#endregion Public Methods
+		
+		#region Private Properties
 		
 		private APIv2.v4l2_capability deviceCapabilities
 		{
@@ -280,13 +284,23 @@ namespace Video4Linux
 			}
 		}
 		
-		/**************************************************/
+		#endregion Private Properties
 		
-		// TODO: remove
-		public int DeviceHandle
+		#region Internal Properties
+		
+		internal int DeviceHandle
 		{
 			get { return deviceHandle; }
 		}
+		
+		internal V4LIOControl IoControl
+		{
+			get { return ioControl; }
+		}
+		
+		#endregion Internal Properties
+		
+		#region Public Properties
 		
 		public string Name
 		{
@@ -487,9 +501,6 @@ namespace Video4Linux
 			}
 		}
 		
-		public V4LIOControl IoControl
-		{
-			get { return ioControl; }
-		}
+		#endregion Public Properties
 	}
 }
