@@ -197,7 +197,7 @@ namespace Video4Linux
 			cur.index = 0;
 			while (ioControl.GetTuner(ref cur) == 0)
 			{
-				tuners.Add(new V4LTuner(cur));
+				tuners.Add(new V4LTuner(this, cur));
 				cur.index++;
 			}
 		}

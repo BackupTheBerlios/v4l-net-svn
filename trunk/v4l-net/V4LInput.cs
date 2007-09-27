@@ -72,9 +72,13 @@ namespace Video4Linux
 			get { return input.type; }
 		}
 		
-		
+        /// <summary>
+        /// Gets the video input's tuner.
+        /// </summary>
+		/// <value>The tuner belonging to the video input.</value>
 		public V4LTuner Tuner
 		{
+			// FIXME: inputs could have zero tuners!
 			get { return device.Tuners[(int)input.tuner]; }
 		}
 		

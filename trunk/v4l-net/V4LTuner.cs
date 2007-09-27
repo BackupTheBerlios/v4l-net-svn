@@ -21,30 +21,46 @@
 
 using System;
 using System.Text;
+using Video4Linux.APIv2;
 
 namespace Video4Linux
 {
+	/// <summary>
+	/// Represents a tuner.
+	/// </summary>
 	public class V4LTuner
 	{
 		/*public int AFCValue;
 		public bool UseAFC;*/
 		
-		private APIv2.v4l2_tuner tuner;
+		#region Private Fields
 		
-		internal V4LTuner(APIv2.v4l2_tuner tuner)
+		private V4LDevice device;
+		private v4l2_tuner tuner;
+		
+		#endregion Private Fields
+		
+		#region Constructors and Destructors
+		
+		internal V4LTuner(V4LDevice device, v4l2_tuner tuner)
 		{
+			this.device = device;
 			this.tuner = tuner;
 		}
 		
-		/**************************************************/
+		#endregion Constructors and Destructors
 		
-		/**************************************************/
+		#region Public Properties
 		
 		public uint Index
 		{
 			get { return tuner.index; }
 		}
 		
+        /// <summary>
+        /// Gets the tuner's name.
+        /// </summary>
+		/// <value>The name of the tuner.</value>
 		public string Name
 		{
 			get { return Encoding.ASCII.GetString(tuner.name); }
@@ -60,15 +76,46 @@ namespace Video4Linux
 			get { return tuner.capability; }
 		}
 		
-		/*public uint Frequency
+        /// <summary>
+        /// Gets or sets the tuner's current frequency.
+        /// </summary>
+		/// <value>The frequency.</value>
+		public uint Frequency
 		{
-		}*/
+			get
+			{
+				v4l2_frequency freq = new v4l2_frequency();
+				freq.tuner = tuner.index;
+				freq.type = tuner.type;
+				if (device.IoControl.GetFrequency(ref freq) < 0)
+					throw new Exception("VIDIOC_G_FREQUENCY");
+				
+				return freq.frequency;
+			}
+			set 
+			{
+				v4l2_frequency freq = new v4l2_frequency();
+				freq.tuner = tuner.index;
+				freq.type = tuner.type;
+				freq.frequency = value;
+				if (device.IoControl.SetFrequency(ref freq) < 0)
+					throw new Exception("VIDIOC_S_FREQUENCY");
+			}
+		}
 		
+        /// <summary>
+        /// Gets the lowest possible tuner frequency.
+        /// </summary>
+		/// <value>The frequency.</value>
 		public uint LowestFrequency
 		{
 			get { return tuner.rangelow; }
 		}
 		
+        /// <summary>
+        /// Gets the highest possible tuner frequency.
+        /// </summary>
+		/// <value>The frequency.</value>
 		public uint HighestFrequency
 		{
 			get { return tuner.rangehigh; }
@@ -78,5 +125,7 @@ namespace Video4Linux
 		{
 			get { return tuner.signal; }
 		}
+		
+		#endregion Public Properties
 	}
 }
