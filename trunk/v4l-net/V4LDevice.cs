@@ -494,7 +494,7 @@ namespace Video4Linux
 			set
 			{
 				v4l2_std_id std = value.Id;
-				if (ioControl.GetStandard(ref std) < 0)
+				if (ioControl.SetStandard(ref std) < 0)
 					throw new Exception("VIDIOC_S_STD");
 			}
 		}
