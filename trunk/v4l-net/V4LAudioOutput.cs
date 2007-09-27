@@ -28,14 +28,14 @@ namespace Video4Linux
 	{
 		private APIv2.v4l2_audioout output;
 		
-		public V4LAudioOutput(APIv2.v4l2_audioout output)
+		internal V4LAudioOutput(APIv2.v4l2_audioout output)
 		{
 			this.output = output;
 		}
 		
 		/**************************************************/
 		
-		public APIv2.v4l2_audioout ToStruct()
+		internal APIv2.v4l2_audioout ToStruct()
 		{
 			return output;
 		}

@@ -25,16 +25,26 @@ using System.Runtime.InteropServices;
 
 namespace Video4Linux
 {
+    /// <summary>
+	/// Represents a Video4Linux buffer used with streaming I/O and mmap
+	/// and stores (info about) the captured frames.
+    /// </summary>
 	public class V4LBuffer
 	{
 		private const int HEIGHT = 576;
 		private const int WIDTH = 720;
 		
+		#region Private Fields
+		
 		private V4LDevice device;
 		private APIv2.v4l2_buffer buffer;
 		private IntPtr start;
 		
-		public V4LBuffer(V4LDevice device, APIv2.v4l2_buffer buffer)
+		#endregion Private Fields
+		
+		#region Constructors and Destructors
+		
+		internal V4LBuffer(V4LDevice device, APIv2.v4l2_buffer buffer)
 		{
 			this.device = device;
 			this.buffer = buffer;
@@ -42,8 +52,15 @@ namespace Video4Linux
 			mapMemory();
 		}
 		
-		/**************************************************/
+		// TODO: unmap memory when destructed.
 		
+		#endregion Constructors and Destructors
+		
+		#region Private Methods
+		
+		/// <summary>
+		/// Maps the memory belonging to the buffer.
+		/// </summary>
 		private void mapMemory()
 		{
 			start = Syscall.mmap
@@ -57,21 +74,29 @@ namespace Video4Linux
 				throw new Exception("Memory mapping failed.");
 		}
 		
-		/**************************************************/
-
-		public void Enqueue()
+		#endregion Private Methods
+		
+		#region Public Methods
+		
+		/// <summary>
+		/// Puts the buffer into the driver's incoming queue.
+		/// </summary>
+		internal void Enqueue()
 		{
 			if (device.IoControl.EnqueueBuffer(ref buffer) < 0)
 				throw new Exception("VIDIOC_QBUF");
 		}
-
-		public void Dequeue()
+		
+		/// <summary>
+		/// Removes the buffer from the driver's outgoing queue.
+		/// </summary>
+		internal void Dequeue()
 		{
 			if (device.IoControl.DequeueBuffer(ref buffer) < 0)
 				throw new Exception("VIDIOC_DQBUF");
 		}
 		
-		/**************************************************/
+		#endregion Public Methods
 		
 		public uint Index
 		{
@@ -112,7 +137,5 @@ namespace Video4Linux
 		{
 			get { return start; }
 		}
-		
-		//public V4LField Field;
 	}
 }

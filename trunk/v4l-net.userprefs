@@ -1,21 +1,19 @@
 <?xml version="1.0"?>
-<UserCombinePreferences filename="/mnt/crypted/coding/mono/v4l-net/v4l-net.mds">
-  <Files>
-    <File filename="./v4l-net/V4LDevice.cs" />
-    <File filename="./v4l-net/V4LBuffer.cs" />
-    <File filename="./v4l-net/V4LIOControl.cs" />
-  </Files>
+<UserCombinePreferences filename="/mnt/crypted/coding/mono/v4l-net/trunk/v4l-net.mds">
+  <Files />
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
-          <Node name="v4l-net" expanded="True" />
+          <Node name="v4l-net" expanded="True">
+            <Node name="V4LAudioInput.cs" expanded="False" selected="True" />
+          </Node>
         </Node>
       </TreeView>
     </ViewMemento>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ClassPad">
       <TreeView>
-        <Node expanded="True" />
+        <Node expanded="False" />
       </TreeView>
     </ViewMemento>
     <ViewMemento Id="MonoDevelop.NUnit.TestPad">
@@ -26,7 +24,7 @@
   </Views>
   <Properties>
     <Properties>
-      <Property key="ActiveWindow" value="/mnt/crypted/coding/mono/v4l-net/v4l-net/V4LBuffer.cs" />
+      <Property key="ActiveWindow" value="" />
       <Property key="ActiveConfiguration" value="Debug" />
     </Properties>
   </Properties>

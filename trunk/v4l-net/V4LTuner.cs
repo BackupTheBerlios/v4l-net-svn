@@ -31,7 +31,7 @@ namespace Video4Linux
 		
 		private APIv2.v4l2_tuner tuner;
 		
-		public V4LTuner(APIv2.v4l2_tuner tuner)
+		internal V4LTuner(APIv2.v4l2_tuner tuner)
 		{
 			this.tuner = tuner;
 		}
