@@ -24,26 +24,44 @@ using System.Text;
 
 namespace Video4Linux
 {
+	/// <summary>
+	/// Represents a video input.
+	/// </summary>
 	public class V4LInput
 	{
+		#region Private Fields
+		
 		private V4LDevice device;
 		private APIv2.v4l2_input input;
 		
+		#endregion Private Fields
+		
+		#region Constructors and Destructors
+		
+        /// <summary>
+        /// Creates a video input.
+        /// </summary>
+		/// <param name="device">The parental Video4Linux device.</param>
+		/// <param name="input">The struct holding the video input information.</param>
 		internal V4LInput(V4LDevice device, APIv2.v4l2_input input)
 		{
 			this.device = device;
 			this.input = input;
 		}
 		
-		/**************************************************/
+		#endregion Constructors and Destructors
 		
-		/**************************************************/
+		#region Public Properties
 		
 		public uint Index
 		{
 			get { return input.index; }
 		}
 		
+        /// <summary>
+        /// Gets the video input's name.
+        /// </summary>
+		/// <value>The name of the video input.</value>
 		public string Name
 		{
 			get { return Encoding.ASCII.GetString(input.name); }
@@ -54,7 +72,8 @@ namespace Video4Linux
 			get { return input.type; }
 		}
 		
-		public V4LTuner tuner
+		
+		public V4LTuner Tuner
 		{
 			get { return device.Tuners[(int)input.tuner]; }
 		}
@@ -68,5 +87,7 @@ namespace Video4Linux
 		{
 			get { return input.std; }
 		}
+		
+		#endregion Public Properties
 	}
 }
