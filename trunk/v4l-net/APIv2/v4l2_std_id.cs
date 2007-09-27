@@ -23,7 +23,7 @@ using System;
 
 namespace Video4Linux.APIv2
 {
-	public enum v4l2_std_id : ulong
+	internal enum v4l2_std_id : ulong
 	{
 		Unknown     = 0,
 		PAL_B       = 0x00000001,

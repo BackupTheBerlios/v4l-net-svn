@@ -28,8 +28,8 @@ namespace Video4Linux.APIv2
 	internal struct v4l2_input
 	{
 		public uint index;
-		[MarshalAs(UnmanagedType.ByValArray, SizeConst=32)]
-		public byte[] name;
+		[MarshalAs(UnmanagedType.ByValTStr, SizeConst=32)]
+		public string name;
 		public uint type;
 		public uint audioset;
 		public uint tuner;

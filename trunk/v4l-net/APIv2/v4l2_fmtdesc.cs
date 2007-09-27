@@ -30,8 +30,8 @@ namespace Video4Linux.APIv2
 		public uint index;
 		public v4l2_buf_type type;
 		public uint flags;
-		[MarshalAs(UnmanagedType.ByValArray, SizeConst=32)]
-		public byte[] description;
+		[MarshalAs(UnmanagedType.ByValTStr, SizeConst=32)]
+		public string description;
 		public v4l2_pix_format_id pixelformat;
 		[MarshalAs(UnmanagedType.ByValArray, SizeConst=4)]
 		public uint[] reserved;

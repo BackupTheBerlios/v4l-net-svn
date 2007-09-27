@@ -28,8 +28,8 @@ namespace Video4Linux.APIv2
 	internal struct v4l2_audioout
 	{
 		public uint index;
-		[MarshalAs(UnmanagedType.ByValArray, SizeConst=32)]
-		public byte[] name;
+		[MarshalAs(UnmanagedType.ByValTStr, SizeConst=32)]
+		public string name;
 		public uint capability;
 		public uint mode;
 		[MarshalAs(UnmanagedType.ByValArray, SizeConst=2)]

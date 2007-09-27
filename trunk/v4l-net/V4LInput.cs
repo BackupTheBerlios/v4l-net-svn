@@ -20,7 +20,7 @@
 #endregion LICENSE
 
 using System;
-using System.Text;
+using Video4Linux.APIv2;
 
 namespace Video4Linux
 {
@@ -32,7 +32,7 @@ namespace Video4Linux
 		#region Private Fields
 		
 		private V4LDevice device;
-		private APIv2.v4l2_input input;
+		private v4l2_input input;
 		
 		#endregion Private Fields
 		
@@ -43,7 +43,7 @@ namespace Video4Linux
         /// </summary>
 		/// <param name="device">The parental Video4Linux device.</param>
 		/// <param name="input">The struct holding the video input information.</param>
-		internal V4LInput(V4LDevice device, APIv2.v4l2_input input)
+		internal V4LInput(V4LDevice device, v4l2_input input)
 		{
 			this.device = device;
 			this.input = input;
@@ -64,7 +64,7 @@ namespace Video4Linux
 		/// <value>The name of the video input.</value>
 		public string Name
 		{
-			get { return Encoding.ASCII.GetString(input.name); }
+			get { return input.name; }
 		}
 		
 		public uint Type

@@ -20,15 +20,15 @@
 #endregion LICENSE
 
 using System;
-using System.Text;
+using Video4Linux.APIv2;
 
 namespace Video4Linux
 {
 	public class V4LFormat
 	{
-		private APIv2.v4l2_fmtdesc fmtdesc;
+		private v4l2_fmtdesc fmtdesc;
 		
-		public V4LFormat(APIv2.v4l2_fmtdesc fmtdesc)
+		public V4LFormat(v4l2_fmtdesc fmtdesc)
 		{
 			this.fmtdesc = fmtdesc;
 		}
@@ -42,7 +42,7 @@ namespace Video4Linux
 			get { return fmtdesc.index; }
 		}
 		
-		public APIv2.v4l2_buf_type Type
+		public v4l2_buf_type Type
 		{
 			get { return fmtdesc.type; }
 		}
@@ -54,10 +54,10 @@ namespace Video4Linux
 		
 		public string Description
 		{
-			get { return Encoding.ASCII.GetString(fmtdesc.description); }
+			get { return fmtdesc.description; }
 		}
 		
-		public APIv2.v4l2_pix_format_id pixelformat
+		public v4l2_pix_format_id pixelformat
 		{
 			get { return fmtdesc.pixelformat; }
 		}

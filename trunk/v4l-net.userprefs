@@ -1,12 +1,15 @@
 <?xml version="1.0"?>
 <UserCombinePreferences filename="/mnt/crypted/coding/mono/v4l-net/trunk/v4l-net.mds">
-  <Files />
+  <Files>
+    <File filename="./v4l-net/V4LTuner.cs" />
+    <File filename="Welcome" />
+  </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
           <Node name="v4l-net" expanded="True">
-            <Node name="V4LAudioInput.cs" expanded="False" selected="True" />
+            <Node name="V4LTuner.cs" expanded="False" selected="True" />
           </Node>
         </Node>
       </TreeView>
@@ -16,15 +19,10 @@
         <Node expanded="False" />
       </TreeView>
     </ViewMemento>
-    <ViewMemento Id="MonoDevelop.NUnit.TestPad">
-      <TreeView>
-        <Node expanded="False" />
-      </TreeView>
-    </ViewMemento>
   </Views>
   <Properties>
     <Properties>
-      <Property key="ActiveWindow" value="" />
+      <Property key="ActiveWindow" value="Welcome" />
       <Property key="ActiveConfiguration" value="Debug" />
     </Properties>
   </Properties>

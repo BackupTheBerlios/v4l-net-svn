@@ -22,8 +22,8 @@
 using Mono.Unix.Native;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
+using Video4Linux.APIv2;
 
 namespace Video4Linux
 {
@@ -37,7 +37,7 @@ namespace Video4Linux
 		private int deviceHandle;
 		private V4LIOControl ioControl;
 		
-		private APIv2.v4l2_capability? _deviceCapabilities;
+		private v4l2_capability? _deviceCapabilities;
 		private uint bufferCount = 4;
 		
 		private List<V4LAudioInput> audioInputs;
@@ -84,7 +84,7 @@ namespace Video4Linux
 		private void fetchAudioInputs()
 		{
 			audioInputs = new List<V4LAudioInput>();
-			APIv2.v4l2_audio cur = new APIv2.v4l2_audio();
+			v4l2_audio cur = new v4l2_audio();
 			
 			cur.index = 0;
 			while (ioControl.EnumerateAudioInputs(ref cur) == 0)
@@ -100,7 +100,7 @@ namespace Video4Linux
 		private void fetchAudioOutputs()
 		{
 			audioOutputs = new List<V4LAudioOutput>();
-			APIv2.v4l2_audioout cur = new APIv2.v4l2_audioout();
+			v4l2_audioout cur = new v4l2_audioout();
 			
 			cur.index = 0;
 			while (ioControl.EnumerateAudioOutputs(ref cur) == 0)
@@ -115,7 +115,7 @@ namespace Video4Linux
         /// </summary>
 		private void fetchCapabilites()
 		{
-			APIv2.v4l2_capability tmpCap = new APIv2.v4l2_capability();
+			v4l2_capability tmpCap = new v4l2_capability();
 			if (ioControl.QueryDeviceCapabilities(ref tmpCap) < 0)
 				throw new Exception("VIDIOC_QUERYCAP");
 			
@@ -128,7 +128,7 @@ namespace Video4Linux
 		private void fetchFormats()
 		{
 			formats = new List<V4LFormat>();
-			APIv2.v4l2_fmtdesc cur = new APIv2.v4l2_fmtdesc();
+			v4l2_fmtdesc cur = new v4l2_fmtdesc();
 			
 			cur.index = 0;
 			while (ioControl.EnumerateFormats(ref cur) == 0)
@@ -144,7 +144,7 @@ namespace Video4Linux
 		private void fetchInputs()
 		{
 			inputs = new List<V4LInput>();
-			APIv2.v4l2_input cur = new APIv2.v4l2_input();
+			v4l2_input cur = new v4l2_input();
 			
 			cur.index = 0;
 			while (ioControl.EnumerateInputs(ref cur) == 0)
@@ -160,7 +160,7 @@ namespace Video4Linux
 		private void fetchOutputs()
 		{
 			outputs = new List<V4LOutput>();
-			APIv2.v4l2_output cur = new APIv2.v4l2_output();
+			v4l2_output cur = new v4l2_output();
 			
 			cur.index = 0;
 			while (ioControl.EnumerateOutputs(ref cur) == 0)
@@ -176,7 +176,7 @@ namespace Video4Linux
 		private void fetchStandards()
 		{
 			standards = new List<V4LStandard>();
-			APIv2.v4l2_standard cur = new APIv2.v4l2_standard();
+			v4l2_standard cur = new v4l2_standard();
 			
 			cur.index = 0;
 			while (ioControl.EnumerateStandards(ref cur) == 0)
@@ -192,7 +192,7 @@ namespace Video4Linux
 		private void fetchTuners()
 		{
 			tuners = new List<V4LTuner>();
-			APIv2.v4l2_tuner cur = new APIv2.v4l2_tuner();
+			v4l2_tuner cur = new v4l2_tuner();
 			
 			cur.index = 0;
 			while (ioControl.GetTuner(ref cur) == 0)
@@ -213,7 +213,7 @@ namespace Video4Linux
 		
 		private void threadTest()
 		{
-			APIv2.v4l2_buffer buf = new APIv2.v4l2_buffer();
+			v4l2_buffer buf = new v4l2_buffer();
 			buf.type = Buffers[0].Type;
 			buf.memory = Buffers[0].Memory;
 			
@@ -235,10 +235,10 @@ namespace Video4Linux
         /// </summary>
 		private void requestBuffers()
 		{
-			APIv2.v4l2_requestbuffers req = new Video4Linux.APIv2.v4l2_requestbuffers();
+			v4l2_requestbuffers req = new v4l2_requestbuffers();
 			req.count = bufferCount;
-			req.type = APIv2.v4l2_buf_type.VideoCapture;
-			req.memory = APIv2.v4l2_memory.MemoryMapping;
+			req.type = v4l2_buf_type.VideoCapture;
+			req.memory = v4l2_memory.MemoryMapping;
 			if (ioControl.RequestBuffers(ref req) < 0)
 				throw new Exception("VIDIOC_REQBUFS");
 				
@@ -251,11 +251,11 @@ namespace Video4Linux
         /// <summary>
         /// Queries the device for information about each requested buffer.
         /// </summary>
-		private void fetchBuffers(APIv2.v4l2_requestbuffers req)
+		private void fetchBuffers(v4l2_requestbuffers req)
 		{
 			for (uint i=0; i<req.count; i++)
 			{
-				APIv2.v4l2_buffer buffer = new APIv2.v4l2_buffer();
+				v4l2_buffer buffer = new v4l2_buffer();
 				buffer.index = i;
 				buffer.type = req.type;
 				buffer.memory = req.memory;
@@ -282,7 +282,7 @@ namespace Video4Linux
 			// make sure that all buffers are in the incoming queue
 			enqueueAllBuffers();
 			
-			APIv2.v4l2_buf_type type = APIv2.v4l2_buf_type.VideoCapture;
+			v4l2_buf_type type = v4l2_buf_type.VideoCapture;
 			if (ioControl.StreamingOn(ref type) < 0)
 				throw new Exception("VIDIOC_STREAMON");
 			
@@ -296,7 +296,7 @@ namespace Video4Linux
         /// </summary>
 		public void StopStreaming()
 		{
-			APIv2.v4l2_buf_type type = APIv2.v4l2_buf_type.VideoCapture;
+			v4l2_buf_type type = v4l2_buf_type.VideoCapture;
 			if (ioControl.StreamingOff(ref type) < 0)
 				throw new Exception("VIDIOC_STREAMOFF");
 		}
@@ -309,14 +309,14 @@ namespace Video4Linux
         /// Gets the device's capabilites.
         /// </summary>
 		/// <value>The capabilities.</value>
-		private APIv2.v4l2_capability deviceCapabilities
+		private v4l2_capability deviceCapabilities
 		{
 			get
 			{
 				if (!_deviceCapabilities.HasValue)
 					fetchCapabilites();
 				
-				return (APIv2.v4l2_capability)_deviceCapabilities;
+				return (v4l2_capability)_deviceCapabilities;
 			}
 		}
 		
@@ -348,7 +348,7 @@ namespace Video4Linux
 		/// <value>The device's name.</value>
 		public string Name
 		{
-			get { return Encoding.ASCII.GetString(deviceCapabilities.card); }
+			get { return deviceCapabilities.card; }
 		}
 		
         /// <summary>
@@ -357,7 +357,7 @@ namespace Video4Linux
 		/// <value>The driver's name.</value>
 		public string Driver
 		{
-			get { return Encoding.ASCII.GetString(deviceCapabilities.driver); }
+			get { return deviceCapabilities.driver; }
 		}
 		
         /// <summary>
@@ -366,7 +366,7 @@ namespace Video4Linux
 		/// <value>The bus info string.</value>
 		public string BusInfo
 		{
-			get { return Encoding.ASCII.GetString(deviceCapabilities.bus_info); }
+			get { return deviceCapabilities.bus_info; }
 		}
 		
         /// <summary>
@@ -386,7 +386,7 @@ namespace Video4Linux
 		{
 			get
 			{
-				APIv2.v4l2_audio input = new APIv2.v4l2_audio();
+				v4l2_audio input = new v4l2_audio();
 				if (ioControl.GetAudioInput(ref input) < 0)
 					throw new Exception("VIDIOC_G_AUDIO");
 				
@@ -394,7 +394,7 @@ namespace Video4Linux
 			}
 			set
 			{
-				APIv2.v4l2_audio input = value.ToStruct();
+				v4l2_audio input = value.ToStruct();
 				if (ioControl.SetAudioInput(ref input) < 0)
 					throw new Exception("VIDIOC_S_AUDIO");
 			}
@@ -408,7 +408,7 @@ namespace Video4Linux
 		{
 			get
 			{
-				APIv2.v4l2_audioout output = new APIv2.v4l2_audioout();
+				v4l2_audioout output = new v4l2_audioout();
 				if (ioControl.GetAudioOutput(ref output) < 0)
 					throw new Exception("VIDIOC_G_AUDOUT");
 				
@@ -416,7 +416,7 @@ namespace Video4Linux
 			}
 			set
 			{
-				APIv2.v4l2_audioout output = value.ToStruct();
+				v4l2_audioout output = value.ToStruct();
 				if (ioControl.SetAudioOutput(ref output) < 0)
 					throw new Exception("VIDIOC_S_AUDOUT");
 			}
@@ -481,19 +481,20 @@ namespace Video4Linux
         /// Gets or sets the current TV standard.
         /// </summary>
         /// <value>The TV standard.</value>
-		public APIv2.v4l2_std_id Standard
+		public V4LStandard Standard
 		{
-			get
+			/*get
 			{
-				APIv2.v4l2_std_id std = 0;
+				v4l2_std_id std = 0;
 				if (ioControl.GetStandard(ref std) < 0)
 					throw new Exception("VIDIOC_G_STD");
 				
 				return std;
-			}
+			}*/
 			set
 			{
-				if (ioControl.GetStandard(ref value) < 0)
+				v4l2_std_id std = value.Id;
+				if (ioControl.GetStandard(ref std) < 0)
 					throw new Exception("VIDIOC_S_STD");
 			}
 		}

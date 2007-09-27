@@ -28,8 +28,8 @@ namespace Video4Linux.APIv2
 	internal struct v4l2_tuner
 	{
 		public uint index;
-		[MarshalAs(UnmanagedType.ByValArray, SizeConst=32)]
-		public byte[] name;
+		[MarshalAs(UnmanagedType.ByValTStr, SizeConst=32)]
+		public string name;
 		public v4l2_tuner_type type;
 		public uint capability;
 		public uint rangelow;

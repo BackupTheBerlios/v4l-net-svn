@@ -63,7 +63,7 @@ namespace Video4Linux
 		/// <value>The name of the tuner.</value>
 		public string Name
 		{
-			get { return Encoding.ASCII.GetString(tuner.name); }
+			get { return tuner.name; }
 		}
 		
 		public APIv2.v4l2_tuner_type Type

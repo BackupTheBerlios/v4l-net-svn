@@ -20,15 +20,15 @@
 #endregion LICENSE
 
 using System;
-using System.Text;
+using Video4Linux.APIv2;
 
 namespace Video4Linux
 {
 	public class V4LStandard
 	{
-		private APIv2.v4l2_standard standard;
+		private v4l2_standard standard;
 		
-		internal V4LStandard(APIv2.v4l2_standard standard)
+		internal V4LStandard(v4l2_standard standard)
 		{
 			this.standard = standard;
 		}
@@ -43,14 +43,14 @@ namespace Video4Linux
 		}
 		
 		
-		public APIv2.v4l2_std_id Id
+		internal v4l2_std_id Id
 		{
 			get { return standard.id; }
 		}
 		
 		public string Name
 		{
-			get { return Encoding.ASCII.GetString(standard.name); }
+			get { return standard.name; }
 		}
 		
 		public uint FrameLines

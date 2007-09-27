@@ -20,22 +20,22 @@
 #endregion LICENSE
 
 using System;
-using System.Text;
+using Video4Linux.APIv2;
 
 namespace Video4Linux
 {
 	public class V4LAudioInput
 	{
-		private APIv2.v4l2_audio input;
+		private v4l2_audio input;
 		
-		internal V4LAudioInput(APIv2.v4l2_audio input)
+		internal V4LAudioInput(v4l2_audio input)
 		{
 			this.input = input;
 		}
 		
 		/**************************************************/
 		
-		internal APIv2.v4l2_audio ToStruct()
+		internal v4l2_audio ToStruct()
 		{
 			return input;
 		}
@@ -49,7 +49,7 @@ namespace Video4Linux
 		
 		public string Name
 		{
-			get { return Encoding.ASCII.GetString(input.name); }
+			get { return input.name; }
 		}
 		
 		public uint Capabilities

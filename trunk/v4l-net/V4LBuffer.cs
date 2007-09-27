@@ -22,6 +22,7 @@
 using Mono.Unix.Native;
 using System;
 using System.Runtime.InteropServices;
+using Video4Linux.APIv2;
 
 namespace Video4Linux
 {
@@ -37,7 +38,7 @@ namespace Video4Linux
 		#region Private Fields
 		
 		private V4LDevice device;
-		private APIv2.v4l2_buffer buffer;
+		private v4l2_buffer buffer;
 		private IntPtr start;
 		
 		#endregion Private Fields
@@ -49,7 +50,7 @@ namespace Video4Linux
         /// </summary>
 		/// <param name="device">The parental Video4Linux device.</param>
 		/// <param name="buffer">The struct holding the buffer information.</param>
-		internal V4LBuffer(V4LDevice device, APIv2.v4l2_buffer buffer)
+		internal V4LBuffer(V4LDevice device, v4l2_buffer buffer)
 		{
 			this.device = device;
 			this.buffer = buffer;
@@ -105,7 +106,7 @@ namespace Video4Linux
 		
 		#region Internal Properties
 		
-		internal APIv2.v4l2_memory Memory
+		internal v4l2_memory Memory
 		{
 			get { return buffer.memory; }
 		}
@@ -139,7 +140,7 @@ namespace Video4Linux
 			get { return buffer.sequence; }
 		}
 		
-		public APIv2.v4l2_buf_type Type
+		public v4l2_buf_type Type
 		{
 			get { return buffer.type; }
 		}

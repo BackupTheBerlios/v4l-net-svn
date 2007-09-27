@@ -20,15 +20,15 @@
 #endregion LICENSE
 
 using System;
-using System.Text;
+using Video4Linux.APIv2;
 
 namespace Video4Linux
 {
 	public class V4LOutput
 	{
-		private APIv2.v4l2_output output;
+		private v4l2_output output;
 		
-		internal V4LOutput(APIv2.v4l2_output output)
+		internal V4LOutput(v4l2_output output)
 		{
 			this.output = output;
 		}
@@ -44,7 +44,7 @@ namespace Video4Linux
 		
 		public string Name
 		{
-			get { return Encoding.ASCII.GetString(output.name); }
+			get { return output.name; }
 		}
 		
 		public uint Type

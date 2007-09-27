@@ -3,7 +3,7 @@
  * Copyright (C) 2007 Tim Taubert (twenty-three@users.berlios.de)
  * 
  * This file is part of Video4Linux.Net.
- *
+ * 
  * Video4Linux.Net is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
@@ -20,22 +20,22 @@
 #endregion LICENSE
 
 using System;
-using System.Text;
+using Video4Linux.APIv2;
 
 namespace Video4Linux
 {
 	public class V4LAudioOutput
 	{
-		private APIv2.v4l2_audioout output;
+		private v4l2_audioout output;
 		
-		internal V4LAudioOutput(APIv2.v4l2_audioout output)
+		internal V4LAudioOutput(v4l2_audioout output)
 		{
 			this.output = output;
 		}
 		
 		/**************************************************/
 		
-		internal APIv2.v4l2_audioout ToStruct()
+		internal v4l2_audioout ToStruct()
 		{
 			return output;
 		}
@@ -49,7 +49,7 @@ namespace Video4Linux
 		
 		public string Name
 		{
-			get { return Encoding.ASCII.GetString(output.name); }
+			get { return output.name; }
 		}
 		
 		public uint Capabilities
