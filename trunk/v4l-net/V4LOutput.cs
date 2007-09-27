@@ -28,7 +28,7 @@ namespace Video4Linux
 	{
 		private APIv2.v4l2_output output;
 		
-		public V4LOutput(APIv2.v4l2_output output)
+		internal V4LOutput(APIv2.v4l2_output output)
 		{
 			this.output = output;
 		}

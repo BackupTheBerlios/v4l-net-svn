@@ -44,6 +44,11 @@ namespace Video4Linux
 		
 		#region Constructors and Destructors
 		
+        /// <summary>
+        /// Creates a buffer to be used with Video4Linux streaming I/O.
+        /// </summary>
+		/// <param name="device">The parental Video4Linux device.</param>
+		/// <param name="buffer">The struct holding the buffer information.</param>
 		internal V4LBuffer(V4LDevice device, APIv2.v4l2_buffer buffer)
 		{
 			this.device = device;
@@ -98,6 +103,17 @@ namespace Video4Linux
 		
 		#endregion Public Methods
 		
+		#region Internal Properties
+		
+		internal APIv2.v4l2_memory Memory
+		{
+			get { return buffer.memory; }
+		}
+		
+		#endregion Internal Properties
+		
+		#region Public Properties
+		
 		public uint Index
 		{
 			get { return buffer.index; }
@@ -128,14 +144,11 @@ namespace Video4Linux
 			get { return buffer.type; }
 		}
 		
-		public APIv2.v4l2_memory Memory
-		{
-			get { return buffer.memory; }
-		}
-		
 		public IntPtr Start
 		{
 			get { return start; }
 		}
+		
+		#endregion Public Properties
 	}
 }

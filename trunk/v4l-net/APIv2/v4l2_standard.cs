@@ -25,7 +25,7 @@ using System.Runtime.InteropServices;
 namespace Video4Linux.APIv2
 {
 	[StructLayout(LayoutKind.Sequential)]
-	public struct v4l2_standard
+	internal struct v4l2_standard
 	{
 		public uint index;
 		public v4l2_std_id id;

@@ -25,7 +25,7 @@ using System.Runtime.InteropServices;
 namespace Video4Linux.APIv2
 {
 	[StructLayout(LayoutKind.Sequential)]
-	public struct v4l2_pix_format
+	internal struct v4l2_pix_format
 	{
 		public uint width;
 		public uint height;

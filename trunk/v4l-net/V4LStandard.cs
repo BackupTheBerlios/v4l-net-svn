@@ -28,7 +28,7 @@ namespace Video4Linux
 	{
 		private APIv2.v4l2_standard standard;
 		
-		public V4LStandard(APIv2.v4l2_standard standard)
+		internal V4LStandard(APIv2.v4l2_standard standard)
 		{
 			this.standard = standard;
 		}

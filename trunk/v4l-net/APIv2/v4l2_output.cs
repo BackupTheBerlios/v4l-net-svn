@@ -25,7 +25,7 @@ using System.Runtime.InteropServices;
 namespace Video4Linux.APIv2
 {
 	[StructLayout(LayoutKind.Sequential)]
-	public struct v4l2_output
+	internal struct v4l2_output
 	{
 		public uint index;
 		[MarshalAs(UnmanagedType.ByValArray, SizeConst=32)]

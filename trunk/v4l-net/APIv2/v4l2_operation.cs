@@ -23,7 +23,10 @@ using System;
 
 namespace Video4Linux.APIv2
 {
-	public enum v4l2_operation : int
+	/// <summary>
+	/// Holds all possible operation to be executed on the driver.
+	/// </summary>
+	internal enum v4l2_operation : int
 	{
 		// HACK: check for _IOR/_IOWR
 		QueryCapabilities     = -2140645888, // VIDIOC_QUERYCAP

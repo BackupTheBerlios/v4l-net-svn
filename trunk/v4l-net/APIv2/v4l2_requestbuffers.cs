@@ -24,13 +24,30 @@ using System.Runtime.InteropServices;
 
 namespace Video4Linux.APIv2
 {
+	/// <summary>
+	/// Holds information about the buffers to request from
+	/// the device driver.
+	/// </summary>
 	[StructLayout(LayoutKind.Sequential)]
-	public struct v4l2_requestbuffers
+	internal struct v4l2_requestbuffers
 	{
+		/// <summary>
+		/// Number of buffers to request.
+		/// </summary>
 		public uint count;
+		
+		/// <summary>
+		/// Type of the buffers to request.
+		/// </summary>
 		public v4l2_buf_type type;
+		
+		/// <summary>
+		/// Memory type of the buffers to request, stands for
+		/// to the data transfer mode.
+		/// </summary>
 		public v4l2_memory memory;
+		
 		[MarshalAs(UnmanagedType.ByValArray, SizeConst=2)]
-		public uint[] reserverd;
+		public uint[] reserved;
 	}
 }

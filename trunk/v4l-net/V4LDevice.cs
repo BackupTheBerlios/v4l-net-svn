@@ -66,7 +66,7 @@ namespace Video4Linux
         /// <summary>
         /// Creates a Video4Linux device.
         /// </summary>
-        /// <param name="path">Path to the device</param>
+        /// <param name="path">Path to the device.</param>
 		public V4LDevice(string path)
 		{
 			deviceHandle = Syscall.open(path, OpenFlags.O_RDWR);

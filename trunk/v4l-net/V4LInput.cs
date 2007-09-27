@@ -29,7 +29,7 @@ namespace Video4Linux
 		private V4LDevice device;
 		private APIv2.v4l2_input input;
 		
-		public V4LInput(V4LDevice device, APIv2.v4l2_input input)
+		internal V4LInput(V4LDevice device, APIv2.v4l2_input input)
 		{
 			this.device = device;
 			this.input = input;
