@@ -59,13 +59,6 @@ namespace Video4Linux
         /// <summary>
         /// Creates a Video4Linux device.
         /// </summary>
-		public V4LDevice()
-			: this("/dev/video0")
-		{}
-		
-        /// <summary>
-        /// Creates a Video4Linux device.
-        /// </summary>
         /// <param name="path">Path to the device.</param>
 		public V4LDevice(string path)
 		{
