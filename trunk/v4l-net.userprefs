@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <UserCombinePreferences filename="/mnt/crypted/coding/mono/v4l-net/trunk/v4l-net.mds">
   <Files>
-    <File filename="./v4l-net/V4LTuner.cs" />
+    <File filename="./v4l-net/V4LDevice.cs" />
     <File filename="Welcome" />
   </Files>
   <Views>
@@ -9,7 +9,7 @@
       <TreeView>
         <Node expanded="True">
           <Node name="v4l-net" expanded="True">
-            <Node name="V4LTuner.cs" expanded="False" selected="True" />
+            <Node name="V4LDevice.cs" expanded="False" selected="True" />
           </Node>
         </Node>
       </TreeView>

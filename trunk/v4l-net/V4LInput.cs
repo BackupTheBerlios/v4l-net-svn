@@ -53,6 +53,10 @@ namespace Video4Linux
 		
 		#region Public Properties
 		
+        /// <summary>
+        /// Gets the video input's index in the list of all video inputs.
+        /// </summary>
+		/// <value>The index of the video input.</value>
 		public uint Index
 		{
 			get { return input.index; }
@@ -67,6 +71,10 @@ namespace Video4Linux
 			get { return input.name; }
 		}
 		
+        /// <summary>
+        /// Gets the type of the video input.
+        /// </summary>
+		/// <value>The type of the video input.</value>
 		public uint Type
 		{
 			get { return input.type; }
@@ -82,6 +90,10 @@ namespace Video4Linux
 			get { return device.Tuners[(int)input.tuner]; }
 		}
 		
+        /// <summary>
+        /// Gets the video input's current status.
+        /// </summary>
+		/// <value>The status of the video input.</value>
 		public uint Status
 		{
 			get { return input.status; }

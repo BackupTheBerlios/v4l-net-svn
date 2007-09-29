@@ -231,7 +231,7 @@ namespace Video4Linux
 		}
 		
         /// <summary>
-        /// Requests a given number of buffers for <see cref="M:Mono.Unix.Native.Syscall.mmap(System.IntPtr,System.UInt64,Mono.Unix.Native.MmapProts,Mono.Unix.Native.MmapFlags,System.Int32,System.Int64)" /> data transfer.
+        /// Requests a given number of buffers for mmap data transfer.
         /// </summary>
 		private void requestBuffers()
 		{
@@ -243,7 +243,7 @@ namespace Video4Linux
 				throw new Exception("VIDIOC_REQBUFS");
 				
 			if (req.count < bufferCount)
-				throw new Exception("VIDIOC_REQBUFS [not enough buffers]");
+				throw new Exception("VIDIOC_REQBUFS [count]");
 			
 			fetchBuffers(req);
 		}
@@ -275,7 +275,7 @@ namespace Video4Linux
         /// </summary>
 		public void StartStreaming()
 		{
-			// request the streaming buffers
+			// request the streaming buffers if necessary
 			if (buffers == null || buffers.Count != bufferCount)
 				requestBuffers();
 			
