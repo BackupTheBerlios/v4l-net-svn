@@ -30,9 +30,6 @@ namespace Video4Linux
 	/// </summary>
 	public class V4LTuner
 	{
-		/*public int AFCValue;
-		public bool UseAFC;*/
-		
 		#region Private Fields
 		
 		private V4LDevice device;
@@ -42,6 +39,11 @@ namespace Video4Linux
 		
 		#region Constructors and Destructors
 		
+        /// <summary>
+        /// Creates a tuner.
+        /// </summary>
+		/// <param name="device">The parental Video4Linux device.</param>
+		/// <param name="tuner">The struct holding the tuner information.</param>
 		internal V4LTuner(V4LDevice device, v4l2_tuner tuner)
 		{
 			this.device = device;
@@ -52,6 +54,10 @@ namespace Video4Linux
 		
 		#region Public Properties
 		
+        /// <summary>
+        /// Gets the tuner's index in the list of all tuners.
+        /// </summary>
+		/// <value>The index of the tuner.</value>
 		public uint Index
 		{
 			get { return tuner.index; }
@@ -66,6 +72,10 @@ namespace Video4Linux
 			get { return tuner.name; }
 		}
 		
+        /// <summary>
+        /// Gets the tuner's type.
+        /// </summary>
+		/// <value>The type of the tuner.</value>
 		public APIv2.v4l2_tuner_type Type
 		{
 			get { return tuner.type; }
@@ -92,6 +102,7 @@ namespace Video4Linux
 				
 				return freq.frequency;
 			}
+			// TODO: if AFC is on, then negotiate the right frequency
 			set 
 			{
 				v4l2_frequency freq = new v4l2_frequency();
@@ -121,6 +132,10 @@ namespace Video4Linux
 			get { return tuner.rangehigh; }
 		}
 		
+        /// <summary>
+        /// Gets the tuner's signal quality.
+        /// </summary>
+		/// <value>The signal quality.</value>
 		public uint Signal
 		{
 			get { return tuner.signal; }

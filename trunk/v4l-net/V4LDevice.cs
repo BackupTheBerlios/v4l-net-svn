@@ -211,6 +211,7 @@ namespace Video4Linux
 				buf.Enqueue();
 		}
 		
+		// TODO: rename and improve
 		private void threadTest()
 		{
 			v4l2_buffer buf = new v4l2_buffer();
@@ -251,6 +252,7 @@ namespace Video4Linux
         /// <summary>
         /// Queries the device for information about each requested buffer.
         /// </summary>
+		/// <param name="req">Struct with information about the request buffers.</param>
 		private void fetchBuffers(v4l2_requestbuffers req)
 		{
 			for (uint i=0; i<req.count; i++)
@@ -264,6 +266,19 @@ namespace Video4Linux
 				
 				buffers.Add(new V4LBuffer(this, buffer));
 			}
+		}
+		
+        /// <summary>
+        /// Gets a V4LStandard out of the list of all supported standards.
+        /// </summary>
+		/// <param name="std">Id of the standard.</param>
+		private V4LStandard getStandardById(v4l2_std_id std)
+		{
+			foreach (V4LStandard standard in Standards)
+				if (standard.Id == std)
+					return standard;
+			
+			throw new Exception("VIDIOC_G_STD [std not in list]");
 		}
 		
 		#endregion Private Methods
@@ -286,6 +301,7 @@ namespace Video4Linux
 			if (ioControl.StreamingOn(ref type) < 0)
 				throw new Exception("VIDIOC_STREAMON");
 			
+			// TODO: rename and improve
 			Thread t = new Thread(new ThreadStart(threadTest));
 			t.Priority = ThreadPriority.Lowest;
 			t.Start();
@@ -483,14 +499,14 @@ namespace Video4Linux
         /// <value>The TV standard.</value>
 		public V4LStandard Standard
 		{
-			/*get
+			get
 			{
 				v4l2_std_id std = 0;
 				if (ioControl.GetStandard(ref std) < 0)
 					throw new Exception("VIDIOC_G_STD");
 				
-				return std;
-			}*/
+				return getStandardById(std);
+			}
 			set
 			{
 				v4l2_std_id std = value.Id;

@@ -25,112 +25,186 @@ using Video4Linux.APIv2;
 
 namespace Video4Linux
 {
+	/// <summary>
+	/// A wrapper class for libc-ioctl calls to communicate with the driver.
+	/// </summary>
 	internal class V4LIOControl
 	{
+		#region Private Fields
+		
 		private int deviceHandle;
 
-		/**************************************************/
-
+		#endregion Private Fields
+		
+		#region Constructors and Destructors
+		
+		/// <summary>
+		/// Creates a I/O control for driver communications.
+		/// </summary>
 		public V4LIOControl(int deviceHandle)
 		{
 			this.deviceHandle = deviceHandle;
 		}
-
+		
+		#endregion Constructors and Destructors
+		
+		#region Public Methods
+		
+		/// <summary>
+		/// Calls VIDIOC_QUERYCAP.
+		/// </summary>
 		public int QueryDeviceCapabilities(ref v4l2_capability cap)
 		{
 			return ioctl(deviceHandle, v4l2_operation.QueryCapabilities, ref cap);
 		}
-
+		
+		/// <summary>
+		/// Calls VIDIOC_QUERYBUF.
+		/// </summary>
 		public int QueryBuffer(ref v4l2_buffer buffer)
 		{
 			return ioctl(deviceHandle, v4l2_operation.QueryBuffer, ref buffer);
 		}
-
+		
+		/// <summary>
+		/// Calls VIDIOC_REQBUFS.
+		/// </summary>
 		public int RequestBuffers(ref v4l2_requestbuffers req)
 		{
 			return ioctl(deviceHandle, v4l2_operation.RequestBuffers, ref req);
 		}
-
+		
+		/// <summary>
+		/// Calls VIDIOC_STREAMON.
+		/// </summary>
 		public int StreamingOn(ref v4l2_buf_type type)
 		{
 			return ioctl(deviceHandle, v4l2_operation.StreamingOn, ref type);
 		}
-
+		
+		/// <summary>
+		/// Calls VIDIOC_STREAMOFF.
+		/// </summary>
 		public int StreamingOff(ref v4l2_buf_type type)
 		{
 			return ioctl(deviceHandle, v4l2_operation.StreamingOff, ref type);
 		}
-
+		
+		/// <summary>
+		/// Calls VIDIOC_QBUF.
+		/// </summary>
 		public int EnqueueBuffer(ref v4l2_buffer buffer)
 		{
 			return ioctl(deviceHandle, v4l2_operation.EnqueueBuffer, ref buffer);
 		}
-
+		
+		/// <summary>
+		/// Calls VIDIOC_DQBUF.
+		/// </summary>
 		public int DequeueBuffer(ref v4l2_buffer buffer)
 		{
 			return ioctl(deviceHandle, v4l2_operation.DequeueBuffer, ref buffer);
 		}
-
+		
+		/// <summary>
+		/// Calls VIDIOC_G_FREQUENCY.
+		/// </summary>
 		public int GetFrequency(ref v4l2_frequency freq)
 		{
 			return ioctl(deviceHandle, v4l2_operation.GetFrequency, ref freq);
 		}
-
+		
+		/// <summary>
+		/// Calls VIDIOC_S_FREQUENCY.
+		/// </summary>
 		public int SetFrequency(ref v4l2_frequency freq)
 		{
 			return ioctl(deviceHandle, v4l2_operation.SetFrequency, ref freq);
 		}
-
+		
+		/// <summary>
+		/// Calls VIDIOC_ENUMINPUT.
+		/// </summary>
 		public int EnumerateInputs(ref v4l2_input input)
 		{
 			return ioctl(deviceHandle, v4l2_operation.EnumerateInputs, ref input);
 		}
-
+		
+		/// <summary>
+		/// Calls VIDIOC_ENUMOUTPUT.
+		/// </summary>
 		public int EnumerateOutputs(ref v4l2_output output)
 		{
 			return ioctl(deviceHandle, v4l2_operation.EnumerateOutputs, ref output);
 		}
-
+		
+		/// <summary>
+		/// Calls VIDIOC_ENUMSTD.
+		/// </summary>
 		public int EnumerateStandards(ref v4l2_standard std)
 		{
 			return ioctl(deviceHandle, v4l2_operation.EnumerateStandards, ref std);
 		}
-
+		
+		/// <summary>
+		/// Calls VIDIOC_G_STD.
+		/// </summary>
 		public int GetStandard(ref v4l2_std_id std)
 		{
 			return ioctl(deviceHandle, v4l2_operation.GetStandard, ref std);
 		}
-
+		
+		/// <summary>
+		/// Calls VIDIOC_S_STD.
+		/// </summary>
 		public int SetStandard(ref v4l2_std_id std)
 		{
 			return ioctl(deviceHandle, v4l2_operation.SetStandard, ref std);
 		}
-
+		
+		/// <summary>
+		/// Calls VIDIOC_G_INPUT.
+		/// </summary>
 		public int GetInput(ref int input)
 		{
 			return ioctl(deviceHandle, v4l2_operation.GetInput, ref input);
 		}
-
+		
+		/// <summary>
+		/// Calls VIDIOC_S_INPUT.
+		/// </summary>
 		public int SetInput(ref int input)
 		{
 			return ioctl(deviceHandle, v4l2_operation.SetInput, ref input);
 		}
 		
+		/// <summary>
+		/// Calls VIDIOC_G_TUNER.
+		/// </summary>
 		public int GetTuner(ref v4l2_tuner tuner)
 		{
 			return ioctl(deviceHandle, v4l2_operation.GetTuner, ref tuner);
 		}
 		
+		/// <summary>
+		/// Calls VIDIOC_S_TUNER.
+		/// </summary>
 		public int SetTuner(ref v4l2_tuner tuner)
 		{
 			return ioctl(deviceHandle, v4l2_operation.SetTuner, ref tuner);
 		}
-
+		
+		/// <summary>
+		/// Calls VIDIOC_G_FMT.
+		/// </summary>
 		public int GetFormat(ref v4l2_format fmt)
 		{
 			return ioctl(deviceHandle, v4l2_operation.GetFormat, ref fmt);
 		}
-
+		
+		/// <summary>
+		/// Calls VIDIOC_S_FMT.
+		/// </summary>
 		public int SetFormat(ref v4l2_format fmt)
 		{
 			return ioctl(deviceHandle, v4l2_operation.SetFormat, ref fmt);
@@ -150,7 +224,10 @@ namespace Video4Linux
 		{
 			return -1; // FIXME: Unimplemented;
 		}
-
+		
+		/// <summary>
+		/// Calls VIDIOC_ENUM_FMT.
+		/// </summary>
 		public int EnumerateFormats(ref v4l2_fmtdesc fmt)
 		{
 			return ioctl(deviceHandle, v4l2_operation.EnumerateFormats, ref fmt);
@@ -251,7 +328,9 @@ namespace Video4Linux
 			return -1; // FIXME: Unimplemented;
 		}
 		
-		/**************************************************/
+		#endregion Public Methods
+		
+		#region Extern LibC Methods
 		
 		[DllImport("libc", SetLastError=true)]
 		private static extern int
@@ -312,5 +391,7 @@ namespace Video4Linux
 		[DllImport("libc", SetLastError=true)]
 		private static extern int
 			ioctl(int device, v4l2_operation request, ref int argp);
+		
+		#endregion Extern LibC Methods
 	}
 }
