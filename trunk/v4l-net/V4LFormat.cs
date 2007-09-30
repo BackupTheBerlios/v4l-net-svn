@@ -35,8 +35,6 @@ namespace Video4Linux
 		
 		/**************************************************/
 		
-		/**************************************************/
-		
 		public uint Index
 		{
 			get { return fmtdesc.index; }
