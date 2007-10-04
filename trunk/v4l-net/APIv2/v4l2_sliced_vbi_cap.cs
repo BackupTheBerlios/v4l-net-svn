@@ -25,7 +25,7 @@ using System.Runtime.InteropServices;
 namespace Video4Linux.APIv2
 {
 	[StructLayout(LayoutKind.Sequential)]
-	public struct v4l2_sliced_vbi_cap
+	internal struct v4l2_sliced_vbi_cap
 	{
 		public ushort service_set;
 		[MarshalAs(UnmanagedType.ByValArray, SizeConst=48)]

@@ -39,11 +39,12 @@ namespace Video4Linux
 		
 		private v4l2_capability? _deviceCapabilities;
 		private uint bufferCount = 4;
+		private V4LFormatContainer formatContainer;
 		
 		private List<V4LAudioInput> audioInputs;
 		private List<V4LAudioOutput> audioOutputs;
 		private List<V4LBuffer> buffers = new List<V4LBuffer>();
-		private List<V4LFormat> formats;
+		private List<V4LFormatDescription> formats;
 		private List<V4LInput> inputs;
 		private List<V4LOutput> outputs;
 		private List<V4LStandard> standards;
@@ -127,13 +128,13 @@ namespace Video4Linux
         /// </summary>
 		private void fetchFormats()
 		{
-			formats = new List<V4LFormat>();
+			formats = new List<V4LFormatDescription>();
 			v4l2_fmtdesc cur = new v4l2_fmtdesc();
 			
 			cur.index = 0;
 			while (ioControl.EnumerateFormats(ref cur) == 0)
 			{
-				formats.Add(new V4LFormat(cur));
+				formats.Add(new V4LFormatDescription(cur));
 				cur.index++;
 			}
 		}
@@ -449,8 +450,19 @@ namespace Video4Linux
 			set { bufferCount = value; }
 		}
 		
+		public V4LFormatContainer Format
+		{
+			get
+			{
+				if (formatContainer == null)
+					formatContainer = new V4LFormatContainer(this);
+				
+				return formatContainer;
+			}
+		}
+		
         /// <summary>
-        /// Gets or sets the curretn video input.
+        /// Gets or sets the current video input.
         /// </summary>
         /// <value>The video input.</value>
 		public V4LInput Input
@@ -558,7 +570,7 @@ namespace Video4Linux
         /// Gets all available image formats.
         /// </summary>
 		/// <value>A list of image formats.</value>
-		public List<V4LFormat> Formats
+		public List<V4LFormatDescription> Formats
 		{
 			get
 			{

@@ -65,8 +65,10 @@
     <File name="./V4LAudioInput.cs" subtype="Code" buildaction="Compile" />
     <File name="./V4LAudioOutput.cs" subtype="Code" buildaction="Compile" />
     <File name="./V4LStandard.cs" subtype="Code" buildaction="Compile" />
-    <File name="./V4LFormat.cs" subtype="Code" buildaction="Compile" />
+    <File name="./V4LFormatDescription.cs" subtype="Code" buildaction="Compile" />
     <File name="./V4LBuffer.cs" subtype="Code" buildaction="Compile" />
+    <File name="./V4LFormatContainer.cs" subtype="Code" buildaction="Compile" />
+    <File name="./V4LVideoFormat.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

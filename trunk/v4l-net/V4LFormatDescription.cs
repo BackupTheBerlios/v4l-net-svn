@@ -24,11 +24,11 @@ using Video4Linux.APIv2;
 
 namespace Video4Linux
 {
-	public class V4LFormat
+	public class V4LFormatDescription
 	{
 		private v4l2_fmtdesc fmtdesc;
 		
-		public V4LFormat(v4l2_fmtdesc fmtdesc)
+		internal V4LFormatDescription(v4l2_fmtdesc fmtdesc)
 		{
 			this.fmtdesc = fmtdesc;
 		}
@@ -40,10 +40,10 @@ namespace Video4Linux
 			get { return fmtdesc.index; }
 		}
 		
-		public v4l2_buf_type Type
+		/*public v4l2_buf_type Type
 		{
 			get { return fmtdesc.type; }
-		}
+		}*/
 		
 		public uint Flags
 		{

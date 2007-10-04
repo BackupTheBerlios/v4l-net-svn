@@ -1,15 +1,14 @@
 <?xml version="1.0"?>
 <UserCombinePreferences filename="/mnt/crypted/coding/mono/v4l-net/trunk/v4l-net.mds">
   <Files>
-    <File filename="./v4l-net/V4LDevice.cs" />
-    <File filename="Welcome" />
+    <File filename="./v4l-net/V4LFormatDescription.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
           <Node name="v4l-net" expanded="True">
-            <Node name="V4LDevice.cs" expanded="False" selected="True" />
+            <Node name="V4LFormatDescription.cs" expanded="False" selected="True" />
           </Node>
         </Node>
       </TreeView>
@@ -22,7 +21,7 @@
   </Views>
   <Properties>
     <Properties>
-      <Property key="ActiveWindow" value="Welcome" />
+      <Property key="ActiveWindow" value="/mnt/crypted/coding/mono/v4l-net/trunk/v4l-net/V4LFormatDescription.cs" />
       <Property key="ActiveConfiguration" value="Debug" />
     </Properties>
   </Properties>

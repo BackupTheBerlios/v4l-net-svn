@@ -140,7 +140,7 @@ namespace Video4Linux
 			get { return buffer.sequence; }
 		}
 		
-		public v4l2_buf_type Type
+		internal v4l2_buf_type Type
 		{
 			get { return buffer.type; }
 		}
