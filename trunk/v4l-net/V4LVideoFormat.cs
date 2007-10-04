@@ -26,8 +26,13 @@ namespace Video4Linux
 {
 	public class V4LVideoFormat
 	{
+		private V4LDevice device;
+		private v4l2_buf_type type;
+		
 		internal V4LVideoFormat(V4LDevice device, v4l2_buf_type type)
 		{
+			this.device = device;
+			this.type = type;
 		}
 	}
 }
