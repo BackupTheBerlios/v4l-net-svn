@@ -29,7 +29,7 @@ namespace Video4Linux
 		#region Private Fields
 		
 		private V4LDevice device;
-		private v4l2_buf_type type;
+		private v4l2_format format;
 		
 		#endregion Private Fields
 		
@@ -38,32 +38,77 @@ namespace Video4Linux
 		internal V4LVideoFormat(V4LDevice device, v4l2_buf_type type)
 		{
 			this.device = device;
-			this.type = type;
+			
+			format = new v4l2_format();
+			format.type = type;
+			getFormat();
 		}
 		
 		#endregion Constructors and Destructors
+		
+		#region Private Methods
+		
+		private void getFormat()
+		{
+			if (device.IoControl.GetFormat(ref format) < 0)
+				throw new Exception("VIDIOC_G_FMT");
+		}
+		
+		private void setFormat()
+		{
+			if (device.IoControl.SetFormat(ref format) < 0)
+				throw new Exception("VIDIOC_S_FMT");
+		}
+		
+		#endregion Private Methods
 		
 		#region Public Methods
 		
 		public void SetDimensions(uint width, uint height)
 		{
-			v4l2_format fmt = new v4l2_format();
-			fmt.type = type;
-			device.IoControl.GetFormat(ref fmt);
-			
-			fmt.fmt.pix.width = width;
-			fmt.fmt.pix.height = height;
-			device.IoControl.SetFormat(ref fmt);
+			getFormat();
+			format.fmt.pix.width = width;
+			format.fmt.pix.height = height;
+			device.IoControl.SetFormat(ref format);
 		}
 		
 		#endregion Public Methods
 		
 		#region Public Properties
 		
+		public uint Width
+		{
+			get
+			{
+				getFormat();
+				return format.fmt.pix.width;
+			}
+		}
+		
+		public uint Height
+		{
+			get
+			{
+				getFormat();
+				return format.fmt.pix.height;
+			}
+		}
+		
+		public uint BytesPerLine
+		{
+			get
+			{
+				getFormat();
+				return format.fmt.pix.bytesperline;
+			}
+			set
+			{
+				format.fmt.pix.bytesperline = value;
+				setFormat();
+			}
+		}
+		
 		/*
-		 * public uint width [get]
-		 * public uint height [get]
-		 * public uint byteperline
 		 * public uint sizeimage [get]
 		 * public v4l2_colorspace colorspace [get]
 		 * public v4l2_field field [get]
