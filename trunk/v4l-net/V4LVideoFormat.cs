@@ -26,13 +26,50 @@ namespace Video4Linux
 {
 	public class V4LVideoFormat
 	{
+		#region Private Fields
+		
 		private V4LDevice device;
 		private v4l2_buf_type type;
+		
+		#endregion Private Fields
+		
+		#region Constructors and Destructors
 		
 		internal V4LVideoFormat(V4LDevice device, v4l2_buf_type type)
 		{
 			this.device = device;
 			this.type = type;
 		}
+		
+		#endregion Constructors and Destructors
+		
+		#region Public Methods
+		
+		public void SetDimensions(uint width, uint height)
+		{
+			v4l2_format fmt = new v4l2_format();
+			fmt.type = type;
+			device.IoControl.GetFormat(ref fmt);
+			
+			fmt.fmt.pix.width = width;
+			fmt.fmt.pix.height = height;
+			device.IoControl.SetFormat(ref fmt);
+		}
+		
+		#endregion Public Methods
+		
+		#region Public Properties
+		
+		/*
+		 * public uint width [get]
+		 * public uint height [get]
+		 * public uint byteperline
+		 * public uint sizeimage [get]
+		 * public v4l2_colorspace colorspace [get]
+		 * public v4l2_field field [get]
+		 * public uint pixelformat
+		 */
+		
+		#endregion Public Properties
 	}
 }
