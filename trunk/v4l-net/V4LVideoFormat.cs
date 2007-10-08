@@ -69,7 +69,7 @@ namespace Video4Linux
 			getFormat();
 			format.fmt.pix.width = width;
 			format.fmt.pix.height = height;
-			device.IoControl.SetFormat(ref format);
+			setFormat();
 		}
 		
 		#endregion Public Methods
@@ -103,7 +103,38 @@ namespace Video4Linux
 			}
 			set
 			{
+				getFormat();
 				format.fmt.pix.bytesperline = value;
+				setFormat();
+			}
+		}
+		
+		public v4l2_field Field
+		{
+			get
+			{
+				getFormat();
+				return format.fmt.pix.field;
+			}
+			set
+			{
+				getFormat();
+				format.fmt.pix.field = value;
+				device.IoControl.SetFormat(ref format);
+			}
+		}
+		
+		public v4l2_pix_format_id PixelFormat
+		{
+			get
+			{
+				getFormat();
+				return format.fmt.pix.pixelformat;
+			}
+			set
+			{
+				getFormat();
+				format.fmt.pix.pixelformat = value;
 				setFormat();
 			}
 		}
@@ -111,8 +142,7 @@ namespace Video4Linux
 		/*
 		 * public uint sizeimage [get]
 		 * public v4l2_colorspace colorspace [get]
-		 * public v4l2_field field [get]
-		 * public uint pixelformat
+		 * public uint pixelformat [get??]
 		 */
 		
 		#endregion Public Properties
