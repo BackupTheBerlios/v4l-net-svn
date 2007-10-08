@@ -48,12 +48,18 @@ namespace Video4Linux
 		
 		#region Private Methods
 		
+		/// <summary>
+		/// Gets the current v4l2_format settings.
+		/// </summary>
 		private void getFormat()
 		{
 			if (device.IoControl.GetFormat(ref format) < 0)
 				throw new Exception("VIDIOC_G_FMT");
 		}
 		
+		/// <summary>
+		/// Sets the current v4l2_format settings.
+		/// </summary>
 		private void setFormat()
 		{
 			if (device.IoControl.SetFormat(ref format) < 0)
@@ -64,6 +70,11 @@ namespace Video4Linux
 		
 		#region Public Methods
 		
+		/// <summary>
+		/// Sets the image dimensions.
+		/// </summary>
+		/// <param name="width">Image width in pixels.</param>
+		/// <param name="height">Image height in pixels.</param>
 		public void SetDimensions(uint width, uint height)
 		{
 			getFormat();
@@ -76,6 +87,9 @@ namespace Video4Linux
 		
 		#region Public Properties
 		
+		/// <summary>
+		/// Gets the image width in pixels.
+		/// </summary>
 		public uint Width
 		{
 			get
@@ -85,6 +99,9 @@ namespace Video4Linux
 			}
 		}
 		
+		/// <summary>
+		/// Gets the image height in pixels.
+		/// </summary>
 		public uint Height
 		{
 			get
@@ -142,7 +159,6 @@ namespace Video4Linux
 		/*
 		 * public uint sizeimage [get]
 		 * public v4l2_colorspace colorspace [get]
-		 * public uint pixelformat [get??]
 		 */
 		
 		#endregion Public Properties
