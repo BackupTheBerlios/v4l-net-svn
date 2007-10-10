@@ -46,7 +46,6 @@ namespace Video4Linux
 			
 			format = new v4l2_format();
 			format.type = type;
-			getFormat();
 		}
 		
 		#endregion Constructors and Destructors

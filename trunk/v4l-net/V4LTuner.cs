@@ -43,25 +43,37 @@ namespace Video4Linux
         /// Creates a tuner.
         /// </summary>
 		/// <param name="device">The parental Video4Linux device.</param>
-		/// <param name="tuner">The struct holding the tuner information.</param>
-		internal V4LTuner(V4LDevice device, v4l2_tuner tuner)
+		/// <param name="index">The index of the tuner.</param>
+		/// <param name="type">The type of the tuner.</param>
+		internal V4LTuner(V4LDevice device, uint index, v4l2_tuner_type type)
 		{
 			this.device = device;
-			this.tuner = tuner;
+			
+			tuner = new v4l2_tuner();
+			tuner.index = index;
+			tuner.type = type;
+			getTuner();
 		}
 		
 		#endregion Constructors and Destructors
 		
-		#region Public Properties
+		#region Private Methods
 		
-        /// <summary>
-        /// Gets the tuner's index in the list of all tuners.
-        /// </summary>
-		/// <value>The index of the tuner.</value>
-		public uint Index
+		private void getTuner()
 		{
-			get { return tuner.index; }
+			if (device.IoControl.GetTuner(ref tuner) < 0)
+				throw new Exception("VIDIOC_G_TUNER");
 		}
+		
+		private void setTuner()
+		{
+			if (device.IoControl.SetTuner(ref tuner) < 0)
+				throw new Exception("VIDIOC_S_TUNER");
+		}
+		
+		#endregion Private Methods
+		
+		#region Public Properties
 		
         /// <summary>
         /// Gets the tuner's name.
@@ -138,7 +150,20 @@ namespace Video4Linux
 		/// <value>The signal quality.</value>
 		public uint Signal
 		{
-			get { return tuner.signal; }
+			get
+			{
+				getTuner();
+				return tuner.signal;
+			}
+		}
+		
+		public int AFC
+		{
+			get
+			{
+				getTuner();
+				return tuner.afc;
+			}
 		}
 		
 		#endregion Public Properties

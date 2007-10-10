@@ -33,8 +33,6 @@ namespace Video4Linux
 			this.fmtdesc = fmtdesc;
 		}
 		
-		/**************************************************/
-		
 		public uint Index
 		{
 			get { return fmtdesc.index; }
