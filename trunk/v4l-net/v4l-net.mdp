@@ -1,5 +1,5 @@
 <Project name="v4l-net" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
-  <Configurations active="Release">
+  <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="./bin/Debug" assemblyKeyFile="./" assembly="video4linux-net" />
       <Build debugmode="True" target="Library" />

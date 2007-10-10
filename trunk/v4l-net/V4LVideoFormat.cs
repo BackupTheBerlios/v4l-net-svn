@@ -35,6 +35,11 @@ namespace Video4Linux
 		
 		#region Constructors and Destructors
 		
+        /// <summary>
+        /// Creates a video capture/output format.
+        /// </summary>
+        /// <param name="device">The parental Video4Linux device.</param>
+		/// <param name="type">The buffer type the format belongs to.</param>
 		internal V4LVideoFormat(V4LDevice device, v4l2_buf_type type)
 		{
 			this.device = device;
@@ -102,6 +107,7 @@ namespace Video4Linux
 		/// <summary>
 		/// Gets the image height in pixels.
 		/// </summary>
+		/// <value>The image height.</value>
 		public uint Height
 		{
 			get
@@ -141,6 +147,10 @@ namespace Video4Linux
 			}
 		}
 		
+		/// <summary>
+		/// Gets or sets the image's pixel format.
+		/// </summary>
+		/// <value>The pixel format.</value>
 		public v4l2_pix_format_id PixelFormat
 		{
 			get
