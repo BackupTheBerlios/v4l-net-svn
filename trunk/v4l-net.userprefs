@@ -2,15 +2,16 @@
 <UserCombinePreferences filename="/mnt/crypted/coding/mono/v4l-net/trunk/v4l-net.mds">
   <Files>
     <File filename="./v4l-net/V4LFormatContainer.cs" />
-    <File filename="./v4l-net/V4LVideoFormat.cs" />
-    <File filename="Welcome" />
+    <File filename="./v4l-net/APIv2/v4l2_format.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
           <Node name="v4l-net" expanded="True">
-            <Node name="V4LVideoFormat.cs" expanded="False" selected="True" />
+            <Node name="APIv2" expanded="True">
+              <Node name="v4l2_format.cs" expanded="False" selected="True" />
+            </Node>
           </Node>
         </Node>
       </TreeView>
@@ -23,7 +24,7 @@
   </Views>
   <Properties>
     <Properties>
-      <Property key="ActiveWindow" value="Welcome" />
+      <Property key="ActiveWindow" value="/mnt/crypted/coding/mono/v4l-net/trunk/v4l-net/APIv2/v4l2_format.cs" />
       <Property key="ActiveConfiguration" value="Debug" />
     </Properties>
   </Properties>

@@ -37,7 +37,7 @@ namespace Video4Linux
 		private int deviceHandle;
 		private V4LIOControl ioControl;
 		
-		private v4l2_capability? _deviceCapabilities;
+		private v4l2_capability deviceCapabilities;
 		private uint bufferCount = 4;
 		private V4LFormatContainer formatContainer;
 		
@@ -65,6 +65,7 @@ namespace Video4Linux
 		{
 			deviceHandle = Syscall.open(path, OpenFlags.O_RDWR);
 			ioControl = new V4LIOControl(deviceHandle);
+			fetchCapabilites();
 		}
 		
         /// <summary>
@@ -116,11 +117,9 @@ namespace Video4Linux
         /// </summary>
 		private void fetchCapabilites()
 		{
-			v4l2_capability tmpCap = new v4l2_capability();
-			if (ioControl.QueryDeviceCapabilities(ref tmpCap) < 0)
+			deviceCapabilities = new v4l2_capability();
+			if (ioControl.QueryDeviceCapabilities(ref deviceCapabilities) < 0)
 				throw new Exception("VIDIOC_QUERYCAP");
-			
-			_deviceCapabilities = tmpCap;
 		}
 		
         /// <summary>
@@ -320,25 +319,6 @@ namespace Video4Linux
 		
 		#endregion Public Methods
 		
-		#region Private Properties
-		
-        /// <summary>
-        /// Gets the device's capabilites.
-        /// </summary>
-		/// <value>The capabilities.</value>
-		private v4l2_capability deviceCapabilities
-		{
-			get
-			{
-				if (!_deviceCapabilities.HasValue)
-					fetchCapabilites();
-				
-				return (v4l2_capability)_deviceCapabilities;
-			}
-		}
-		
-		#endregion Private Properties
-		
 		#region Internal Properties
 		
         /// <summary>
@@ -384,6 +364,15 @@ namespace Video4Linux
 		public string BusInfo
 		{
 			get { return deviceCapabilities.bus_info; }
+		}
+		
+        /// <summary>
+        /// Gets information about the device's capabilities.
+        /// </summary>
+		/// <value>The capability bitmap.</value>
+		public uint Capabilities
+		{
+			get { return deviceCapabilities.capabilities; }
 		}
 		
         /// <summary>

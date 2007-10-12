@@ -65,12 +65,6 @@ namespace Video4Linux
 				throw new Exception("VIDIOC_G_TUNER");
 		}
 		
-		private void setTuner()
-		{
-			if (device.IoControl.SetTuner(ref tuner) < 0)
-				throw new Exception("VIDIOC_S_TUNER");
-		}
-		
 		#endregion Private Methods
 		
 		#region Public Properties

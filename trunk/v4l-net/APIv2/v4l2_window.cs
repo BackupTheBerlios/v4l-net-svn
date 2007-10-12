@@ -33,5 +33,6 @@ namespace Video4Linux.APIv2
 		public unsafe v4l2_clip *clips;
 		public uint clipcount;
 		public unsafe void *bitmap;
+		public byte global_alpha;
 	}
 }

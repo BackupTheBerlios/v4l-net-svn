@@ -27,9 +27,14 @@ namespace Video4Linux.APIv2
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct v4l2_rect
 	{
-		public int left;
-		public int top;
-		public int width;
-		public int height;
+		public int left, top, width, height;
+		
+		internal v4l2_rect(int left, int top, int width, int height)
+		{
+			this.left = left;
+			this.top = top;
+			this.width = width;
+			this.height = height;
+		}
 	}
 }

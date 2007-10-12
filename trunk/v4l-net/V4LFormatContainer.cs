@@ -31,6 +31,7 @@ namespace Video4Linux
 		private V4LDevice device;
 		
 		private V4LVideoFormat videoCapture, videoOutput;
+		private V4LOverlayFormat overlayCapture, overlayOutput;
 		
 		#endregion Private Fields
 		
@@ -45,10 +46,17 @@ namespace Video4Linux
 		
 		#region Public Properties
 		
+		/// <summary>
+		/// Gets the current video capture format.
+		/// </summary>
+		/// <value>The video capture format.</value>
 		public V4LVideoFormat VideoCapture
 		{
 			get
 			{
+				if ((device.Capabilities & (uint)v4l2_capability_id.VideoCapture) == 0)
+					throw new Exception("video capture not supported");
+				
 				if (videoCapture == null)
 					videoCapture = new V4LVideoFormat(device, v4l2_buf_type.VideoCapture);
 				
@@ -56,10 +64,17 @@ namespace Video4Linux
 			}
 		}
 		
+		/// <summary>
+		/// Gets the current video output format.
+		/// </summary>
+		/// <value>The video output format.</value>
 		public V4LVideoFormat VideoOutput
 		{
 			get
 			{
+				if ((device.Capabilities & (uint)v4l2_capability_id.VideoOutput) == 0)
+					throw new Exception("video output not supported");
+				
 				if (videoOutput == null)
 					videoOutput = new V4LVideoFormat(device, v4l2_buf_type.VideoOutput);
 				
@@ -67,10 +82,43 @@ namespace Video4Linux
 			}
 		}
 		
+		/// <summary>
+		/// Gets the current overlay capture format.
+		/// </summary>
+		/// <value>The overlay capture format.</value>
+		public V4LOverlayFormat OverlayCapture
+		{
+			get
+			{
+				if ((device.Capabilities & (uint)v4l2_capability_id.VideoOverlay) == 0)
+					throw new Exception("overlay capture not supported");
+				
+				if (overlayCapture == null)
+					overlayCapture = new V4LOverlayFormat(device, v4l2_buf_type.VideoOverlay);
+				
+				return overlayCapture;
+			}
+		}
+		
+		/// <summary>
+		/// Gets the current overlay output format.
+		/// </summary>
+		/// <value>The overlay output format.</value>
+		public V4LOverlayFormat OverlayOutput
+		{
+			get
+			{
+				if ((device.Capabilities & (uint)v4l2_capability_id.VideoOutputOverlay) == 0)
+					throw new Exception("overlay output not supported");
+				
+				if (overlayOutput == null)
+					overlayOutput = new V4LOverlayFormat(device, v4l2_buf_type.VideoOutputOverlay);
+				
+				return overlayOutput;
+			}
+		}
+		
 		/*
-		 * public V4LOverlayFormat OverlayCapture
-		 * public V4LOverlayFormat OverlayOutput
-		 * 
 		 * public V4LVBIFormat VBICapture
 		 * public V4LVBIFormat VBIOutput
 		 * 

@@ -20,29 +20,35 @@
 #endregion LICENSE
 
 using System;
-using System.Runtime.InteropServices;
+using Video4Linux.APIv2;
 
-namespace Video4Linux.APIv2
+namespace Video4Linux
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct v4l2_format
+	/// <summary>
+	/// Represents a rectangle.
+	/// </summary>
+	public struct V4LRectangle
 	{
-		public v4l2_buf_type type;
-		public fmt_union fmt;
-	}
-	
-	[StructLayout(LayoutKind.Explicit)]
-	internal struct fmt_union
-	{
-		[FieldOffset(0)]
-		public v4l2_pix_format pix;           // V4L2_BUF_TYPE_VIDEO_CAPTURE
-		[FieldOffset(0)]
-		public v4l2_window win;               // V4L2_BUF_TYPE_VIDEO_OVERLAY
-		//[FieldOffset(0)]
-		//public v4l2_vbi_format vbi;           // V4L2_BUF_TYPE_VBI_CAPTURE
-		//[FieldOffset(0)]
-		//public v4l2_sliced_vbi_format sliced; // V4L2_BUF_TYPE_SLICED_VBI_CAPTURE
-		//[FieldOffset(0), MarshalAs(UnmanagedType.ByValArray, SizeConst=200)]
-		//public byte[] raw;
+		public int Left, Top, Height, Width;
+		
+		/// <summary>
+		/// Creates a new rectangle.
+		/// </summary>
+		/// <param name="rect">The struct holding the rectangle information.</param>
+		internal V4LRectangle(v4l2_rect rect)
+		{
+			Left = rect.left;
+			Top = rect.top;
+			Height = rect.height;
+			Width = rect.width;
+		}
+		
+		/// <summary>
+		/// Converts a rectangle back to a v4l2_rect.
+		/// </summary>
+		internal v4l2_rect ToStruct()
+		{
+			return new v4l2_rect(Left, Top, Height, Width);
+		}
 	}
 }
