@@ -24,30 +24,50 @@ using Video4Linux.APIv2;
 
 namespace Video4Linux
 {
+	/// <summary>
+	/// Represents a video transmission standard.
+	/// </summary>
 	public class V4LStandard
 	{
+		#region Private Fields
+		
 		private v4l2_standard standard;
+		
+		#endregion Private Fields
+		
+		#region Constructors and Destructors
 		
 		internal V4LStandard(v4l2_standard standard)
 		{
 			this.standard = standard;
 		}
 		
-		/**************************************************/
+		#endregion Constructors and Destructors
 		
-		/**************************************************/
-		
-		public uint Index
-		{
-			get { return standard.index; }
-		}
-		
+		#region Internal Properties
 		
 		internal v4l2_std_id Id
 		{
 			get { return standard.id; }
 		}
 		
+		/// <summary>
+		/// Gets the index of this standard in the list of all available standards.
+		/// </summary>
+		/// <value>The index of this standard.</value>
+		internal uint Index
+		{
+			get { return standard.index; }
+		}
+		
+		#endregion Internal Properties
+		
+		#region Public Properties
+		
+		/// <summary>
+		/// Gets the name of the video transmission standard.
+		/// </summary>
+		/// <value>The name of the standard.</value>
 		public string Name
 		{
 			get { return standard.name; }
@@ -57,5 +77,7 @@ namespace Video4Linux
 		{
 			get { return standard.framelines; }
 		}
+		
+		#endregion Public Properties
 	}
 }

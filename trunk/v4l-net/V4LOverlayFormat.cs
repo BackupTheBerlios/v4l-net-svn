@@ -24,6 +24,9 @@ using Video4Linux.APIv2;
 
 namespace Video4Linux
 {
+	/// <summary>
+	/// Represents a video overlay capture and output format.
+	/// </summary>
 	public class V4LOverlayFormat
 	{
 		#region Private Fields
@@ -76,6 +79,12 @@ namespace Video4Linux
 		
 		#endregion Public Methods
 		
+		#region Public Properties
+		
+		/// <summary>
+		/// Gets or sets the clipping rectangle.
+		/// </summary>
+		/// <value>The rectangle to be clipped.</value>
 		public V4LRectangle Window
 		{
 			get
@@ -91,10 +100,7 @@ namespace Video4Linux
 			}
 		}
 		
-		#region Public Properties
-		
 		/*
-		 * window
 		 * field
 		 * chromakey
 		 * clips

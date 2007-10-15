@@ -29,7 +29,28 @@ namespace Video4Linux
 	/// </summary>
 	public struct V4LRectangle
 	{
-		public int Left, Top, Height, Width;
+		#region Public Fields
+		
+		/// <summary>
+		/// The left position of the top-left corner in pixels.
+		/// </summary>
+		public int Left;
+		/// <summary>
+		/// The top position of the top-left corner in pixels.
+		/// </summary>
+		public int Top;
+		/// <summary>
+		/// The height in pixels.
+		/// </summary>
+		public int Height;
+		/// <summary>
+		/// The width in pixels.
+		/// </summary>
+		public int Width;
+		
+		#endregion Public Fields
+		
+		#region Constructors and Destructors
 		
 		/// <summary>
 		/// Creates a new rectangle.
@@ -43,6 +64,10 @@ namespace Video4Linux
 			Width = rect.width;
 		}
 		
+		#endregion Constructors and Destructors
+		
+		#region Internal Methods
+		
 		/// <summary>
 		/// Converts a rectangle back to a v4l2_rect.
 		/// </summary>
@@ -50,5 +75,7 @@ namespace Video4Linux
 		{
 			return new v4l2_rect(Left, Top, Height, Width);
 		}
+		
+		#endregion Internal Methods
 	}
 }

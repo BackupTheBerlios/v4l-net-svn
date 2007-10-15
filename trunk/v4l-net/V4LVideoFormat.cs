@@ -24,6 +24,9 @@ using Video4Linux.APIv2;
 
 namespace Video4Linux
 {
+	/// <summary>
+	/// Represents a video capture and output format.
+	/// </summary>
 	public class V4LVideoFormat
 	{
 		#region Private Fields

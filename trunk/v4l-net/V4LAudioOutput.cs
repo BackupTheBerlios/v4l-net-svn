@@ -24,23 +24,32 @@ using Video4Linux.APIv2;
 
 namespace Video4Linux
 {
+	/// <summary>
+	/// Represents an audio output device.
+	/// </summary>
 	public class V4LAudioOutput
 	{
+		#region Private Fields
+		
 		private v4l2_audioout output;
+		
+		#endregion Private Fields
+		
+		#region Constructors and Destructors
 		
 		internal V4LAudioOutput(v4l2_audioout output)
 		{
 			this.output = output;
 		}
 		
-		/**************************************************/
+		#endregion Constructors and Destructors
 		
 		internal v4l2_audioout ToStruct()
 		{
 			return output;
 		}
 		
-		/**************************************************/
+		#region Public Properties
 		
 		public uint Index
 		{
@@ -61,5 +70,7 @@ namespace Video4Linux
 		{
 			get { return output.mode; }
 		}
+		
+		#endregion Public Properties
 	}
 }
