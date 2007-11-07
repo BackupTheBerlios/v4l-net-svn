@@ -32,9 +32,6 @@ namespace Video4Linux
     /// </summary>
 	public class V4LBuffer
 	{
-		private const int HEIGHT = 576;
-		private const int WIDTH = 720;
-		
 		#region Private Fields
 		
 		private V4LDevice device;
@@ -58,7 +55,13 @@ namespace Video4Linux
 			mapMemory();
 		}
 		
-		// TODO: unmap memory when destructed.
+        /// <summary>
+        /// Extends the destruction of a Video4Linux buffer.
+        /// </summary>
+		~V4LBuffer()
+		{
+			unmapMemory();
+		}
 		
 		#endregion Constructors and Destructors
 		
@@ -78,6 +81,11 @@ namespace Video4Linux
 				 buffer.m.offset);
 			if (start == Syscall.MAP_FAILED)
 				throw new Exception("Memory mapping failed.");
+		}
+		
+		private void unmapMemory()
+		{
+			Mono.Unix.Native.Syscall.munmap(start, buffer.length);
 		}
 		
 		#endregion Private Methods
@@ -115,11 +123,10 @@ namespace Video4Linux
 		
 		#region Public Properties
 		
-		public uint Index
-		{
-			get { return buffer.index; }
-		}
-		
+		/// <summary>
+		/// Gets the number of bytes that are currently used.
+		/// </summary>
+		/// <value>The number of bytes currently in use.</value>
 		public uint BytesUsed
 		{
 			get { return buffer.bytesused; }
@@ -130,6 +137,10 @@ namespace Video4Linux
 			get { return buffer.m.offset; }
 		}
 		
+		/// <summary>
+		/// Gets the length of the buffer in bytes.
+		/// </summary>
+		/// <value>The length of the buffer in bytes.</value>
 		public uint Length
 		{
 			get { return buffer.length; }
@@ -140,16 +151,25 @@ namespace Video4Linux
 			get { return buffer.sequence; }
 		}
 		
-		internal v4l2_buf_type Type
-		{
-			get { return buffer.type; }
-		}
-		
 		public IntPtr Start
 		{
 			get { return start; }
 		}
 		
 		#endregion Public Properties
+		
+		#region Internal Properties
+		
+		internal uint Index
+		{
+			get { return buffer.index; }
+		}
+		
+		internal v4l2_buf_type Type
+		{
+			get { return buffer.type; }
+		}
+		
+		#endregion Internal Properties
 	}
 }

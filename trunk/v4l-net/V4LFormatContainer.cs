@@ -24,12 +24,14 @@ using Video4Linux.APIv2;
 
 namespace Video4Linux
 {
+	/// <summary>
+	/// Provides a container for all video capture and output formats.
+	/// </summary>
 	public class V4LFormatContainer
 	{
 		#region Private Fields
 		
 		private V4LDevice device;
-		
 		private V4LVideoFormat videoCapture, videoOutput;
 		private V4LOverlayFormat overlayCapture, overlayOutput;
 		
@@ -54,7 +56,7 @@ namespace Video4Linux
 		{
 			get
 			{
-				if ((device.Capabilities & (uint)v4l2_capability_id.VideoCapture) == 0)
+				if (!device.Capabilities.Contains(V4LDeviceCapability.VideoCapture))
 					throw new Exception("video capture not supported");
 				
 				if (videoCapture == null)
@@ -72,7 +74,7 @@ namespace Video4Linux
 		{
 			get
 			{
-				if ((device.Capabilities & (uint)v4l2_capability_id.VideoOutput) == 0)
+				if (!device.Capabilities.Contains(V4LDeviceCapability.VideoOutput))
 					throw new Exception("video output not supported");
 				
 				if (videoOutput == null)
@@ -90,7 +92,7 @@ namespace Video4Linux
 		{
 			get
 			{
-				if ((device.Capabilities & (uint)v4l2_capability_id.VideoOverlay) == 0)
+				if (!device.Capabilities.Contains(V4LDeviceCapability.VideoOverlay))
 					throw new Exception("overlay capture not supported");
 				
 				if (overlayCapture == null)
@@ -108,7 +110,7 @@ namespace Video4Linux
 		{
 			get
 			{
-				if ((device.Capabilities & (uint)v4l2_capability_id.VideoOutputOverlay) == 0)
+				if (!device.Capabilities.Contains(V4LDeviceCapability.VideoOutputOverlay))
 					throw new Exception("overlay output not supported");
 				
 				if (overlayOutput == null)

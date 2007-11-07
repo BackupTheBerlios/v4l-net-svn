@@ -28,7 +28,7 @@ namespace Video4Linux.APIv2
 	internal struct v4l2_frequency
 	{
 		public uint tuner;
-		public v4l2_tuner_type type;
+		public V4LTunerType type;
 		public uint frequency;
 		[MarshalAs(UnmanagedType.ByValArray, SizeConst=8)]
 		public uint[] reserved;

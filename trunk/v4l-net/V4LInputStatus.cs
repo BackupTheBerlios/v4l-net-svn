@@ -21,9 +21,9 @@
 
 using System;
 
-namespace Video4Linux.APIv2
+namespace Video4Linux
 {
-	public enum v4l2_input_status : uint
+	public enum V4LInputStatus : uint
 	{
 		// General
 		NoPower              = 0x00000001, // Attached device is off.

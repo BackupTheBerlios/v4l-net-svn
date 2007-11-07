@@ -23,7 +23,7 @@ using System;
 
 namespace Video4Linux.APIv2
 {
-	public enum v4l2_colorspace : byte
+	internal enum v4l2_colorspace : byte
 	{
 		SMPTE170M     = 1,
 		SMPTE240M     = 2,

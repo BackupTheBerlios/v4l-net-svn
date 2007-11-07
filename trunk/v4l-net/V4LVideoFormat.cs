@@ -119,6 +119,10 @@ namespace Video4Linux
 			}
 		}
 		
+		/// <summary>
+		/// Gets the size of a line in bytes.
+		/// </summary>
+		/// <value>The bytes per line.</value>
 		public uint BytesPerLine
 		{
 			get

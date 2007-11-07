@@ -1,12 +1,13 @@
 ﻿<UserCombinePreferences version="1.0" filename="/mnt/crypted/coding/mono/v4l-net/trunk/v4l-net.mds">
   <Files>
-    <File name="./v4l-net/V4LDevice.cs" line="40" column="46" />
+    <File name="v4l-net/V4LDevice.cs" line="40" column="46" />
+    <File name="v4l-net/V4LBuffer.cs" line="88" column="29" />
   </Files>
   <Views>
     <ViewMemento id="ProjectPad">
       <Node expanded="True">
         <Node name="v4l-net" expanded="True">
-          <Node name="V4LDevice.cs" selected="True" />
+          <Node name="V4LBuffer.cs" selected="True" />
         </Node>
       </Node>
     </ViewMemento>
@@ -21,7 +22,7 @@
     </ViewMemento>
   </Views>
   <Properties>
-    <Property key="ActiveWindow" value="/mnt/crypted/coding/mono/v4l-net/trunk/v4l-net/V4LDevice.cs" />
+    <Property key="ActiveWindow" value="/mnt/crypted/coding/mono/v4l-net/trunk/v4l-net/V4LBuffer.cs" />
     <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>

@@ -22,6 +22,7 @@
 using Mono.Unix.Native;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading;
 using Video4Linux.APIv2;
 
@@ -37,18 +38,21 @@ namespace Video4Linux
 		private int deviceHandle;
 		private V4LIOControl ioControl;
 		
-		private v4l2_capability deviceCapabilities;
+		private v4l2_capability device;
 		private uint bufferCount = 4;
 		private V4LFormatContainer formatContainer;
 		
-		private List<V4LAudioInput> audioInputs;
-		private List<V4LAudioOutput> audioOutputs;
+		private ManagedList<V4LAudioInput> audioInputs;
+		private ManagedList<V4LAudioOutput> audioOutputs;
 		private List<V4LBuffer> buffers = new List<V4LBuffer>();
-		private List<V4LFormatDescription> formats;
-		private List<V4LInput> inputs;
-		private List<V4LOutput> outputs;
-		private List<V4LStandard> standards;
-		private List<V4LTuner> tuners;
+		private List<V4LDeviceCapability> capabilities;
+		private List<V4LFormat> formats;
+		private ManagedList<V4LInput> inputs;
+		private ManagedList<V4LOutput> outputs;
+		private ManagedList<V4LStandard> standards;
+		private ManagedList<V4LTuner> tuners;
+		
+		private Thread streamingThread;
 		
 		#endregion Private Fields
 		
@@ -65,7 +69,7 @@ namespace Video4Linux
 		{
 			deviceHandle = Syscall.open(path, OpenFlags.O_RDWR);
 			ioControl = new V4LIOControl(deviceHandle);
-			fetchCapabilites();
+			fetchDevice();
 		}
 		
         /// <summary>
@@ -85,7 +89,7 @@ namespace Video4Linux
         /// </summary>
 		private void fetchAudioInputs()
 		{
-			audioInputs = new List<V4LAudioInput>();
+			audioInputs = new ManagedList<V4LAudioInput>();
 			v4l2_audio cur = new v4l2_audio();
 			
 			cur.index = 0;
@@ -101,7 +105,7 @@ namespace Video4Linux
         /// </summary>
 		private void fetchAudioOutputs()
 		{
-			audioOutputs = new List<V4LAudioOutput>();
+			audioOutputs = new ManagedList<V4LAudioOutput>();
 			v4l2_audioout cur = new v4l2_audioout();
 			
 			cur.index = 0;
@@ -115,10 +119,10 @@ namespace Video4Linux
         /// <summary>
         /// Queries the device for its capabilites.
         /// </summary>
-		private void fetchCapabilites()
+		private void fetchDevice()
 		{
-			deviceCapabilities = new v4l2_capability();
-			if (ioControl.QueryDeviceCapabilities(ref deviceCapabilities) < 0)
+			device = new v4l2_capability();
+			if (ioControl.QueryDeviceCapabilities(ref device) < 0)
 				throw new Exception("VIDIOC_QUERYCAP");
 		}
 		
@@ -127,13 +131,13 @@ namespace Video4Linux
         /// </summary>
 		private void fetchFormats()
 		{
-			formats = new List<V4LFormatDescription>();
+			formats = new List<V4LFormat>();
 			v4l2_fmtdesc cur = new v4l2_fmtdesc();
 			
 			cur.index = 0;
 			while (ioControl.EnumerateFormats(ref cur) == 0)
 			{
-				formats.Add(new V4LFormatDescription(cur));
+				formats.Add(new V4LFormat(cur));
 				cur.index++;
 			}
 		}
@@ -143,7 +147,7 @@ namespace Video4Linux
         /// </summary>
 		private void fetchInputs()
 		{
-			inputs = new List<V4LInput>();
+			inputs = new ManagedList<V4LInput>();
 			v4l2_input cur = new v4l2_input();
 			
 			cur.index = 0;
@@ -159,7 +163,7 @@ namespace Video4Linux
         /// </summary>
 		private void fetchOutputs()
 		{
-			outputs = new List<V4LOutput>();
+			outputs = new ManagedList<V4LOutput>();
 			v4l2_output cur = new v4l2_output();
 			
 			cur.index = 0;
@@ -175,7 +179,7 @@ namespace Video4Linux
         /// </summary>
 		private void fetchStandards()
 		{
-			standards = new List<V4LStandard>();
+			standards = new ManagedList<V4LStandard>();
 			v4l2_standard cur = new v4l2_standard();
 			
 			cur.index = 0;
@@ -191,7 +195,7 @@ namespace Video4Linux
         /// </summary>
 		private void fetchTuners()
 		{
-			tuners = new List<V4LTuner>();
+			tuners = new ManagedList<V4LTuner>();
 			v4l2_tuner cur = new v4l2_tuner();
 			
 			cur.index = 0;
@@ -211,8 +215,10 @@ namespace Video4Linux
 				buf.Enqueue();
 		}
 		
-		// TODO: rename and improve
-		private void threadTest()
+		/// <summary>
+		/// Tries to dequeue a buffer and fires the 'BufferFilled' event if the buffer was filled by the driver.
+		/// </summary>
+		private void captureFromBuffers()
 		{
 			v4l2_buffer buf = new v4l2_buffer();
 			buf.type = Buffers[0].Type;
@@ -268,6 +274,15 @@ namespace Video4Linux
 			}
 		}
 		
+		private void fetchCapabilities()
+		{
+			capabilities = new List<V4LDeviceCapability>();
+			
+			foreach (object val in Enum.GetValues(typeof(V4LDeviceCapability)))
+				if ((device.capabilities & (uint)val) != 0)
+					capabilities.Add((V4LDeviceCapability)val);
+		}
+		
         /// <summary>
         /// Gets a V4LStandard out of the list of all supported standards.
         /// </summary>
@@ -301,10 +316,9 @@ namespace Video4Linux
 			if (ioControl.StreamingOn(ref type) < 0)
 				throw new Exception("VIDIOC_STREAMON");
 			
-			// TODO: rename and improve
-			Thread t = new Thread(new ThreadStart(threadTest));
-			t.Priority = ThreadPriority.Lowest;
-			t.Start();
+			streamingThread = new Thread(new ThreadStart(captureFromBuffers));
+			streamingThread.Priority = ThreadPriority.Lowest;
+			streamingThread.Start();
 		}
 		
         /// <summary>
@@ -312,6 +326,9 @@ namespace Video4Linux
         /// </summary>
 		public void StopStreaming()
 		{
+			streamingThread.Abort();
+			streamingThread = null;
+			
 			v4l2_buf_type type = v4l2_buf_type.VideoCapture;
 			if (ioControl.StreamingOff(ref type) < 0)
 				throw new Exception("VIDIOC_STREAMOFF");
@@ -345,7 +362,7 @@ namespace Video4Linux
 		/// <value>The device's name.</value>
 		public string Name
 		{
-			get { return deviceCapabilities.card; }
+			get { return device.card; }
 		}
 		
         /// <summary>
@@ -354,7 +371,7 @@ namespace Video4Linux
 		/// <value>The driver's name.</value>
 		public string Driver
 		{
-			get { return deviceCapabilities.driver; }
+			get { return device.driver; }
 		}
 		
         /// <summary>
@@ -363,16 +380,22 @@ namespace Video4Linux
 		/// <value>The bus info string.</value>
 		public string BusInfo
 		{
-			get { return deviceCapabilities.bus_info; }
+			get { return device.bus_info; }
 		}
 		
         /// <summary>
         /// Gets information about the device's capabilities.
         /// </summary>
 		/// <value>The capability bitmap.</value>
-		public uint Capabilities
+		public ReadOnlyCollection<V4LDeviceCapability> Capabilities
 		{
-			get { return deviceCapabilities.capabilities; }
+			get
+			{
+				if (capabilities == null)
+					fetchCapabilities();
+				
+				return capabilities.AsReadOnly();
+			}
 		}
 		
         /// <summary>
@@ -381,7 +404,7 @@ namespace Video4Linux
 		/// <value>The version string.</value>
 		public uint Version
 		{
-			get { return deviceCapabilities.version; }
+			get { return device.version; }
 		}
 		
         /// <summary>
@@ -439,6 +462,10 @@ namespace Video4Linux
 			set { bufferCount = value; }
 		}
 		
+		/// <summary>
+		/// Gets a container holding all video capture and output formats.
+		/// </summary>
+		/// <value>The format container.</value>
 		public V4LFormatContainer Format
 		{
 			get
@@ -520,7 +547,7 @@ namespace Video4Linux
         /// Gets all available audio inputs.
         /// </summary>
 		/// <value>A list of audio inputs.</value>
-		public List<V4LAudioInput> AudioInputs
+		public ManagedList<V4LAudioInput> AudioInputs
 		{
 			get
 			{
@@ -535,7 +562,7 @@ namespace Video4Linux
         /// Gets all available audio outputs.
         /// </summary>
 		/// <value>A list of audio outputs.</value>
-		public List<V4LAudioOutput> AudioOutputs
+		public ManagedList<V4LAudioOutput> AudioOutputs
 		{
 			get
 			{
@@ -559,7 +586,7 @@ namespace Video4Linux
         /// Gets all available image formats.
         /// </summary>
 		/// <value>A list of image formats.</value>
-		public List<V4LFormatDescription> Formats
+		public List<V4LFormat> Formats
 		{
 			get
 			{
@@ -574,7 +601,7 @@ namespace Video4Linux
         /// Gets all available video inputs.
         /// </summary>
 		/// <value>A list of video inputs.</value>
-		public List<V4LInput> Inputs
+		public ManagedList<V4LInput> Inputs
 		{
 			get
 			{
@@ -589,7 +616,7 @@ namespace Video4Linux
         /// Gets all available video outputs.
         /// </summary>
 		/// <value>A list of video outputs.</value>
-		public List<V4LOutput> Outputs
+		public ManagedList<V4LOutput> Outputs
 		{
 			get
 			{
@@ -604,7 +631,7 @@ namespace Video4Linux
         /// Gets all avaible TV standards.
         /// </summary>
 		/// <value>A list of standards.</value>
-		public List<V4LStandard> Standards
+		public ManagedList<V4LStandard> Standards
 		{
 			get
 			{
@@ -619,7 +646,7 @@ namespace Video4Linux
         /// Gets all available tuners.
         /// </summary>
 		/// <value>A list of tuners.</value>
-		public List<V4LTuner> Tuners
+		public ManagedList<V4LTuner> Tuners
 		{
 			get
 			{

@@ -21,9 +21,12 @@
 
 using System;
 
-namespace Video4Linux.APIv2
+namespace Video4Linux
 {
-	public enum v4l2_capability_id : uint
+	/// <summary>
+	/// Represents a capability of a Video4Linux device.
+	/// </summary>
+	public enum V4LDeviceCapability : uint
 	{
 		VideoCapture       = 0x00000001,
 		VideoOutput        = 0x00000002,

@@ -24,42 +24,73 @@ using Video4Linux.APIv2;
 
 namespace Video4Linux
 {
+	/// <summary>
+	/// Represents a video output.
+	/// </summary>
 	public class V4LOutput
 	{
+		#region Private Fields
+		
 		private v4l2_output output;
+		
+		#endregion Private Fields
+		
+		#region Constructors and Destructors
 		
 		internal V4LOutput(v4l2_output output)
 		{
 			this.output = output;
 		}
 		
-		/**************************************************/
+		#endregion Constructors and Destructors
 		
-		/**************************************************/
+		#region Public Properties
 		
-		public uint Index
-		{
-			get { return output.index; }
-		}
-		
+		/// <summary>
+		/// Gets the name of video output.
+		/// </summary>
+		/// <value>The name of the video output.</value>
 		public string Name
 		{
 			get { return output.name; }
 		}
 		
+		/// <summary>
+		/// Gets the type of the video output.
+		/// </summary>
+		/// <value>The type of the video output.</value>
 		public uint Type
 		{
 			get { return output.type; }
 		}
 		
+		/// <summary>
+		/// Gets the current status of the video output.
+		/// </summary>
+		/// <value>The current status.</value>
 		public uint Status
 		{
 			get { return output.status; }
 		}
 		
+		/// <summary>
+		/// Gets a bitmap of the video output's supported video standards.
+		/// </summary>
+		/// <value>The bitmap of video standards.</value>
 		public ulong SupportedStandards
 		{
 			get { return output.std; }
 		}
+		
+		#endregion Public Properties
+		
+		#region Internal Properties
+		
+		internal uint Index
+		{
+			get { return output.index; }
+		}
+		
+		#endregion Internal Properties
 	}
 }

@@ -25,7 +25,7 @@ using System.Runtime.InteropServices;
 namespace Video4Linux.APIv2
 {
 	[StructLayout(LayoutKind.Sequential)]
-	public struct v4l2_capability
+	internal struct v4l2_capability
 	{
 		[MarshalAs(UnmanagedType.ByValTStr, SizeConst=16)]
 		public string driver;

@@ -21,11 +21,18 @@
 
 using System;
 
-namespace Video4Linux.APIv2
+namespace Video4Linux
 {
-	public enum v4l2_tuner_type
+	public enum V4LInputType : uint
 	{
-		Radio    = 1,
-		AnalogTV = 2
+		/// <summary>
+		/// This input uses a tuner (Rf demodulator).
+		/// </summary>
+		Tuner  = 1,
+		
+		/// <summary>
+		/// Analog baseband input, for example CVBS/composite video, S-Video, RGB.
+		/// </summary>
+		Camera = 2
 	}
 }

@@ -30,11 +30,11 @@ namespace Video4Linux.APIv2
 		public uint index;
 		[MarshalAs(UnmanagedType.ByValTStr, SizeConst=32)]
 		public string name;
-		public uint type;
+		public V4LInputType type;
 		public uint audioset;
 		public uint tuner;
 		public ulong std;
-		public uint status;
+		public V4LInputStatus status;
 		[MarshalAs(UnmanagedType.ByValArray, SizeConst=4)]
 		public uint[] reserved;
 	}

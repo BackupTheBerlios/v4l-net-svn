@@ -23,7 +23,7 @@ using System;
 
 namespace Video4Linux.APIv2
 {
-	public enum v4l2_tuner_capability
+	internal enum v4l2_tuner_capability
 	{
 		Low   = 0x0001, // tuning frequencies are expressed in units of 62.5 Hz, otherwise in units of 62.5 kHz.
 		Norm  = 0x0002, // Multi-standard tuner; the video standard can or must be switched, only v4l2_tuner_type.AnalogTV

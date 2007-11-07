@@ -30,7 +30,7 @@ namespace Video4Linux.APIv2
 		public uint index;
 		[MarshalAs(UnmanagedType.ByValTStr, SizeConst=32)]
 		public string name;
-		public v4l2_tuner_type type;
+		public V4LTunerType type;
 		public uint capability;
 		public uint rangelow;
 		public uint rangehigh;

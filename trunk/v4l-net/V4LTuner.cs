@@ -45,7 +45,7 @@ namespace Video4Linux
 		/// <param name="device">The parental Video4Linux device.</param>
 		/// <param name="index">The index of the tuner.</param>
 		/// <param name="type">The type of the tuner.</param>
-		internal V4LTuner(V4LDevice device, uint index, v4l2_tuner_type type)
+		internal V4LTuner(V4LDevice device, uint index, V4LTunerType type)
 		{
 			this.device = device;
 			
@@ -82,11 +82,15 @@ namespace Video4Linux
         /// Gets the tuner's type.
         /// </summary>
 		/// <value>The type of the tuner.</value>
-		public APIv2.v4l2_tuner_type Type
+		public V4LTunerType Type
 		{
 			get { return tuner.type; }
 		}
 		
+		/// <summary>
+		/// Gets a bitmap of the tuner's capabilities.
+		/// </summary>
+		/// <value>A bitmap of the tuner's capabilities.</value>
 		public uint Capabilities
 		{
 			get { return tuner.capability; }
@@ -151,6 +155,10 @@ namespace Video4Linux
 			}
 		}
 		
+		/// <summary>
+		/// Get the tuner's current automatic frequency control value.
+		/// </summary>
+		/// <value>The automatic frequency control value.</value>
 		public int AFC
 		{
 			get
@@ -161,5 +169,14 @@ namespace Video4Linux
 		}
 		
 		#endregion Public Properties
+		
+		#region Internal Properties
+		
+		internal uint Index
+		{
+			get { return tuner.index; }
+		}
+		
+		#endregion Internal Properties
 	}
 }

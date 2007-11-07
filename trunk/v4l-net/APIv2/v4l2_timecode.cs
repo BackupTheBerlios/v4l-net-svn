@@ -25,7 +25,7 @@ using System.Runtime.InteropServices;
 namespace Video4Linux.APIv2
 {
 	[StructLayout(LayoutKind.Sequential)]
-	public struct v4l2_timecode
+	internal struct v4l2_timecode
 	{
 		public uint type;
 		public uint flags;

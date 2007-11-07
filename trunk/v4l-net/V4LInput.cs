@@ -54,15 +54,6 @@ namespace Video4Linux
 		#region Public Properties
 		
         /// <summary>
-        /// Gets the video input's index in the list of all video inputs.
-        /// </summary>
-		/// <value>The index of the video input.</value>
-		public uint Index
-		{
-			get { return input.index; }
-		}
-		
-        /// <summary>
         /// Gets the video input's name.
         /// </summary>
 		/// <value>The name of the video input.</value>
@@ -75,7 +66,7 @@ namespace Video4Linux
         /// Gets the type of the video input.
         /// </summary>
 		/// <value>The type of the video input.</value>
-		public uint Type
+		public V4LInputType Type
 		{
 			get { return input.type; }
 		}
@@ -94,16 +85,33 @@ namespace Video4Linux
         /// Gets the video input's current status.
         /// </summary>
 		/// <value>The status of the video input.</value>
-		public uint Status
+		public V4LInputStatus Status
 		{
 			get { return input.status; }
 		}
 		
+		/// <summary>
+		/// Gets a bitmap of the video input's supported standards.
+		/// </summary>
+		/// <value>The bitmap of the supported standards.</value>
 		public ulong SupportedStandards
 		{
 			get { return input.std; }
 		}
 		
 		#endregion Public Properties
+		
+		#region Internal Properties
+		
+        /// <summary>
+        /// Gets the video input's index in the list of all video inputs.
+        /// </summary>
+		/// <value>The index of the video input.</value>
+		internal uint Index
+		{
+			get { return input.index; }
+		}
+		
+		#endregion Internal Properties
 	}
 }

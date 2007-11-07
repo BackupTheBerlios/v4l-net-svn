@@ -24,19 +24,27 @@ using Video4Linux.APIv2;
 
 namespace Video4Linux
 {
-	public class V4LFormatDescription
+	/// <summary>
+	/// Represents a picture format.
+	/// </summary>
+	public class V4LFormat
 	{
+		#region Private Fields
+		
 		private v4l2_fmtdesc fmtdesc;
 		
-		internal V4LFormatDescription(v4l2_fmtdesc fmtdesc)
+		#endregion Private Fields
+		
+		#region Constructors and Destructors
+		
+		internal V4LFormat(v4l2_fmtdesc fmtdesc)
 		{
 			this.fmtdesc = fmtdesc;
 		}
 		
-		public uint Index
-		{
-			get { return fmtdesc.index; }
-		}
+		#endregion Constructors and Destructors
+		
+		#region Public Properties
 		
 		/*public v4l2_buf_type Type
 		{
@@ -57,5 +65,16 @@ namespace Video4Linux
 		{
 			get { return fmtdesc.pixelformat; }
 		}
+		
+		#endregion Public Properties
+		
+		#region Internal Properties
+		
+		internal uint Index
+		{
+			get { return fmtdesc.index; }
+		}
+		
+		#endregion Internal Properties
 	}
 }

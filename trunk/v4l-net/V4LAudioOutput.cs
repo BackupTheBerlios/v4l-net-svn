@@ -44,6 +44,9 @@ namespace Video4Linux
 		
 		#endregion Constructors and Destructors
 		
+		/// <summary>
+		/// Converts the video output back to the native v4l2_audioout struct.
+		/// </summary>
 		internal v4l2_audioout ToStruct()
 		{
 			return output;
@@ -51,11 +54,10 @@ namespace Video4Linux
 		
 		#region Public Properties
 		
-		public uint Index
-		{
-			get { return output.index; }
-		}
-		
+		/// <summary>
+		/// Gets the name of the video output.
+		/// </summary>
+		/// <value>The name of the video output.</value>
 		public string Name
 		{
 			get { return output.name; }
@@ -72,5 +74,14 @@ namespace Video4Linux
 		}
 		
 		#endregion Public Properties
+		
+		#region Internal Properties
+		
+		internal uint Index
+		{
+			get { return output.index; }
+		}
+		
+		#endregion Internal Properties
 	}
 }

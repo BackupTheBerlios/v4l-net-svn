@@ -21,11 +21,21 @@
 
 using System;
 
-namespace Video4Linux.APIv2
+namespace Video4Linux
 {
-	public enum v4l2_input_type : uint
+	/// <summary>
+	/// Represents a tuner type.
+	/// </summary>
+	public enum V4LTunerType : uint
 	{
-		Tuner  = 1, // This input uses a tuner (RF demodulator).
-		Camera = 2 // Analog baseband input, for example CVBS / Composite Video, S-Video, RGB.
+		/// <summary>
+		/// Is a radio tuner.
+		/// </summary>
+		Radio    = 1,
+		
+		/// <summary>
+		/// Is a tuner for analog tv.
+		/// </summary>
+		AnalogTV = 2
 	}
 }
