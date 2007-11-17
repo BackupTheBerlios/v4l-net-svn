@@ -1,0 +1,16 @@
+<Combine name="tv-viewer" fileversion="2.0">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry build="True" name="tv-viewer" configuration="Debug" />
+    </Configuration>
+    <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry build="True" name="tv-viewer" configuration="Release" />
+    </Configuration>
+  </Configurations>
+  <StartMode startupentry="tv-viewer" single="True">
+    <Execute type="None" entry="tv-viewer" />
+  </StartMode>
+  <Entries>
+    <Entry filename="./tv-viewer/tv-viewer.mdp" />
+  </Entries>
+</Combine>

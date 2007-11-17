@@ -1,14 +1,12 @@
-﻿<UserCombinePreferences version="1.0" filename="/mnt/crypted/coding/mono/v4l-net/trunk/v4l-net.mds">
+﻿<UserCombinePreferences version="1.0" filename="/mnt/crypted/coding/mono/v4l-net/examples/tv-viewer/tv-viewer.mds">
   <Files>
-    <File name="v4l-net/V4LDevice.cs" line="40" column="1" />
-    <File name="v4l-net/V4LBuffer.cs" line="88" column="29" />
-    <File name="Welcome" />
+    <File name="tv-viewer/Main.cs" line="3" column="1" />
   </Files>
   <Views>
     <ViewMemento id="ProjectPad">
       <Node expanded="True">
-        <Node name="v4l-net" expanded="True">
-          <Node name="V4LDevice.cs" selected="True" />
+        <Node name="tv-viewer" expanded="True">
+          <Node name="References" expanded="True" selected="True" />
         </Node>
       </Node>
     </ViewMemento>
@@ -23,7 +21,7 @@
     </ViewMemento>
   </Views>
   <Properties>
-    <Property key="ActiveWindow" value="Welcome" />
+    <Property key="ActiveWindow" value="/mnt/crypted/coding/mono/v4l-net/examples/tv-viewer/tv-viewer/Main.cs" />
     <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>
