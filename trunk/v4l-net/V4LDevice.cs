@@ -98,7 +98,7 @@ namespace Video4Linux
 			cur.index = 0;
 			while (ioControl.EnumerateAudioInputs(ref cur) == 0)
 			{
-				audioInputs.Add(new V4LAudioInput(cur));
+				audioInputs.Add(new V4LAudioInput(this, cur));
 				cur.index++;
 			}
 		}

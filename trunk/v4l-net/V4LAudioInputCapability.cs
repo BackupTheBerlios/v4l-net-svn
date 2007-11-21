@@ -20,19 +20,22 @@
 #endregion LICENSE
 
 using System;
-using System.Runtime.InteropServices;
 
-namespace Video4Linux.APIv2
+namespace Video4Linux
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct v4l2_audio
+	/// <summary>
+	/// Represents a capability of an audio input.
+	/// </summary>
+	public enum V4LAudioInputCapability : uint
 	{
-		public uint index;
-		[MarshalAs(UnmanagedType.ByValTStr, SizeConst=32)]
-		public string name;
-		public uint capabilities;
-		public uint mode;
-		[MarshalAs(UnmanagedType.ByValArray, SizeConst=2)]
-		public uint[] reserved;
+		/// <summary>
+		/// This is a stereo input. The ﬂag is intended to automatically disable stereo
+		/// recording etc. when the signal is always monaural.
+		/// </summary>
+		Stereo               = 0x00000001,
+		/// <summary>
+		/// Automatic Volume Level mode is supported.
+		/// </summary>
+		AutomaticVolumeLevel = 0x00000002
 	}
 }

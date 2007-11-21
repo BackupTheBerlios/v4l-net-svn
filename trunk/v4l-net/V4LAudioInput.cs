@@ -20,6 +20,7 @@
 #endregion LICENSE
 
 using System;
+using System.Collections.Generic;
 using Video4Linux.APIv2;
 
 namespace Video4Linux
@@ -31,18 +32,46 @@ namespace Video4Linux
 	{
 		#region Private Fields
 		
+		private V4LDevice device;
 		private v4l2_audio input;
+		private List<V4LAudioInputCapability> capabilities;
 		
 		#endregion Private Fields
 		
 		#region Constructors and Destructors
 		
-		internal V4LAudioInput(v4l2_audio input)
+		internal V4LAudioInput(V4LDevice device, v4l2_audio input)
 		{
+			this.device = device;
 			this.input = input;
 		}
 		
 		#endregion Constructors and Destructors
+		
+		#region Private Methods
+		
+		private void getInput()
+		{
+			if (device.IoControl.GetAudioInput(ref input) < 0)
+				throw new Exception("VIDIOC_G_AUDIO");
+		}
+		
+		private void setInput()
+		{
+			if (device.IoControl.SetAudioInput(ref input) < 0)
+				throw new Exception("VIDIOC_S_AUDIO");
+		}
+		
+		private void fetchCapabilities()
+		{
+			capabilities = new List<V4LAudioInputCapability>();
+			
+			foreach (object val in Enum.GetValues(typeof(V4LAudioInputCapability)))
+				if ((input.capabilities & (uint)val) != 0)
+					capabilities.Add((V4LAudioInputCapability)val);
+		}
+		
+		#endregion Private Methods
 		
 		#region Internal Methods
 		
@@ -64,14 +93,37 @@ namespace Video4Linux
 			get { return input.name; }
 		}
 		
-		public uint Capabilities
+		/// <summary>
+		/// Gets the audio input's capabilities.
+		/// </summary>
+		/// <value>A list of capabilities.</value>
+		public List<V4LAudioInputCapability> Capabilities
 		{
-			get { return input.capability; }
+			get
+			{
+				if (capabilities == null)
+					fetchCapabilities();
+				
+				return capabilities;
+			}
 		}
 		
-		public uint Mode
+		/// <summary>
+		/// Gets or sets the current Automatic Volume Level mode status.
+		/// </summary>
+		/// <value></value>
+		public bool UsesAVLMode
 		{
-			get { return input.mode; }
+			get
+			{
+				getInput();
+				return input.mode == 1;
+			}
+			set
+			{
+				input.mode = value ? (uint)1 : (uint)0;
+				setInput();
+			}
 		}
 		
 		#endregion Public Properties

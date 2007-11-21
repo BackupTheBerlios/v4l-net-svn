@@ -1,5 +1,12 @@
 2007-11-21  Tim Taubert <twenty-three@users.berlios.de> 
 
+	* APIv2/v4l2_audio.cs, v4l-net.mdp, V4LAudioInputCapability.cs: class for
+	  audio input capabilities added
+	* V4LAudioInput.cs: added list of capabilities and support for automatic
+	  volume level mode
+
+2007-11-21  Tim Taubert <twenty-three@users.berlios.de> 
+
 	* LICENSE: license added
 	* AssemblyInfo.cs: project description changed
 	* v4l-net.mdp, V4LAudioInput.cs: documentation added
