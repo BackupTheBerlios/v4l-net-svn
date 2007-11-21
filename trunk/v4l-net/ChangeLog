@@ -1,0 +1,5 @@
+2007-11-21  Tim Taubert <twenty-three@users.berlios.de> 
+
+	* V4LAudioInput.cs: added some documentation; some methods were made
+	  internal
+

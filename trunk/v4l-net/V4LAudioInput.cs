@@ -51,11 +51,10 @@ namespace Video4Linux
 		
 		#region Public Properties
 		
-		public uint Index
-		{
-			get { return input.index; }
-		}
-		
+		/// <summary>
+		/// Gets the name of the audio input.
+		/// </summary>
+		/// <value>The name of the audio input.</value>
 		public string Name
 		{
 			get { return input.name; }
@@ -72,5 +71,14 @@ namespace Video4Linux
 		}
 		
 		#endregion Public Properties
+		
+		#region Internal Properties
+		
+		internal uint Index
+		{
+			get { return input.index; }
+		}
+		
+		#endregion Internal Properties
 	}
 }
