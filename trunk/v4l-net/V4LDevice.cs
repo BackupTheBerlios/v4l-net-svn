@@ -57,6 +57,9 @@ namespace Video4Linux
 		#endregion Private Fields
 		
 		public delegate void BufferFilledEventHandler(V4LDevice sender, V4LBuffer buffer);
+		/// <summary>
+		/// Gets fired when a buffer was filled by the driver (when a frame was captured).
+		/// </summary>
 		public event BufferFilledEventHandler BufferFilled;
 		
 		#region Constructors and Destructors

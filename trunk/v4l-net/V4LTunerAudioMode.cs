@@ -21,7 +21,7 @@
 
 using System;
 
-namespace Video4Linux.APIv2
+namespace Video4Linux
 {
 	/// <summary>
 	/// Represents a tuner's audio mode.

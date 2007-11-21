@@ -70,8 +70,8 @@
     <File name="V4LTunerType.cs" subtype="Code" buildaction="Compile" />
     <File name="V4LInputType.cs" subtype="Code" buildaction="Compile" />
     <File name="V4LInputStatus.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_tuner_audio_reception.cs" subtype="Code" buildaction="Compile" />
     <File name="V4LTunerAudioMode.cs" subtype="Code" buildaction="Compile" />
+    <File name="V4LTunerAudioReception.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

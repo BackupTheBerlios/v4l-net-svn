@@ -23,7 +23,7 @@ using System;
 
 namespace Video4Linux.APIv2
 {
-	public enum v4l2_tuner_audio_reception
+	public enum V4LTunerAudioReception : uint
 	{
 		Mono   = 0x0001,
 		Stereo = 0x0002,
