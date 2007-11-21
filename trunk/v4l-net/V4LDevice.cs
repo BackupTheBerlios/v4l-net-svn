@@ -28,9 +28,9 @@ using Video4Linux.APIv2;
 
 namespace Video4Linux
 {
-    /// <summary>
+	/// <summary>
 	/// Represents a Video4Linux hardware device.
-    /// </summary>
+	/// </summary>
 	public class V4LDevice
 	{
 		#region Private Fields
@@ -58,13 +58,13 @@ namespace Video4Linux
 		
 		public delegate void BufferFilledEventHandler(V4LDevice sender, V4LBuffer buffer);
 		public event BufferFilledEventHandler BufferFilled;
-
+		
 		#region Constructors and Destructors
 		
-        /// <summary>
-        /// Creates a Video4Linux device.
-        /// </summary>
-        /// <param name="path">Path to the device.</param>
+		/// <summary>
+		/// Creates a Video4Linux device.
+		/// </summary>
+		/// <param name="path">Path to the device.</param>
 		public V4LDevice(string path)
 		{
 			deviceHandle = Syscall.open(path, OpenFlags.O_RDWR);
@@ -72,21 +72,21 @@ namespace Video4Linux
 			fetchDevice();
 		}
 		
-        /// <summary>
-        /// Destroys a Video4Linux device.
-        /// </summary>
+		/// <summary>
+		/// Destroys a Video4Linux device.
+		/// </summary>
 		~V4LDevice()
 		{
 			Syscall.close(deviceHandle);
 		}
-	
+		
 		#endregion Constructors and Destructors
 		
 		#region Private Methods
 		
-        /// <summary>
-        /// Collects all available audio inputs from the device.
-        /// </summary>
+		/// <summary>
+		/// Collects all available audio inputs from the device.
+		/// </summary>
 		private void fetchAudioInputs()
 		{
 			audioInputs = new ManagedList<V4LAudioInput>();
@@ -100,9 +100,9 @@ namespace Video4Linux
 			}
 		}
 		
-        /// <summary>
-        /// Collects all available audio outputs from the device.
-        /// </summary>
+		/// <summary>
+		/// Collects all available audio outputs from the device.
+		/// </summary>
 		private void fetchAudioOutputs()
 		{
 			audioOutputs = new ManagedList<V4LAudioOutput>();
@@ -116,9 +116,9 @@ namespace Video4Linux
 			}
 		}
 		
-        /// <summary>
-        /// Queries the device for its capabilites.
-        /// </summary>
+		/// <summary>
+		/// Queries the device for its capabilites.
+		/// </summary>
 		private void fetchDevice()
 		{
 			device = new v4l2_capability();
@@ -126,9 +126,9 @@ namespace Video4Linux
 				throw new Exception("VIDIOC_QUERYCAP");
 		}
 		
-        /// <summary>
-        /// Collects all available image formats from the device.
-        /// </summary>
+		/// <summary>
+		/// Collects all available image formats from the device.
+		/// </summary>
 		private void fetchFormats()
 		{
 			formats = new List<V4LFormat>();
@@ -142,9 +142,9 @@ namespace Video4Linux
 			}
 		}
 		
-        /// <summary>
-        /// Collects all available video inputs from the device.
-        /// </summary>
+		/// <summary>
+		/// Collects all available video inputs from the device.
+		/// </summary>
 		private void fetchInputs()
 		{
 			inputs = new ManagedList<V4LInput>();
@@ -158,9 +158,9 @@ namespace Video4Linux
 			}
 		}
 		
-        /// <summary>
-        /// Collects all available video outputs from the device.
-        /// </summary>
+		/// <summary>
+		/// Collects all available video outputs from the device.
+		/// </summary>
 		private void fetchOutputs()
 		{
 			outputs = new ManagedList<V4LOutput>();
@@ -174,9 +174,9 @@ namespace Video4Linux
 			}
 		}
 		
-        /// <summary>
-        /// Collects all available TV standards from the device.
-        /// </summary>
+		/// <summary>
+		/// Collects all available TV standards from the device.
+		/// </summary>
 		private void fetchStandards()
 		{
 			standards = new ManagedList<V4LStandard>();
@@ -190,9 +190,9 @@ namespace Video4Linux
 			}
 		}
 		
-        /// <summary>
-        /// Collects all available tuners from the device.
-        /// </summary>
+		/// <summary>
+		/// Collects all available tuners from the device.
+		/// </summary>
 		private void fetchTuners()
 		{
 			tuners = new ManagedList<V4LTuner>();
@@ -206,9 +206,9 @@ namespace Video4Linux
 			}
 		}
 		
-        /// <summary>
-        /// Enqueues all requested buffers.
-        /// </summary>
+		/// <summary>
+		/// Enqueues all requested buffers.
+		/// </summary>
 		private void enqueueAllBuffers()
 		{
 			foreach (V4LBuffer buf in buffers)
@@ -237,9 +237,9 @@ namespace Video4Linux
 			}
 		}
 		
-        /// <summary>
-        /// Requests a given number of buffers for mmap data transfer.
-        /// </summary>
+		/// <summary>
+		/// Requests a given number of buffers for mmap data transfer.
+		/// </summary>
 		private void requestBuffers()
 		{
 			v4l2_requestbuffers req = new v4l2_requestbuffers();
@@ -255,9 +255,9 @@ namespace Video4Linux
 			fetchBuffers(req);
 		}
 		
-        /// <summary>
-        /// Queries the device for information about each requested buffer.
-        /// </summary>
+		/// <summary>
+		/// Queries the device for information about each requested buffer.
+		/// </summary>
 		/// <param name="req">Struct with information about the request buffers.</param>
 		private void fetchBuffers(v4l2_requestbuffers req)
 		{
@@ -283,9 +283,9 @@ namespace Video4Linux
 					capabilities.Add((V4LDeviceCapability)val);
 		}
 		
-        /// <summary>
-        /// Gets a V4LStandard out of the list of all supported standards.
-        /// </summary>
+		/// <summary>
+		/// Gets a V4LStandard out of the list of all supported standards.
+		/// </summary>
 		/// <param name="std">Id of the standard.</param>
 		private V4LStandard getStandardById(v4l2_std_id std)
 		{
@@ -300,9 +300,9 @@ namespace Video4Linux
 		
 		#region Public Methods
 		
-        /// <summary>
-        /// Starts the streaming I/O.
-        /// </summary>
+		/// <summary>
+		/// Starts the streaming I/O.
+		/// </summary>
 		public void StartStreaming()
 		{
 			// request the streaming buffers if necessary
@@ -321,13 +321,17 @@ namespace Video4Linux
 			streamingThread.Start();
 		}
 		
-        /// <summary>
-        /// Stops the streaming I/O.
-        /// </summary>
+		/// <summary>
+		/// Stops the streaming I/O.
+		/// </summary>
 		public void StopStreaming()
 		{
+			// abort checking for captured frames
 			streamingThread.Abort();
 			streamingThread = null;
+			
+			// destroy the buffers
+			buffers = new List<V4LBuffer>();
 			
 			v4l2_buf_type type = v4l2_buf_type.VideoCapture;
 			if (ioControl.StreamingOff(ref type) < 0)
@@ -338,9 +342,9 @@ namespace Video4Linux
 		
 		#region Internal Properties
 		
-        /// <summary>
-        /// Gets the file handle for the v4l device.
-        /// </summary>
+		/// <summary>
+		/// Gets the file handle for the v4l device.
+		/// </summary>
 		/// <value>The file handle.</value>
 		internal int DeviceHandle
 		{
@@ -356,36 +360,36 @@ namespace Video4Linux
 		
 		#region Public Properties
 		
-        /// <summary>
-        /// Gets the device's name.
-        /// </summary>
+		/// <summary>
+		/// Gets the device's name.
+		/// </summary>
 		/// <value>The device's name.</value>
 		public string Name
 		{
 			get { return device.card; }
 		}
 		
-        /// <summary>
-        /// Gets the device driver's name.
-        /// </summary>
+		/// <summary>
+		/// Gets the device driver's name.
+		/// </summary>
 		/// <value>The driver's name.</value>
 		public string Driver
 		{
 			get { return device.driver; }
 		}
 		
-        /// <summary>
-        /// Gets information about the bus the device is attached to.
-        /// </summary>
+		/// <summary>
+		/// Gets information about the bus the device is attached to.
+		/// </summary>
 		/// <value>The bus info string.</value>
 		public string BusInfo
 		{
 			get { return device.bus_info; }
 		}
 		
-        /// <summary>
-        /// Gets information about the device's capabilities.
-        /// </summary>
+		/// <summary>
+		/// Gets information about the device's capabilities.
+		/// </summary>
 		/// <value>The capability bitmap.</value>
 		public ReadOnlyCollection<V4LDeviceCapability> Capabilities
 		{
@@ -398,19 +402,19 @@ namespace Video4Linux
 			}
 		}
 		
-        /// <summary>
-        /// Gets the device driver's version.
-        /// </summary>
+		/// <summary>
+		/// Gets the device driver's version.
+		/// </summary>
 		/// <value>The version string.</value>
 		public uint Version
 		{
 			get { return device.version; }
 		}
 		
-        /// <summary>
-        /// Gets or sets the current audio input.
-        /// </summary>
-        /// <value>The audio input.</value>
+		/// <summary>
+		/// Gets or sets the current audio input.
+		/// </summary>
+		/// <value>The audio input.</value>
 		public V4LAudioInput AudioInput
 		{
 			get
@@ -429,10 +433,10 @@ namespace Video4Linux
 			}
 		}
 		
-        /// <summary>
-        /// Gets or sets the current audio output.
-        /// </summary>
-        /// <value>The audio output.</value>
+		/// <summary>
+		/// Gets or sets the current audio output.
+		/// </summary>
+		/// <value>The audio output.</value>
 		public V4LAudioOutput AudioOutput
 		{
 			get
@@ -451,10 +455,10 @@ namespace Video4Linux
 			}
 		}
 		
-        /// <summary>
-        /// Gets or sets the number of buffers to use for streaming I/O with mmap.
-        /// </summary>
-        /// <value>The number of buffers to use.</value>
+		/// <summary>
+		/// Gets or sets the number of buffers to use for streaming I/O with mmap.
+		/// </summary>
+		/// <value>The number of buffers to use.</value>
 		public uint BufferCount
 		{
 			get { return bufferCount; }
@@ -477,10 +481,10 @@ namespace Video4Linux
 			}
 		}
 		
-        /// <summary>
-        /// Gets or sets the current video input.
-        /// </summary>
-        /// <value>The video input.</value>
+		/// <summary>
+		/// Gets or sets the current video input.
+		/// </summary>
+		/// <value>The video input.</value>
 		public V4LInput Input
 		{
 			get
@@ -499,10 +503,10 @@ namespace Video4Linux
 			}
 		}
 		
-        /// <summary>
-        /// Gets or sets the current video output.
-        /// </summary>
-        /// <value>The video output.</value>
+		/// <summary>
+		/// Gets or sets the current video output.
+		/// </summary>
+		/// <value>The video output.</value>
 		public V4LOutput Output
 		{
 			get
@@ -521,10 +525,10 @@ namespace Video4Linux
 			}
 		}
 		
-        /// <summary>
-        /// Gets or sets the current TV standard.
-        /// </summary>
-        /// <value>The TV standard.</value>
+		/// <summary>
+		/// Gets or sets the current TV standard.
+		/// </summary>
+		/// <value>The TV standard.</value>
 		public V4LStandard Standard
 		{
 			get
@@ -543,9 +547,9 @@ namespace Video4Linux
 			}
 		}
 		
-        /// <summary>
-        /// Gets all available audio inputs.
-        /// </summary>
+		/// <summary>
+		/// Gets all available audio inputs.
+		/// </summary>
 		/// <value>A list of audio inputs.</value>
 		public ManagedList<V4LAudioInput> AudioInputs
 		{
@@ -558,9 +562,9 @@ namespace Video4Linux
 			}
 		}
 		
-        /// <summary>
-        /// Gets all available audio outputs.
-        /// </summary>
+		/// <summary>
+		/// Gets all available audio outputs.
+		/// </summary>
 		/// <value>A list of audio outputs.</value>
 		public ManagedList<V4LAudioOutput> AudioOutputs
 		{
@@ -573,18 +577,18 @@ namespace Video4Linux
 			}
 		}
 		
-        /// <summary>
-        /// Gets the requested buffers for streaming I/O.
-        /// </summary>
+		/// <summary>
+		/// Gets the requested buffers for streaming I/O.
+		/// </summary>
 		/// <value>A list of buffers.</value>
 		public List<V4LBuffer> Buffers
 		{
 			get { return buffers; }
 		}
 		
-        /// <summary>
-        /// Gets all available image formats.
-        /// </summary>
+		/// <summary>
+		/// Gets all available image formats.
+		/// </summary>
 		/// <value>A list of image formats.</value>
 		public List<V4LFormat> Formats
 		{
@@ -597,9 +601,9 @@ namespace Video4Linux
 			}
 		}
 		
-        /// <summary>
-        /// Gets all available video inputs.
-        /// </summary>
+		/// <summary>
+		/// Gets all available video inputs.
+		/// </summary>
 		/// <value>A list of video inputs.</value>
 		public ManagedList<V4LInput> Inputs
 		{
@@ -612,9 +616,9 @@ namespace Video4Linux
 			}
 		}
 		
-        /// <summary>
-        /// Gets all available video outputs.
-        /// </summary>
+		/// <summary>
+		/// Gets all available video outputs.
+		/// </summary>
 		/// <value>A list of video outputs.</value>
 		public ManagedList<V4LOutput> Outputs
 		{
@@ -627,9 +631,9 @@ namespace Video4Linux
 			}
 		}
 		
-        /// <summary>
-        /// Gets all avaible TV standards.
-        /// </summary>
+		/// <summary>
+		/// Gets all avaible TV standards.
+		/// </summary>
 		/// <value>A list of standards.</value>
 		public ManagedList<V4LStandard> Standards
 		{
@@ -642,9 +646,9 @@ namespace Video4Linux
 			}
 		}
 		
-        /// <summary>
-        /// Gets all available tuners.
-        /// </summary>
+		/// <summary>
+		/// Gets all available tuners.
+		/// </summary>
 		/// <value>A list of tuners.</value>
 		public ManagedList<V4LTuner> Tuners
 		{

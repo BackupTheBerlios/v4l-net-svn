@@ -37,6 +37,7 @@ namespace Video4Linux
 		private V4LDevice device;
 		private v4l2_buffer buffer;
 		private IntPtr start;
+		private uint originalLength;
 		
 		#endregion Private Fields
 		
@@ -79,13 +80,17 @@ namespace Video4Linux
 				 MmapFlags.MAP_SHARED,
 				 device.DeviceHandle,
 				 buffer.m.offset);
+			originalLength = buffer.length;
 			if (start == Syscall.MAP_FAILED)
 				throw new Exception("Memory mapping failed.");
 		}
 		
+		/// <summary>
+		/// Unmaps the memory belonging to the buffer.
+		/// </summary>
 		private void unmapMemory()
 		{
-			Mono.Unix.Native.Syscall.munmap(start, buffer.length);
+			Mono.Unix.Native.Syscall.munmap(start, originalLength);
 		}
 		
 		#endregion Private Methods
@@ -111,15 +116,6 @@ namespace Video4Linux
 		}
 		
 		#endregion Public Methods
-		
-		#region Internal Properties
-		
-		internal v4l2_memory Memory
-		{
-			get { return buffer.memory; }
-		}
-		
-		#endregion Internal Properties
 		
 		#region Public Properties
 		
@@ -160,6 +156,10 @@ namespace Video4Linux
 		
 		#region Internal Properties
 		
+		/// <summary>
+		/// Gets the index of this buffer in the list of all buffers.
+		/// </summary>
+		/// <value>The index of this buffer.</value>
 		internal uint Index
 		{
 			get { return buffer.index; }
@@ -168,6 +168,11 @@ namespace Video4Linux
 		internal v4l2_buf_type Type
 		{
 			get { return buffer.type; }
+		}
+		
+		internal v4l2_memory Memory
+		{
+			get { return buffer.memory; }
 		}
 		
 		#endregion Internal Properties

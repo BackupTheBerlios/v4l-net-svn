@@ -39,8 +39,6 @@
     <File name="APIv2/v4l2_colorspace.cs" subtype="Code" buildaction="Compile" />
     <File name="APIv2/v4l2_pix_format_id.cs" subtype="Code" buildaction="Compile" />
     <File name="APIv2/v4l2_tuner_capability.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_tuner_audio_reception.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_tuner_audio_mode.cs" subtype="Code" buildaction="Compile" />
     <File name="APIv2/v4l2_memory.cs" subtype="Code" buildaction="Compile" />
     <File name="APIv2/v4l2_output.cs" subtype="Code" buildaction="Compile" />
     <File name="APIv2/v4l2_standard.cs" subtype="Code" buildaction="Compile" />
@@ -72,6 +70,8 @@
     <File name="V4LTunerType.cs" subtype="Code" buildaction="Compile" />
     <File name="V4LInputType.cs" subtype="Code" buildaction="Compile" />
     <File name="V4LInputStatus.cs" subtype="Code" buildaction="Compile" />
+    <File name="APIv2/v4l2_tuner_audio_reception.cs" subtype="Code" buildaction="Compile" />
+    <File name="V4LAudioMode.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

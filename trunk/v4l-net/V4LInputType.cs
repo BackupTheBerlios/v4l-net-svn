@@ -23,10 +23,13 @@ using System;
 
 namespace Video4Linux
 {
+	/// <summary>
+	/// Represents an input device type.
+	/// </summary>
 	public enum V4LInputType : uint
 	{
 		/// <summary>
-		/// This input uses a tuner (Rf demodulator).
+		/// This input uses a tuner (RF demodulator).
 		/// </summary>
 		Tuner  = 1,
 		

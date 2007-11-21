@@ -40,11 +40,16 @@ namespace Video4Linux
 		/// <returns>The index of the item.</returns>
 		public int IndexOf(string property, object value)
 		{
+			// are there any items?
 			if (Count == 0)
 				return -1;
 			
 			PropertyInfo pi = this[0].GetType().GetProperty(property);
+			// did we find the property?
+			if (pi == null)
+				return -1;
 			
+			// search the matching item
 			for (int i=0; i<Count; i++)
 				if (pi.GetValue(this[i], new object[0]).Equals(value))
 					return i;

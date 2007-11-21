@@ -23,7 +23,7 @@ using System;
 
 namespace Video4Linux.APIv2
 {
-	public enum v4l2_tuner_audio_mode
+	public enum V4LTunerAudioMode : uint
 	{
 		Mono        = 0,
 		Stereo      = 1,

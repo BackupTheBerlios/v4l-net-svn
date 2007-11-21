@@ -172,6 +172,10 @@ namespace Video4Linux
 		
 		#region Internal Properties
 		
+		/// <summary>
+		/// Gets the index of this tuner in the list of all available tuners.
+		/// </summary>
+		/// <value>The index of this tuner.</value>
 		internal uint Index
 		{
 			get { return tuner.index; }

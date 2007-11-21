@@ -23,25 +23,64 @@ using System;
 
 namespace Video4Linux
 {
+	/// <summary>
+	/// Represents a input device status.
+	/// </summary>
 	public enum V4LInputStatus : uint
 	{
 		// General
-		NoPower              = 0x00000001, // Attached device is off.
+		/// <summary>
+		/// The device is off.
+		/// </summary>
+		NoPower              = 0x00000001,
+		/// <summary>
+		/// The device has no signal.
+		/// </summary>
 		NoSignal             = 0x00000002,
-		NoColor              = 0x00000004, // The hardware supports color decoding, but does not detect color modulation in the signal.
+		/// <summary>
+		/// The hardware supports color decoding but does not detect color modulation in the signal.
+		/// </summary>
+		NoColor              = 0x00000004,
 			
 		// Analog Video
-		NoHorizontalSyncLock = 0x00000100, // No horizontal sync lock.
-		ColorKill            = 0x00000200, // A color killer circuit automatically disables color decoding when it detects no color modulation. When this flag is set the color killer is enabled and has shut off color decoding.
-
+		/// <summary>
+		/// No horizontal synchronization lock.
+		/// </summary>
+		NoHorizontalSyncLock = 0x00000100,
+		/// <summary>
+		/// A color killer circuit automatically disables color decoding when it detects no color
+		/// modulation. When this flag is set the color killer is enabled and has shut off color
+		/// decoding.
+		/// </summary>
+		ColorKill            = 0x00000200,
+		
 		// Digital Video
-		NoSyncLock           = 0x00010000, // No synchronization lock.
-		NoEqualizerLock      = 0x00020000, // No equalizer lock.
-		NoCarrier            = 0x00040000, // Carrier recovery failed.
+		/// <summary>
+		/// No synchronization lock.
+		/// </summary>
+		NoSyncLock           = 0x00010000,
+		/// <summary>
+		/// No equalizer lock.
+		/// </summary>
+		NoEqualizerLock      = 0x00020000,
+		/// <summary>
+		/// Carrier recovery failed.
+		/// </summary>
+		NoCarrier            = 0x00040000,
 		
 		// VCR and Set-Top Box
-		Macrovision          = 0x01000000, // Macrovision is an analog copy prevention system mangling the video signal to confuse video recorders. When this flag is set Macrovision has been detected.
-		NoAccess             = 0x02000000, // Conditional access denied.
-		VTR                  = 0x04000000 // VTR time constant. [?]
+		/// <summary>
+		/// Macrovision is an analog copy prevention system mangling the video signal to confuse
+		/// video recorders. When this flag is set Macrovision has been detected.
+		/// </summary>
+		Macrovision          = 0x01000000,
+		/// <summary>
+		/// Conditional access denied.
+		/// </summary>
+		NoAccess             = 0x02000000,
+		/// <summary>
+		/// VTR time constant.
+		/// </summary>
+		VTR                  = 0x04000000
 	}
 }
