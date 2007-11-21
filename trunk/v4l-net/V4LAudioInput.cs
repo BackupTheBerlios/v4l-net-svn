@@ -44,10 +44,14 @@ namespace Video4Linux
 		
 		#endregion Constructors and Destructors
 		
+		#region Internal Methods
+		
 		internal v4l2_audio ToStruct()
 		{
 			return input;
 		}
+		
+		#endregion Internal Methods
 		
 		#region Public Properties
 		
@@ -74,6 +78,10 @@ namespace Video4Linux
 		
 		#region Internal Properties
 		
+		/// <summary>
+		/// Gets the index of this audio input in the list of all available audio inputs.
+		/// </summary>
+		/// <value>The index of this audio input.</value>
 		internal uint Index
 		{
 			get { return input.index; }

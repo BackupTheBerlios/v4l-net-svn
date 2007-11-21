@@ -1,4 +1,4 @@
-<Project name="v4l-net" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+<Project name="v4l-net" fileversion="2.0" DefaultNamespace="Video4Linux" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assemblyKeyFile="." assembly="video4linux-net" />
@@ -71,7 +71,7 @@
     <File name="V4LInputType.cs" subtype="Code" buildaction="Compile" />
     <File name="V4LInputStatus.cs" subtype="Code" buildaction="Compile" />
     <File name="V4LTunerAudioMode.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LTunerAudioReception.cs" subtype="Code" buildaction="Compile" />
+    <File name="V4LTunerAudioReception.cs" subtype="Code" buildaction="FileCopy" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

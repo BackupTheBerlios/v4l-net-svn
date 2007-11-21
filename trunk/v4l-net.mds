@@ -1,4 +1,4 @@
-<Combine releaseversion="0.0.2" name="v4l-net" fileversion="2.0" description="Video4Linux.Net is a C# interface to Video4Linux." outputpath="build/bin/">
+<Combine releaseversion="0.0.2" name="v4l-net" fileversion="2.0" description="Video4Linux.Net is a Mono interface to Video4Linux." outputpath="build/bin/">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="True" name="v4l-net" configuration="Debug" />
@@ -10,6 +10,7 @@
   <StartMode startupentry="v4l-net" single="True">
     <Execute type="None" entry="v4l-net" />
   </StartMode>
+  <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="NoChangeLog" />
   <Entries>
     <Entry filename="v4l-net/v4l-net.mdp" />
   </Entries>

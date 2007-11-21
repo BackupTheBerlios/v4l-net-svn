@@ -23,7 +23,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 
 [assembly: AssemblyTitle("Video4Linux.Net")]
-[assembly: AssemblyDescription("Video4Linux.Net is a C# interface to Video4Linux.")]
+[assembly: AssemblyDescription("Video4Linux.Net is a Mono interface to Video4Linux.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("")]
