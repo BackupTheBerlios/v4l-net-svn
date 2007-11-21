@@ -27,7 +27,7 @@ namespace SdlTest
 			device.Format.VideoCapture.Field = Video4Linux.APIv2.v4l2_field.Interlaced;
 			
 			device.Input = device.Inputs[device.Inputs.IndexOf("Name", "Television")];
-			device.Standard = device.Standards[device.Standards.IndexOf("Name", "PAL-BG")];
+			device.Standard = device.Standards[device.Standards.IndexOf("Name", "PAL")];
 			
 			// set to RTL initially
 			tune((uint)(217.25 * 16));

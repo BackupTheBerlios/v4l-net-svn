@@ -1,6 +1,6 @@
 ﻿<UserCombinePreferences version="1.0" filename="/mnt/crypted/coding/mono/v4l-net/examples/tv-viewer/tv-viewer.mds">
   <Files>
-    <File name="tv-viewer/Main.cs" line="3" column="1" />
+    <File name="tv-viewer/Main.cs" line="33" column="30" />
     <File name="Welcome" />
   </Files>
   <Views>
