@@ -35,7 +35,7 @@ namespace Video4Linux.APIv2
 		public uint rangelow;
 		public uint rangehigh;
 		public uint rxsubchans;
-		public uint audmode;
+		public V4LTunerAudioMode audmode;
 		public uint signal;
 		public int afc;
 		[MarshalAs(UnmanagedType.ByValArray, SizeConst=4)]

@@ -7,9 +7,7 @@
   <Views>
     <ViewMemento id="ProjectPad">
       <Node expanded="True">
-        <Node name="v4l-net" expanded="True">
-          <Node name="V4LDevice.cs" selected="True" />
-        </Node>
+        <Node name="v4l-net" expanded="True" selected="True" />
       </Node>
     </ViewMemento>
     <ViewMemento id="ClassPad">

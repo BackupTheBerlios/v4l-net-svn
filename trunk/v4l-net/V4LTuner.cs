@@ -156,7 +156,7 @@ namespace Video4Linux
 		}
 		
 		/// <summary>
-		/// Get the tuner's current automatic frequency control value.
+		/// Gets the tuner's current automatic frequency control value.
 		/// </summary>
 		/// <value>The automatic frequency control value.</value>
 		public int AFC
@@ -166,6 +166,15 @@ namespace Video4Linux
 				getTuner();
 				return tuner.afc;
 			}
+		}
+		
+		/// <summary>
+		/// Gets the tuner's audio mode.
+		/// </summary>
+		/// <value>The audio mode.</value>
+		public V4LTunerAudioMode AudioMode
+		{
+			get { return tuner.audmode; }
 		}
 		
 		#endregion Public Properties
