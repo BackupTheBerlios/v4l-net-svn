@@ -71,7 +71,7 @@
     <File name="V4LInputType.cs" subtype="Code" buildaction="Compile" />
     <File name="V4LInputStatus.cs" subtype="Code" buildaction="Compile" />
     <File name="V4LTunerAudioMode.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LTunerAudioReception.cs" subtype="Code" buildaction="FileCopy" />
+    <File name="V4LTunerAudioReception.cs" subtype="Code" buildaction="Compile" />
     <File name="V4LAudioInputCapability.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
