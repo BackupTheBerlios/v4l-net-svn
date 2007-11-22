@@ -4,7 +4,6 @@ using SdlDotNet.Input;
 using System;
 using System.Runtime.InteropServices;
 using Tao.Sdl;
-using Video4Linux;
 
 namespace SdlTest
 {
@@ -12,7 +11,7 @@ namespace SdlTest
 	{
 		private static IntPtr screen, yuvOverlay;
 		private static Sdl.SDL_Rect rect;
-		private static V4LDevice device;
+		private static Video4Linux.Analog.Adapter.Adapter adapter;
 		
 		public static void Main(string[] args)
 		{
@@ -20,23 +19,23 @@ namespace SdlTest
 			yuvOverlay = Sdl.SDL_CreateYUVOverlay(720, 576, Sdl.SDL_YUY2_OVERLAY, screen);
 			rect = new Sdl.SDL_Rect(0, 0, 360, 288);
 			
-			device = new V4LDevice("/dev/video0");
+			adapter = new Video4Linux.Analog.Adapter.Adapter("/dev/video0");
 			
-			device.Format.VideoCapture.SetDimensions(720, 576);
-			device.Format.VideoCapture.PixelFormat = Video4Linux.APIv2.v4l2_pix_format_id.YUYV;
-			device.Format.VideoCapture.Field = Video4Linux.APIv2.v4l2_field.Interlaced;
+			adapter.Format.VideoCapture.SetDimensions(720, 576);
+			adapter.Format.VideoCapture.PixelFormat = Video4Linux.Analog.Kernel.v4l2_pix_format_id.YUYV;
+			adapter.Format.VideoCapture.Field = Video4Linux.Analog.Kernel.v4l2_field.Interlaced;
 			
-			device.Input = device.Inputs[device.Inputs.IndexOf("Name", "Television")];
-			device.Standard = device.Standards[device.Standards.IndexOf("Name", "PAL")];
+			adapter.Input = adapter.Inputs[adapter.Inputs.IndexOf("Name", "Television")];
+			adapter.Standard = adapter.Standards[adapter.Standards.IndexOf("Name", "PAL")];
 			
 			// set to RTL initially
 			tune((uint)(217.25 * 16));
 			
-			if (!device.Capabilities.Contains(V4LDeviceCapability.Streaming))
+			if (!adapter.Capabilities.Contains(Video4Linux.Analog.Adapter.Capability.Streaming))
 				throw new Exception("device is not able to do streaming!");
 			
-			device.BufferFilled += bufferFilled;
-			device.StartStreaming();
+			adapter.BufferFilled += bufferFilled;
+			adapter.StartStreaming();
 			
 			Events.Quit += quit;
 			Events.KeyboardDown += keyDown;
@@ -46,7 +45,7 @@ namespace SdlTest
 		
 		private static void quit(object sender, QuitEventArgs e)
 		{
-			device.StopStreaming();
+			adapter.StopStreaming();
 			Events.QuitApplication();
 		}
 		
@@ -69,10 +68,10 @@ namespace SdlTest
 		
 		private static void tune(uint frequency)
 		{
-			device.Input.Tuner.Frequency = frequency;
+			adapter.Input.Tuner.Frequency = frequency;
 		}
 		
-		private static unsafe void bufferFilled(V4LDevice device, V4LBuffer buffer)
+		private static unsafe void bufferFilled(Video4Linux.Analog.Adapter.Adapter adapter, Video4Linux.Analog.Buffer buffer)
 		{
 			if (Sdl.SDL_MUSTLOCK(screen) == 1)
 				if (Sdl.SDL_LockSurface(screen) < 0)
