@@ -1,5 +1,5 @@
 <Project name="v4l-net" fileversion="2.0" DefaultNamespace="Video4Linux" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
-  <Configurations active="Debug">
+  <Configurations active="Release">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assemblyKeyFile="." assembly="video4linux-net" />
       <Build debugmode="True" target="Library" />
@@ -14,65 +14,77 @@
     </Configuration>
   </Configurations>
   <Contents>
-    <File name="AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LDevice.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LIOControl.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2" subtype="Directory" buildaction="Compile" />
-    <File name="APIv2/v4l2_capability.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_input.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_format.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_pix_format.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_window.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_rect.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_clip.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_vbi_format.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_sliced_vbi_format.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_frequency.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_tuner.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_requestbuffers.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_buffer.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_timecode.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_operation.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_std_id.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_buf_type.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_field.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_colorspace.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_pix_format_id.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_tuner_capability.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_memory.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_output.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_standard.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_fract.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_fmtdesc.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_sliced_vbi_cap.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_control.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_priority.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_modulator.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_crop.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_audio.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_audioout.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_cropcap.cs" subtype="Code" buildaction="Compile" />
-    <File name="APIv2/v4l2_framebuffer.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LInput.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LTuner.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LOutput.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LAudioInput.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LAudioOutput.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LStandard.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LFormat.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LBuffer.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LFormatContainer.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LVideoFormat.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LOverlayFormat.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LRectangle.cs" subtype="Code" buildaction="Compile" />
-    <File name="ManagedList.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LDeviceCapability.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LTunerType.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LInputType.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LInputStatus.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LTunerAudioMode.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LTunerAudioReception.cs" subtype="Code" buildaction="Compile" />
-    <File name="V4LAudioInputCapability.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog" subtype="Directory" buildaction="Compile" />
+    <File name="Digital" subtype="Directory" buildaction="Compile" />
+    <File name="Core" subtype="Directory" buildaction="Compile" />
+    <File name="Core/SearchableList.cs" subtype="Code" buildaction="Compile" />
+    <File name="Core/IOControl.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Adapter" subtype="Directory" buildaction="Compile" />
+    <File name="Analog/Audio" subtype="Directory" buildaction="Compile" />
+    <File name="Analog/Kernel" subtype="Directory" buildaction="Compile" />
+    <File name="Analog/Tuner" subtype="Directory" buildaction="Compile" />
+    <File name="Analog/Video" subtype="Directory" buildaction="Compile" />
+    <File name="Analog/Adapter/Capability.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Adapter/Adapter.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/Standard.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/Input" subtype="Directory" buildaction="Compile" />
+    <File name="Analog/Video/Output" subtype="Directory" buildaction="Compile" />
+    <File name="Analog/Audio/Input" subtype="Directory" buildaction="Compile" />
+    <File name="Analog/Audio/Output" subtype="Directory" buildaction="Compile" />
+    <File name="Analog/Audio/Output/Output.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Audio/Input/Input.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Audio/Input/Capability.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/Input/Input.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/Input/Status.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/Input/Type.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/Output/Output.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Tuner/Tuner.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Tuner/Type.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Tuner/AudioMode.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Tuner/AudioReception.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/Format" subtype="Directory" buildaction="Compile" />
+    <File name="Analog/Video/Format/Format.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/Format/Overlay.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/Format/Video.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/Format/Container.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_audio.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_capability.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_cropcap.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_field.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_fract.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_crop.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_colorspace.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_fmtdesc.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_framebuffer.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_control.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_pix_format_id.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_format.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_clip.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_output.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_buffer.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_operation.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_input.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_std_id.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_pix_format.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_memory.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_rect.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_buf_type.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_sliced_vbi_format.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_sliced_vbi_cap.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_priority.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_vbi_format.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_standard.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_requestbuffers.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_tuner.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_timecode.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_modulator.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_frequency.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_tuner_capability.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_audioout.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/v4l2_window.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/Rectangle.cs" subtype="Code" buildaction="Compile" />
+    <File name="Core/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Buffer.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
