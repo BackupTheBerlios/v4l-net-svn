@@ -1,3 +1,26 @@
+2007-11-23  Tim Taubert <twenty-three@users.berlios.de> 
+
+	* Analog/Adapter/Adapter.cs, Analog/Adapter/Capability.cs,
+	  Analog/Kernel/v4l2_input.cs, Analog/Kernel/v4l2_tuner.cs,
+	  Analog/Kernel/v4l2_frequency.cs, Analog/Audio/Input/Input.cs,
+	  Analog/Audio/Input/Capability.cs, Analog/Audio/Output/Output.cs,
+	  Analog/Audio/Input.cs, Analog/Audio/Output.cs,
+	  Analog/Audio/InputCapability.cs, Analog/Tuner.cs, Analog/TunerType.cs,
+	  Analog/Adapter.cs, Analog/Video/Input/Input.cs,
+	  Analog/Video/Input/Type.cs, Analog/Video/Input/Status.cs,
+	  Analog/Video/FormatContainer.cs, Analog/Video/Output/Output.cs,
+	  Analog/Video/Input.cs, Analog/Video/VideoFormat.cs,
+	  Analog/Video/Output.cs, Analog/Video/InputType.cs,
+	  Analog/Video/InputStatus.cs, Analog/Video/Format/Overlay.cs,
+	  Analog/Video/Format/Format.cs, Analog/Video/Format.cs,
+	  Analog/Video/OverlayFormat.cs, Analog/AdapterCapability.cs,
+	  Analog/TunerAudioMode.cs, Analog/TunerAudioReception.cs,
+	  Analog/Tuner/Tuner.cs, Analog/Tuner/Type.cs, Analog/Tuner/AudioMode.cs,
+	  Analog/Tuner/AudioReception.cs, Analog/Buffer.cs, v4l-net.mdp: slight
+	  namespace refactoring
+	* Analog/Video/Format/Container.cs, Analog/Video/Format/Video.cs: new format
+	  handling started
+
 2007-11-22  Tim Taubert <twenty-three@users.berlios.de> 
 
 	* APIv2/v4l2_requestbuffers.cs, APIv2/v4l2_modulator.cs,

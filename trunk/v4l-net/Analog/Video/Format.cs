@@ -23,7 +23,7 @@ using System;
 
 using Video4Linux.Analog.Kernel;
 
-namespace Video4Linux.Analog.Video.Format
+namespace Video4Linux.Analog.Video
 {
 	/// <summary>
 	/// Represents a picture format.

@@ -21,12 +21,12 @@
 
 using System;
 
-namespace Video4Linux.Analog.Tuner
+namespace Video4Linux.Analog
 {
 	/// <summary>
 	/// Represents a tuner's audio mode.
 	/// </summary>
-	public enum AudioMode : uint
+	public enum TunerAudioMode : uint
 	{
 		/// <summary>
 		/// Play mono audio. When the tuner receives a stereo signal this a down-mix of

@@ -21,12 +21,12 @@
 
 using System;
 
-namespace Video4Linux.Analog.Tuner
+namespace Video4Linux.Analog
 {
 	/// <summary>
 	/// Represents a tuner type.
 	/// </summary>
-	public enum Type : uint
+	public enum TunerType : uint
 	{
 		/// <summary>
 		/// Is a radio tuner.

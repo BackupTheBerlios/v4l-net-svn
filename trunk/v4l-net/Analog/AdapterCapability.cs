@@ -21,12 +21,12 @@
 
 using System;
 
-namespace Video4Linux.Analog.Adapter
+namespace Video4Linux.Analog
 {
 	/// <summary>
 	/// Represents a capability of a Video4Linux device.
 	/// </summary>
-	public enum Capability : uint
+	public enum AdapterCapability : uint
 	{
 		/// <summary>
 		/// The device supports the video capture interface.

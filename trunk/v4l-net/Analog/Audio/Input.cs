@@ -24,7 +24,7 @@ using System.Collections.Generic;
 
 using Video4Linux.Analog.Kernel;
 
-namespace Video4Linux.Analog.Audio.Input
+namespace Video4Linux.Analog.Audio
 {
 	/// <summary>
 	/// Represents an audio input device.
@@ -33,15 +33,15 @@ namespace Video4Linux.Analog.Audio.Input
 	{
 		#region Private Fields
 		
-		private Analog.Adapter.Adapter adapter;
+		private Analog.Adapter adapter;
 		private v4l2_audio input;
-		private List<Analog.Audio.Input.Capability> capabilities;
+		private List<InputCapability> capabilities;
 		
 		#endregion Private Fields
 		
 		#region Constructors and Destructors
 		
-		internal Input(Analog.Adapter.Adapter adapter, v4l2_audio input)
+		internal Input(Analog.Adapter adapter, v4l2_audio input)
 		{
 			this.adapter = adapter;
 			this.input = input;
@@ -65,11 +65,11 @@ namespace Video4Linux.Analog.Audio.Input
 		
 		private void fetchCapabilities()
 		{
-			capabilities = new List<Analog.Audio.Input.Capability>();
+			capabilities = new List<InputCapability>();
 			
-			foreach (object val in Enum.GetValues(typeof(Analog.Audio.Input.Capability)))
+			foreach (object val in Enum.GetValues(typeof(InputCapability)))
 				if ((input.capabilities & (uint)val) != 0)
-					capabilities.Add((Analog.Audio.Input.Capability)val);
+					capabilities.Add((InputCapability)val);
 		}
 		
 		#endregion Private Methods
@@ -98,7 +98,7 @@ namespace Video4Linux.Analog.Audio.Input
 		/// Gets the audio input's capabilities.
 		/// </summary>
 		/// <value>A list of capabilities.</value>
-		public List<Analog.Audio.Input.Capability> Capabilities
+		public List<InputCapability> Capabilities
 		{
 			get
 			{

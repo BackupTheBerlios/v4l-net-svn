@@ -23,7 +23,7 @@ using System;
 
 using Video4Linux.Analog.Kernel;
 
-namespace Video4Linux.Analog.Video.Input
+namespace Video4Linux.Analog.Video
 {
 	/// <summary>
 	/// Represents a video input.
@@ -32,7 +32,7 @@ namespace Video4Linux.Analog.Video.Input
 	{
 		#region Private Fields
 		
-		private Analog.Adapter.Adapter adapter;
+		private Analog.Adapter adapter;
 		private v4l2_input input;
 		
 		#endregion Private Fields
@@ -44,7 +44,7 @@ namespace Video4Linux.Analog.Video.Input
         /// </summary>
 		/// <param name="adapter">The parental analog adapter.</param>
 		/// <param name="input">The struct holding the video input information.</param>
-		internal Input(Analog.Adapter.Adapter adapter, v4l2_input input)
+		internal Input(Analog.Adapter adapter, v4l2_input input)
 		{
 			this.adapter = adapter;
 			this.input = input;
@@ -67,7 +67,7 @@ namespace Video4Linux.Analog.Video.Input
         /// Gets the type of the video input.
         /// </summary>
 		/// <value>The type of the video input.</value>
-		public Analog.Video.Input.Type Type
+		public InputType Type
 		{
 			get { return input.type; }
 		}
@@ -76,7 +76,7 @@ namespace Video4Linux.Analog.Video.Input
         /// Gets the video input's tuner.
         /// </summary>
 		/// <value>The tuner belonging to the video input.</value>
-		public Analog.Tuner.Tuner Tuner
+		public Analog.Tuner Tuner
 		{
 			// FIXME: inputs could have zero tuners!
 			get { return adapter.Tuners[(int)input.tuner]; }
@@ -86,7 +86,7 @@ namespace Video4Linux.Analog.Video.Input
         /// Gets the video input's current status.
         /// </summary>
 		/// <value>The status of the video input.</value>
-		public Analog.Video.Input.Status Status
+		public InputStatus Status
 		{
 			get { return input.status; }
 		}

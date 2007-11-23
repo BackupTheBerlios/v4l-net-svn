@@ -23,16 +23,16 @@ using System;
 
 using Video4Linux.Analog.Kernel;
 
-namespace Video4Linux.Analog.Video.Format
+namespace Video4Linux.Analog.Video
 {
 	/// <summary>
-	/// Represents a video capture and output format.
+	/// Represents a video overlay capture and output format.
 	/// </summary>
-	public class Video
+	public class OverlayFormat
 	{
 		#region Private Fields
 		
-		private Analog.Adapter.Adapter adapter;
+		private Analog.Adapter adapter;
 		private v4l2_format format;
 		
 		#endregion Private Fields
@@ -42,9 +42,9 @@ namespace Video4Linux.Analog.Video.Format
         /// <summary>
         /// Creates a video capture/output format.
         /// </summary>
-        /// <param name="adapter">The parental Video4Linux device.</param>
+        /// <param name="device">The parental Video4Linux device.</param>
 		/// <param name="type">The buffer type the format belongs to.</param>
-		internal Video(Analog.Adapter.Adapter adapter, v4l2_buf_type type)
+		internal OverlayFormat(Analog.Adapter adapter, v4l2_buf_type type)
 		{
 			this.adapter = adapter;
 			
@@ -78,104 +78,36 @@ namespace Video4Linux.Analog.Video.Format
 		
 		#region Public Methods
 		
-		/// <summary>
-		/// Sets the image dimensions.
-		/// </summary>
-		/// <param name="width">Image width in pixels.</param>
-		/// <param name="height">Image height in pixels.</param>
-		public void SetDimensions(uint width, uint height)
-		{
-			getFormat();
-			format.fmt.pix.width = width;
-			format.fmt.pix.height = height;
-			setFormat();
-		}
-		
 		#endregion Public Methods
 		
 		#region Public Properties
 		
 		/// <summary>
-		/// Gets the image width in pixels.
+		/// Gets or sets the clipping rectangle.
 		/// </summary>
-		public uint Width
+		/// <value>The rectangle to be clipped.</value>
+		public Analog.Video.Rectangle Window
 		{
 			get
 			{
 				getFormat();
-				return format.fmt.pix.width;
-			}
-		}
-		
-		/// <summary>
-		/// Gets the image height in pixels.
-		/// </summary>
-		/// <value>The image height.</value>
-		public uint Height
-		{
-			get
-			{
-				getFormat();
-				return format.fmt.pix.height;
-			}
-		}
-		
-		/// <summary>
-		/// Gets the size of a line in bytes.
-		/// </summary>
-		/// <value>The bytes per line.</value>
-		public uint BytesPerLine
-		{
-			get
-			{
-				getFormat();
-				return format.fmt.pix.bytesperline;
+				return new Analog.Video.Rectangle(format.fmt.win.w);
 			}
 			set
 			{
 				getFormat();
-				format.fmt.pix.bytesperline = value;
-				setFormat();
-			}
-		}
-		
-		public v4l2_field Field
-		{
-			get
-			{
-				getFormat();
-				return format.fmt.pix.field;
-			}
-			set
-			{
-				getFormat();
-				format.fmt.pix.field = value;
-				adapter.IoControl.SetFormat(ref format);
-			}
-		}
-		
-		/// <summary>
-		/// Gets or sets the image's pixel format.
-		/// </summary>
-		/// <value>The pixel format.</value>
-		public v4l2_pix_format_id PixelFormat
-		{
-			get
-			{
-				getFormat();
-				return format.fmt.pix.pixelformat;
-			}
-			set
-			{
-				getFormat();
-				format.fmt.pix.pixelformat = value;
+				format.fmt.win.w = value.ToStruct();
 				setFormat();
 			}
 		}
 		
 		/*
-		 * public uint sizeimage [get]
-		 * public v4l2_colorspace colorspace [get]
+		 * field
+		 * chromakey
+		 * clips
+		 * clipcount
+		 * bitmap
+		 * global_alpha
 		 */
 		
 		#endregion Public Properties

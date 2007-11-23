@@ -21,9 +21,9 @@
 
 using System;
 
-namespace Video4Linux.Analog.Tuner
+namespace Video4Linux.Analog
 {
-	public enum AudioReception : uint
+	public enum TunerAudioReception : uint
 	{
 		Mono   = 0x0001,
 		Stereo = 0x0002,

@@ -24,7 +24,7 @@ using System.Text;
 
 using Video4Linux.Analog.Kernel;
 
-namespace Video4Linux.Analog.Tuner
+namespace Video4Linux.Analog
 {
 	/// <summary>
 	/// Represents a tuner.
@@ -33,7 +33,7 @@ namespace Video4Linux.Analog.Tuner
 	{
 		#region Private Fields
 		
-		private Analog.Adapter.Adapter adapter;
+		private Adapter adapter;
 		private v4l2_tuner tuner;
 		
 		#endregion Private Fields
@@ -46,7 +46,7 @@ namespace Video4Linux.Analog.Tuner
 		/// <param name="device">The parental Video4Linux device.</param>
 		/// <param name="index">The index of the tuner.</param>
 		/// <param name="type">The type of the tuner.</param>
-		internal Tuner(Analog.Adapter.Adapter adapter, uint index, Analog.Tuner.Type type)
+		internal Tuner(Adapter adapter, uint index, TunerType type)
 		{
 			this.adapter = adapter;
 			
@@ -83,7 +83,7 @@ namespace Video4Linux.Analog.Tuner
         /// Gets the tuner's type.
         /// </summary>
 		/// <value>The type of the tuner.</value>
-		public Analog.Tuner.Type Type
+		public TunerType Type
 		{
 			get { return tuner.type; }
 		}
@@ -173,7 +173,7 @@ namespace Video4Linux.Analog.Tuner
 		/// Gets the tuner's audio mode.
 		/// </summary>
 		/// <value>The audio mode.</value>
-		public Analog.Tuner.AudioMode AudioMode
+		public TunerAudioMode AudioMode
 		{
 			get { return tuner.audmode; }
 		}

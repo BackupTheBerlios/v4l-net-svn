@@ -27,7 +27,7 @@ using System.Threading;
 
 using Video4Linux.Analog.Kernel;
 
-namespace Video4Linux.Analog.Adapter
+namespace Video4Linux.Analog
 {
 	/// <summary>
 	/// Represents a Video4Linux hardware device.
@@ -41,24 +41,24 @@ namespace Video4Linux.Analog.Adapter
 		
 		private v4l2_capability device;
 		private uint bufferCount = 4;
-		private Analog.Video.Format.Container formatContainer;
+		private Analog.Video.FormatContainer formatContainer;
 		
-		private Core.SearchableList<Analog.Audio.Input.Input> audioInputs;
-		private Core.SearchableList<Analog.Audio.Output.Output> audioOutputs;
-		private Core.SearchableList<Analog.Video.Input.Input> inputs;
-		private Core.SearchableList<Analog.Video.Output.Output> outputs;
+		private Core.SearchableList<Analog.Audio.Input> audioInputs;
+		private Core.SearchableList<Analog.Audio.Output> audioOutputs;
+		private Core.SearchableList<Analog.Video.Input> inputs;
+		private Core.SearchableList<Analog.Video.Output> outputs;
 		private Core.SearchableList<Analog.Video.Standard> standards;
-		private Core.SearchableList<Analog.Tuner.Tuner> tuners;
+		private Core.SearchableList<Analog.Tuner> tuners;
 		
-		private List<Analog.Buffer> buffers = new List<Analog.Buffer>();
-		private List<Analog.Adapter.Capability> capabilities;
-		private List<Analog.Video.Format.Format> formats;
+		private List<Buffer> buffers = new List<Buffer>();
+		private List<AdapterCapability> capabilities;
+		private List<Analog.Video.Format> formats;
 		
 		private Thread streamingThread;
 		
 		#endregion Private Fields
 		
-		public delegate void BufferFilledEventHandler(Analog.Adapter.Adapter sender, Analog.Buffer buffer);
+		public delegate void BufferFilledEventHandler(Adapter sender, Buffer buffer);
 		/// <summary>
 		/// Gets fired when a buffer was filled by the driver (when a frame was captured).
 		/// </summary>
@@ -94,13 +94,13 @@ namespace Video4Linux.Analog.Adapter
 		/// </summary>
 		private void fetchAudioInputs()
 		{
-			audioInputs = new Core.SearchableList<Analog.Audio.Input.Input>();
+			audioInputs = new Core.SearchableList<Analog.Audio.Input>();
 			v4l2_audio cur = new v4l2_audio();
 			
 			cur.index = 0;
 			while (ioControl.EnumerateAudioInputs(ref cur) == 0)
 			{
-				audioInputs.Add(new Analog.Audio.Input.Input(this, cur));
+				audioInputs.Add(new Analog.Audio.Input(this, cur));
 				cur.index++;
 			}
 		}
@@ -110,13 +110,13 @@ namespace Video4Linux.Analog.Adapter
 		/// </summary>
 		private void fetchAudioOutputs()
 		{
-			audioOutputs = new Core.SearchableList<Analog.Audio.Output.Output>();
+			audioOutputs = new Core.SearchableList<Analog.Audio.Output>();
 			v4l2_audioout cur = new v4l2_audioout();
 			
 			cur.index = 0;
 			while (ioControl.EnumerateAudioOutputs(ref cur) == 0)
 			{
-				audioOutputs.Add(new Analog.Audio.Output.Output(cur));
+				audioOutputs.Add(new Analog.Audio.Output(cur));
 				cur.index++;
 			}
 		}
@@ -136,13 +136,13 @@ namespace Video4Linux.Analog.Adapter
 		/// </summary>
 		private void fetchFormats()
 		{
-			formats = new List<Analog.Video.Format.Format>();
+			formats = new List<Analog.Video.Format>();
 			v4l2_fmtdesc cur = new v4l2_fmtdesc();
 			
 			cur.index = 0;
 			while (ioControl.EnumerateFormats(ref cur) == 0)
 			{
-				formats.Add(new Analog.Video.Format.Format(cur));
+				formats.Add(new Analog.Video.Format(cur));
 				cur.index++;
 			}
 		}
@@ -152,13 +152,13 @@ namespace Video4Linux.Analog.Adapter
 		/// </summary>
 		private void fetchInputs()
 		{
-			inputs = new Core.SearchableList<Analog.Video.Input.Input>();
+			inputs = new Core.SearchableList<Analog.Video.Input>();
 			v4l2_input cur = new v4l2_input();
 			
 			cur.index = 0;
 			while (ioControl.EnumerateInputs(ref cur) == 0)
 			{
-				inputs.Add(new Analog.Video.Input.Input(this, cur));
+				inputs.Add(new Analog.Video.Input(this, cur));
 				cur.index++;
 			}
 		}
@@ -168,13 +168,13 @@ namespace Video4Linux.Analog.Adapter
 		/// </summary>
 		private void fetchOutputs()
 		{
-			outputs = new Core.SearchableList<Analog.Video.Output.Output>();
+			outputs = new Core.SearchableList<Analog.Video.Output>();
 			v4l2_output cur = new v4l2_output();
 			
 			cur.index = 0;
 			while (ioControl.EnumerateOutputs(ref cur) == 0)
 			{
-				outputs.Add(new Analog.Video.Output.Output(cur));
+				outputs.Add(new Analog.Video.Output(cur));
 				cur.index++;
 			}
 		}
@@ -200,13 +200,13 @@ namespace Video4Linux.Analog.Adapter
 		/// </summary>
 		private void fetchTuners()
 		{
-			tuners = new Core.SearchableList<Analog.Tuner.Tuner>();
+			tuners = new Core.SearchableList<Analog.Tuner>();
 			v4l2_tuner cur = new v4l2_tuner();
 			
 			cur.index = 0;
 			while (ioControl.GetTuner(ref cur) == 0)
 			{
-				tuners.Add(new Analog.Tuner.Tuner(this, cur.index, cur.type));
+				tuners.Add(new Analog.Tuner(this, cur.index, cur.type));
 				cur.index++;
 			}
 		}
@@ -281,11 +281,11 @@ namespace Video4Linux.Analog.Adapter
 		
 		private void fetchCapabilities()
 		{
-			capabilities = new List<Analog.Adapter.Capability>();
+			capabilities = new List<AdapterCapability>();
 			
-			foreach (object val in Enum.GetValues(typeof(Analog.Adapter.Capability)))
+			foreach (object val in Enum.GetValues(typeof(AdapterCapability)))
 				if ((device.capabilities & (uint)val) != 0)
-					capabilities.Add((Analog.Adapter.Capability)val);
+					capabilities.Add((AdapterCapability)val);
 		}
 		
 		/// <summary>
@@ -396,7 +396,7 @@ namespace Video4Linux.Analog.Adapter
 		/// Gets information about the device's capabilities.
 		/// </summary>
 		/// <value>The capability bitmap.</value>
-		public ReadOnlyCollection<Analog.Adapter.Capability> Capabilities
+		public ReadOnlyCollection<AdapterCapability> Capabilities
 		{
 			get
 			{
@@ -420,7 +420,7 @@ namespace Video4Linux.Analog.Adapter
 		/// Gets or sets the current audio input.
 		/// </summary>
 		/// <value>The audio input.</value>
-		public Analog.Audio.Input.Input AudioInput
+		public Analog.Audio.Input AudioInput
 		{
 			get
 			{
@@ -442,7 +442,7 @@ namespace Video4Linux.Analog.Adapter
 		/// Gets or sets the current audio output.
 		/// </summary>
 		/// <value>The audio output.</value>
-		public Analog.Audio.Output.Output AudioOutput
+		public Analog.Audio.Output AudioOutput
 		{
 			get
 			{
@@ -475,12 +475,12 @@ namespace Video4Linux.Analog.Adapter
 		/// Gets a container holding all video capture and output formats.
 		/// </summary>
 		/// <value>The format container.</value>
-		public Analog.Video.Format.Container Format
+		public Analog.Video.FormatContainer Format
 		{
 			get
 			{
 				if (formatContainer == null)
-					formatContainer = new Analog.Video.Format.Container(this);
+					formatContainer = new Analog.Video.FormatContainer(this);
 				
 				return formatContainer;
 			}
@@ -490,7 +490,7 @@ namespace Video4Linux.Analog.Adapter
 		/// Gets or sets the current video input.
 		/// </summary>
 		/// <value>The video input.</value>
-		public Analog.Video.Input.Input Input
+		public Analog.Video.Input Input
 		{
 			get
 			{
@@ -512,7 +512,7 @@ namespace Video4Linux.Analog.Adapter
 		/// Gets or sets the current video output.
 		/// </summary>
 		/// <value>The video output.</value>
-		public Analog.Video.Output.Output Output
+		public Analog.Video.Output Output
 		{
 			get
 			{
@@ -556,7 +556,7 @@ namespace Video4Linux.Analog.Adapter
 		/// Gets all available audio inputs.
 		/// </summary>
 		/// <value>A list of audio inputs.</value>
-		public Core.SearchableList<Analog.Audio.Input.Input> AudioInputs
+		public Core.SearchableList<Analog.Audio.Input> AudioInputs
 		{
 			get
 			{
@@ -571,7 +571,7 @@ namespace Video4Linux.Analog.Adapter
 		/// Gets all available audio outputs.
 		/// </summary>
 		/// <value>A list of audio outputs.</value>
-		public Core.SearchableList<Analog.Audio.Output.Output> AudioOutputs
+		public Core.SearchableList<Analog.Audio.Output> AudioOutputs
 		{
 			get
 			{
@@ -586,7 +586,7 @@ namespace Video4Linux.Analog.Adapter
 		/// Gets the requested buffers for streaming I/O.
 		/// </summary>
 		/// <value>A list of buffers.</value>
-		public List<Analog.Buffer> Buffers
+		public List<Buffer> Buffers
 		{
 			get { return buffers; }
 		}
@@ -595,7 +595,7 @@ namespace Video4Linux.Analog.Adapter
 		/// Gets all available image formats.
 		/// </summary>
 		/// <value>A list of image formats.</value>
-		public List<Analog.Video.Format.Format> Formats
+		public List<Analog.Video.Format> Formats
 		{
 			get
 			{
@@ -610,7 +610,7 @@ namespace Video4Linux.Analog.Adapter
 		/// Gets all available video inputs.
 		/// </summary>
 		/// <value>A list of video inputs.</value>
-		public Core.SearchableList<Analog.Video.Input.Input> Inputs
+		public Core.SearchableList<Analog.Video.Input> Inputs
 		{
 			get
 			{
@@ -625,7 +625,7 @@ namespace Video4Linux.Analog.Adapter
 		/// Gets all available video outputs.
 		/// </summary>
 		/// <value>A list of video outputs.</value>
-		public Core.SearchableList<Analog.Video.Output.Output> Outputs
+		public Core.SearchableList<Analog.Video.Output> Outputs
 		{
 			get
 			{
@@ -655,7 +655,7 @@ namespace Video4Linux.Analog.Adapter
 		/// Gets all available tuners.
 		/// </summary>
 		/// <value>A list of tuners.</value>
-		public Core.SearchableList<Analog.Tuner.Tuner> Tuners
+		public Core.SearchableList<Analog.Tuner> Tuners
 		{
 			get
 			{

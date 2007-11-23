@@ -35,7 +35,7 @@ namespace Video4Linux.Analog
 	{
 		#region Private Fields
 		
-		private Analog.Adapter.Adapter adapter;
+		private Analog.Adapter adapter;
 		private v4l2_buffer buffer;
 		private IntPtr start;
 		private uint originalLength;
@@ -49,7 +49,7 @@ namespace Video4Linux.Analog
         /// </summary>
 		/// <param name="device">The parental Video4Linux device.</param>
 		/// <param name="buffer">The struct holding the buffer information.</param>
-		internal Buffer(Analog.Adapter.Adapter adapter, v4l2_buffer buffer)
+		internal Buffer(Analog.Adapter adapter, v4l2_buffer buffer)
 		{
 			this.adapter = adapter;
 			this.buffer = buffer;

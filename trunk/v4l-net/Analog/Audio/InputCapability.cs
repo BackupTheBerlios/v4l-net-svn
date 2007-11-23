@@ -21,21 +21,21 @@
 
 using System;
 
-namespace Video4Linux.Analog.Video.Input
+namespace Video4Linux.Analog.Audio
 {
 	/// <summary>
-	/// Represents an input device type.
+	/// Represents a capability of an audio input.
 	/// </summary>
-	public enum Type : uint
+	public enum InputCapability : uint
 	{
 		/// <summary>
-		/// This input uses a tuner (RF demodulator).
+		/// This is a stereo input. The ﬂag is intended to automatically disable stereo
+		/// recording etc. when the signal is always monaural.
 		/// </summary>
-		Tuner  = 1,
-		
+		Stereo               = 0x00000001,
 		/// <summary>
-		/// Analog baseband input, for example CVBS/composite video, S-Video, RGB.
+		/// Automatic Volume Level mode is supported.
 		/// </summary>
-		Camera = 2
+		AutomaticVolumeLevel = 0x00000002
 	}
 }

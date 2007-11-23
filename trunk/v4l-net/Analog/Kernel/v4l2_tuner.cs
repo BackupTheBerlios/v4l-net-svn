@@ -30,12 +30,12 @@ namespace Video4Linux.Analog.Kernel
 		public uint index;
 		[MarshalAs(UnmanagedType.ByValTStr, SizeConst=32)]
 		public string name;
-		public Analog.Tuner.Type type;
+		public Analog.TunerType type;
 		public uint capability;
 		public uint rangelow;
 		public uint rangehigh;
 		public uint rxsubchans;
-		public Analog.Tuner.AudioMode audmode;
+		public Analog.TunerAudioMode audmode;
 		public uint signal;
 		public int afc;
 		[MarshalAs(UnmanagedType.ByValArray, SizeConst=4)]

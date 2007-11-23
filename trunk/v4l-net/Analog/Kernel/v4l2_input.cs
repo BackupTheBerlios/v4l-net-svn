@@ -30,11 +30,11 @@ namespace Video4Linux.Analog.Kernel
 		public uint index;
 		[MarshalAs(UnmanagedType.ByValTStr, SizeConst=32)]
 		public string name;
-		public Analog.Video.Input.Type type;
+		public Analog.Video.InputType type;
 		public uint audioset;
 		public uint tuner;
 		public ulong std;
-		public Analog.Video.Input.Status status;
+		public Analog.Video.InputStatus status;
 		[MarshalAs(UnmanagedType.ByValArray, SizeConst=4)]
 		public uint[] reserved;
 	}

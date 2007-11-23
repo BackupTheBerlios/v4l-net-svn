@@ -23,7 +23,7 @@ using System;
 
 using Video4Linux.Analog.Kernel;
 
-namespace Video4Linux.Analog.Audio.Output
+namespace Video4Linux.Analog.Audio
 {
 	/// <summary>
 	/// Represents an audio output device.

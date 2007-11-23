@@ -21,12 +21,12 @@
 
 using System;
 
-namespace Video4Linux.Analog.Video.Input
+namespace Video4Linux.Analog.Video
 {
 	/// <summary>
 	/// Represents a input device status.
 	/// </summary>
-	public enum Status : uint
+	public enum InputStatus : uint
 	{
 		// General
 		/// <summary>

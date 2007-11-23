@@ -28,7 +28,7 @@ namespace Video4Linux.Analog.Kernel
 	internal struct v4l2_frequency
 	{
 		public uint tuner;
-		public Analog.Tuner.Type type;
+		public Analog.TunerType type;
 		public uint frequency;
 		[MarshalAs(UnmanagedType.ByValArray, SizeConst=8)]
 		public uint[] reserved;

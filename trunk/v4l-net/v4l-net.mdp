@@ -1,5 +1,5 @@
 <Project name="v4l-net" fileversion="2.0" DefaultNamespace="Video4Linux" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
-  <Configurations active="Release">
+  <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assemblyKeyFile="." assembly="video4linux-net" />
       <Build debugmode="True" target="Library" />
@@ -19,34 +19,10 @@
     <File name="Core" subtype="Directory" buildaction="Compile" />
     <File name="Core/SearchableList.cs" subtype="Code" buildaction="Compile" />
     <File name="Core/IOControl.cs" subtype="Code" buildaction="Compile" />
-    <File name="Analog/Adapter" subtype="Directory" buildaction="Compile" />
     <File name="Analog/Audio" subtype="Directory" buildaction="Compile" />
     <File name="Analog/Kernel" subtype="Directory" buildaction="Compile" />
-    <File name="Analog/Tuner" subtype="Directory" buildaction="Compile" />
     <File name="Analog/Video" subtype="Directory" buildaction="Compile" />
-    <File name="Analog/Adapter/Capability.cs" subtype="Code" buildaction="Compile" />
-    <File name="Analog/Adapter/Adapter.cs" subtype="Code" buildaction="Compile" />
     <File name="Analog/Video/Standard.cs" subtype="Code" buildaction="Compile" />
-    <File name="Analog/Video/Input" subtype="Directory" buildaction="Compile" />
-    <File name="Analog/Video/Output" subtype="Directory" buildaction="Compile" />
-    <File name="Analog/Audio/Input" subtype="Directory" buildaction="Compile" />
-    <File name="Analog/Audio/Output" subtype="Directory" buildaction="Compile" />
-    <File name="Analog/Audio/Output/Output.cs" subtype="Code" buildaction="Compile" />
-    <File name="Analog/Audio/Input/Input.cs" subtype="Code" buildaction="Compile" />
-    <File name="Analog/Audio/Input/Capability.cs" subtype="Code" buildaction="Compile" />
-    <File name="Analog/Video/Input/Input.cs" subtype="Code" buildaction="Compile" />
-    <File name="Analog/Video/Input/Status.cs" subtype="Code" buildaction="Compile" />
-    <File name="Analog/Video/Input/Type.cs" subtype="Code" buildaction="Compile" />
-    <File name="Analog/Video/Output/Output.cs" subtype="Code" buildaction="Compile" />
-    <File name="Analog/Tuner/Tuner.cs" subtype="Code" buildaction="Compile" />
-    <File name="Analog/Tuner/Type.cs" subtype="Code" buildaction="Compile" />
-    <File name="Analog/Tuner/AudioMode.cs" subtype="Code" buildaction="Compile" />
-    <File name="Analog/Tuner/AudioReception.cs" subtype="Code" buildaction="Compile" />
-    <File name="Analog/Video/Format" subtype="Directory" buildaction="Compile" />
-    <File name="Analog/Video/Format/Format.cs" subtype="Code" buildaction="Compile" />
-    <File name="Analog/Video/Format/Overlay.cs" subtype="Code" buildaction="Compile" />
-    <File name="Analog/Video/Format/Video.cs" subtype="Code" buildaction="Compile" />
-    <File name="Analog/Video/Format/Container.cs" subtype="Code" buildaction="Compile" />
     <File name="Analog/Kernel/v4l2_audio.cs" subtype="Code" buildaction="Compile" />
     <File name="Analog/Kernel/v4l2_capability.cs" subtype="Code" buildaction="Compile" />
     <File name="Analog/Kernel/v4l2_cropcap.cs" subtype="Code" buildaction="Compile" />
@@ -85,6 +61,23 @@
     <File name="Analog/Video/Rectangle.cs" subtype="Code" buildaction="Compile" />
     <File name="Core/AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
     <File name="Analog/Buffer.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Adapter.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/AdapterCapability.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Audio/Input.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Audio/InputCapability.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Audio/Output.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/Output.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/Input.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/InputStatus.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/InputType.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Tuner.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/TunerAudioMode.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/TunerType.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/TunerAudioReception.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/FormatContainer.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/Format.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/OverlayFormat.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/VideoFormat.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

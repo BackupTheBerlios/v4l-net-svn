@@ -4,9 +4,7 @@
   </Files>
   <Views>
     <ViewMemento id="ProjectPad">
-      <Node expanded="True" selected="True">
-        <Node name="v4l-net" expanded="True" />
-      </Node>
+      <Node expanded="True" selected="True" />
     </ViewMemento>
     <ViewMemento id="ClassPad">
       <Node expanded="True" />
