@@ -1,0 +1,33 @@
+﻿<UserCombinePreferences version="1.0" filename="/mnt/crypted/coding/mono/v4l-net/trunk/v4l-net.mds">
+  <Files>
+    <File name="v4l-net/Analog/Adapter.cs" line="349" column="25" />
+    <File name="v4l-net/Analog/Video/BaseFormat.cs" line="38" column="44" />
+    <File name="v4l-net/Analog/Video/VideoFormat.cs" line="49" column="11" />
+  </Files>
+  <Views>
+    <ViewMemento id="ProjectPad">
+      <Node expanded="True">
+        <Node name="v4l-net" expanded="True">
+          <Node name="Analog" expanded="True">
+            <Node name="Video" expanded="True">
+              <Node name="VideoFormat.cs" selected="True" />
+            </Node>
+          </Node>
+        </Node>
+      </Node>
+    </ViewMemento>
+    <ViewMemento id="ClassPad">
+      <Node expanded="True" />
+    </ViewMemento>
+    <ViewMemento id="ConnectionManagerPad">
+      <Node />
+    </ViewMemento>
+    <ViewMemento id="MonoDevelop.NUnit.TestPad">
+      <Node />
+    </ViewMemento>
+  </Views>
+  <Properties>
+    <Property key="ActiveWindow" value="/mnt/crypted/coding/mono/v4l-net/trunk/v4l-net/Analog/Video/VideoFormat.cs" />
+    <Property key="ActiveConfiguration" value="Debug" />
+  </Properties>
+</UserCombinePreferences>
