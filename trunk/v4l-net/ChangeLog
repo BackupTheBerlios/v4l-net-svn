@@ -1,6 +1,13 @@
 2007-12-17  Tim Taubert <twenty-three@users.berlios.de> 
 
-	* Analog/Adapter.cs: refactored format setting system
+	* ChangeLog, Core/AssemblyInfo.cs: release 0.3 prepared
+
+2007-12-17  Tim Taubert <twenty-three@users.berlios.de> 
+
+	* Analog/Adapter.cs, Analog/Video/BaseFormat.cs,
+	  Analog/Video/FormatContainer.cs, Analog/Video/VideoCaptureFormat.cs,
+	  Analog/Video/VideoFormat.cs, Analog/Video/VideoOutputFormat.cs,
+	  v4l-net.mdp: refactored format setting system
 
 2007-11-23  Tim Taubert <twenty-three@users.berlios.de> 
 

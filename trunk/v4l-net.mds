@@ -1,4 +1,4 @@
-<Combine releaseversion="0.0.2" name="v4l-net" fileversion="2.0" description="Video4Linux.Net is a Mono interface to Video4Linux." outputpath="build/bin/">
+<Combine releaseversion="0.3" name="v4l-net" fileversion="2.0" description="Video4Linux.Net is a Mono interface to Video4Linux." outputpath="build/bin/">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="True" name="v4l-net" configuration="Debug" />
