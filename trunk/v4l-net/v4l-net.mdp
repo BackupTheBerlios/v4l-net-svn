@@ -74,10 +74,12 @@
     <File name="Analog/TunerAudioMode.cs" subtype="Code" buildaction="Compile" />
     <File name="Analog/TunerType.cs" subtype="Code" buildaction="Compile" />
     <File name="Analog/TunerAudioReception.cs" subtype="Code" buildaction="Compile" />
-    <File name="Analog/Video/FormatContainer.cs" subtype="Code" buildaction="Compile" />
     <File name="Analog/Video/Format.cs" subtype="Code" buildaction="Compile" />
     <File name="Analog/Video/OverlayFormat.cs" subtype="Code" buildaction="Compile" />
     <File name="Analog/Video/VideoFormat.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/BaseFormat.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/VideoCaptureFormat.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/VideoOutputFormat.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

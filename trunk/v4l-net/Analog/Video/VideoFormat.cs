@@ -28,46 +28,23 @@ namespace Video4Linux.Analog.Video
 	/// <summary>
 	/// Represents a video capture and output format.
 	/// </summary>
-	public class VideoFormat
+	abstract public class VideoFormat : BaseFormat
 	{
-		#region Internal Static Methods
-		
-		internal static VideoFormat Get(Analog.Adapter adapter, v4l2_buf_type type)
-		{
-			v4l2_format fmt = new v4l2_format();
-			fmt.type = type;
-			
-			if (adapter.IoControl.GetFormat(ref fmt) < 0)
-				throw new Exception("VIDIOC_G_FMT");
-			
-			return new VideoFormat(fmt);
-		}
-		
-		internal static void Set(Analog.Adapter adapter, v4l2_buf_type type, VideoFormat format)
-		{
-			v4l2_format fmt = format.ToStructure();
-			fmt.type = type;
-			
-			if (adapter.IoControl.SetFormat(ref fmt) < 0)
-				throw new Exception("VIDIOC_S_FMT");
-		}
-		
-		#endregion Internal Static Methods
-		
-		#region Private Fields
-		
-		private v4l2_format format;
-		
-		#endregion Private Fields
-		
 		#region Constructors and Destructors
 		
 		/// <summary>
 		/// Creates a video capture/output format.
 		/// </summary>
 		public VideoFormat()
-			: this(new v4l2_format())
+			: this(352, 288)
 		{}
+		
+		public VideoFormat(uint width, uint height)
+			: this(new v4l2_format())
+		{
+			format.fmt.pix.width = width;
+			format.fmt.pix.height = height;
+		}
 		
 		internal VideoFormat(v4l2_format format)
 		{
@@ -129,14 +106,5 @@ namespace Video4Linux.Analog.Video
 		 */
 		
 		#endregion Public Properties
-		
-		#region Internal Methods
-		
-		internal v4l2_format ToStructure()
-		{
-			return format;
-		}
-		
-		#endregion Internal Methods
 	}
 }

@@ -1,3 +1,7 @@
+2007-12-17  Tim Taubert <twenty-three@users.berlios.de> 
+
+	* Analog/Adapter.cs: refactored format setting system
+
 2007-11-23  Tim Taubert <twenty-three@users.berlios.de> 
 
 	* Analog/Adapter/Adapter.cs, Analog/Adapter/Capability.cs,

@@ -32,16 +32,15 @@ namespace Video4Linux.Analog
 	/// <summary>
 	/// Represents a Video4Linux hardware device.
 	/// </summary>
-	public class Adapter
+	sealed public class Adapter
 	{
 		#region Private Fields
 		
 		private int deviceHandle;
 		private Core.IOControl ioControl;
 		
-		private v4l2_capability device;
+		private v4l2_capability? device;
 		private uint bufferCount = 4;
-		private Analog.Video.FormatContainer formatContainer;
 		
 		private Core.SearchableList<Analog.Audio.Input> audioInputs;
 		private Core.SearchableList<Analog.Audio.Output> audioOutputs;
@@ -74,7 +73,6 @@ namespace Video4Linux.Analog
 		{
 			deviceHandle = Syscall.open(path, OpenFlags.O_RDWR);
 			ioControl = new Core.IOControl(deviceHandle);
-			fetchDevice();
 		}
 		
 		/// <summary>
@@ -126,9 +124,11 @@ namespace Video4Linux.Analog
 		/// </summary>
 		private void fetchDevice()
 		{
-			device = new v4l2_capability();
-			if (ioControl.QueryDeviceCapabilities(ref device) < 0)
+			v4l2_capability dv = new v4l2_capability();
+			if (ioControl.QueryDeviceCapabilities(ref dv) < 0)
 				throw new Exception("VIDIOC_QUERYCAP");
+			
+			device = dv;
 		}
 		
 		/// <summary>
@@ -281,10 +281,13 @@ namespace Video4Linux.Analog
 		
 		private void fetchCapabilities()
 		{
+			if (device == null)
+				fetchDevice();
+			
 			capabilities = new List<AdapterCapability>();
 			
 			foreach (object val in Enum.GetValues(typeof(AdapterCapability)))
-				if ((device.capabilities & (uint)val) != 0)
+				if ((((v4l2_capability)device).capabilities & (uint)val) != 0)
 					capabilities.Add((AdapterCapability)val);
 		}
 		
@@ -343,6 +346,16 @@ namespace Video4Linux.Analog
 				throw new Exception("VIDIOC_STREAMOFF");
 		}
 		
+		public void GetFormat(Analog.Video.BaseFormat fmt)
+		{
+			fmt.Get(this);
+		}
+		
+		public void SetFormat(Analog.Video.BaseFormat fmt)
+		{
+			fmt.Set(this);
+		}
+		
 		#endregion Public Methods
 		
 		#region Internal Properties
@@ -371,7 +384,13 @@ namespace Video4Linux.Analog
 		/// <value>The device's name.</value>
 		public string Name
 		{
-			get { return device.card; }
+			get
+			{
+				if (device == null)
+					fetchDevice();
+				
+				return ((v4l2_capability)device).card;
+			}
 		}
 		
 		/// <summary>
@@ -380,7 +399,13 @@ namespace Video4Linux.Analog
 		/// <value>The driver's name.</value>
 		public string Driver
 		{
-			get { return device.driver; }
+			get
+			{
+				if (device == null)
+					fetchDevice();
+				
+				return ((v4l2_capability)device).driver;
+			}
 		}
 		
 		/// <summary>
@@ -389,7 +414,13 @@ namespace Video4Linux.Analog
 		/// <value>The bus info string.</value>
 		public string BusInfo
 		{
-			get { return device.bus_info; }
+			get
+			{
+				if (device == null)
+					fetchDevice();
+				
+				return ((v4l2_capability)device).bus_info;
+			}
 		}
 		
 		/// <summary>
@@ -413,7 +444,13 @@ namespace Video4Linux.Analog
 		/// <value>The version string.</value>
 		public uint Version
 		{
-			get { return device.version; }
+			get
+			{
+				if (device == null)
+					fetchDevice();
+				
+				return ((v4l2_capability)device).version;
+			}
 		}
 		
 		/// <summary>
@@ -469,21 +506,6 @@ namespace Video4Linux.Analog
 			get { return bufferCount; }
 			// TODO: must be immutable while capturing
 			set { bufferCount = value; }
-		}
-		
-		/// <summary>
-		/// Gets a container holding all video capture and output formats.
-		/// </summary>
-		/// <value>The format container.</value>
-		public Analog.Video.FormatContainer Format
-		{
-			get
-			{
-				if (formatContainer == null)
-					formatContainer = new Analog.Video.FormatContainer(this);
-				
-				return formatContainer;
-			}
 		}
 		
 		/// <summary>
