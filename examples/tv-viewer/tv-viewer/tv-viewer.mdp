@@ -20,8 +20,8 @@
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <ProjectReference type="Gac" localcopy="True" refto="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
-    <ProjectReference type="Assembly" localcopy="True" refto="../../../trunk/v4l-net/bin/Debug/video4linux-net.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="../../../../../../../../home/tim/sdldotnet/bin/assemblies/SdlDotNet.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="../../../../../../../../home/tim/sdldotnet/bin/assemblies/Tao.Sdl.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../../../trunk/v4l-net/bin/Debug/video4linux-net.dll" />
   </References>
 </Project>

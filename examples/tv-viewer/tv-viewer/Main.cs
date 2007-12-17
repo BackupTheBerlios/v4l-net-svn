@@ -5,25 +5,34 @@ using System;
 using System.Runtime.InteropServices;
 using Tao.Sdl;
 
+using Video4Linux.Analog;
+using Video4Linux.Analog.Kernel;
+using Video4Linux.Analog.Video;
+
 namespace SdlTest
 {
 	class MainClass
 	{
 		private static IntPtr screen, yuvOverlay;
 		private static Sdl.SDL_Rect rect;
-		private static Video4Linux.Analog.Adapter.Adapter adapter;
+		private static Adapter adapter;
 		
 		public static void Main(string[] args)
 		{
-			screen = Sdl.SDL_SetVideoMode(360, 288, 32, Sdl.SDL_HWSURFACE | Sdl.SDL_DOUBLEBUF | Sdl.SDL_RESIZABLE);
+			screen = Sdl.SDL_SetVideoMode(720, 576, 32, Sdl.SDL_HWSURFACE | Sdl.SDL_DOUBLEBUF); // | Sdl.SDL_RESIZABLE);
 			yuvOverlay = Sdl.SDL_CreateYUVOverlay(720, 576, Sdl.SDL_YUY2_OVERLAY, screen);
-			rect = new Sdl.SDL_Rect(0, 0, 360, 288);
+			rect = new Sdl.SDL_Rect(0, 0, 720, 576);
 			
-			adapter = new Video4Linux.Analog.Adapter.Adapter("/dev/video0");
+			adapter = new Adapter("/dev/video1");
 			
-			adapter.Format.VideoCapture.SetDimensions(720, 576);
-			adapter.Format.VideoCapture.PixelFormat = Video4Linux.Analog.Kernel.v4l2_pix_format_id.YUYV;
-			adapter.Format.VideoCapture.Field = Video4Linux.Analog.Kernel.v4l2_field.Interlaced;
+			VideoCaptureFormat ft = new VideoCaptureFormat();
+			adapter.GetFormat(ft);
+			System.Console.WriteLine(ft.Width + "x" + ft.Height + ", Field: " + ft.Field.ToString());
+			
+			VideoCaptureFormat format = new VideoCaptureFormat(720, 576);
+			format.PixelFormat = v4l2_pix_format_id.YUYV;
+			format.Field = v4l2_field.Interlaced;
+			adapter.SetFormat(format);
 			
 			adapter.Input = adapter.Inputs[adapter.Inputs.IndexOf("Name", "Television")];
 			adapter.Standard = adapter.Standards[adapter.Standards.IndexOf("Name", "PAL")];
@@ -31,7 +40,7 @@ namespace SdlTest
 			// set to RTL initially
 			tune((uint)(217.25 * 16));
 			
-			if (!adapter.Capabilities.Contains(Video4Linux.Analog.Adapter.Capability.Streaming))
+			if (!adapter.Capabilities.Contains(AdapterCapability.Streaming))
 				throw new Exception("device is not able to do streaming!");
 			
 			adapter.BufferFilled += bufferFilled;
@@ -71,14 +80,12 @@ namespace SdlTest
 			adapter.Input.Tuner.Frequency = frequency;
 		}
 		
-		private static unsafe void bufferFilled(Video4Linux.Analog.Adapter.Adapter adapter, Video4Linux.Analog.Buffer buffer)
+		private static unsafe void bufferFilled(Adapter adapter, Video4Linux.Analog.Buffer buffer)
 		{
 			if (Sdl.SDL_MUSTLOCK(screen) == 1)
-				if (Sdl.SDL_LockSurface(screen) < 0)
-					throw new Exception("SDL_LockSurface");
+				Sdl.SDL_LockSurface(screen);
 			
-			if (Sdl.SDL_LockYUVOverlay(yuvOverlay) < 0)
-				throw new Exception("SDL_LockYUVOverlay");
+			Sdl.SDL_LockYUVOverlay(yuvOverlay);
 			
 			IntPtr pixels = Marshal.ReadIntPtr(yuvOverlay, 20);
 			memcpy(Marshal.ReadIntPtr(pixels).ToPointer(), buffer.Start.ToPointer(), buffer.Length);
