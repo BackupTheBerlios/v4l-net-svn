@@ -53,6 +53,10 @@ namespace Video4Linux.Analog.Video
 		
 		#region Constructors and Destructors
 		
+		public Rectangle(int left, int top, int width, int height)
+		: this(new v4l2_rect(left, top, width, height))
+		{}
+		
 		/// <summary>
 		/// Creates a new rectangle.
 		/// </summary>
@@ -61,8 +65,8 @@ namespace Video4Linux.Analog.Video
 		{
 			Left = rect.left;
 			Top = rect.top;
-			Height = rect.height;
 			Width = rect.width;
+			Height = rect.height;
 		}
 		
 		#endregion Constructors and Destructors

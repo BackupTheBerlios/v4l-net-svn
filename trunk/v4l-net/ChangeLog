@@ -1,5 +1,9 @@
 2007-12-17  Tim Taubert <twenty-three@users.berlios.de> 
 
+	* Analog/Video/Rectangle.cs: public constructor missing
+
+2007-12-17  Tim Taubert <twenty-three@users.berlios.de> 
+
 	* Analog/Video/OverlayOutputFormat.cs, Analog/Video/OverlayCaptureFormat.cs,
 	  Analog/Video/OverlayFormat.cs: video overlay support added
 	* Analog/Video/VideoFormat.cs, Analog/Video/BaseFormat.cs,
