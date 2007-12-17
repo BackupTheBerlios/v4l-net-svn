@@ -35,5 +35,8 @@ namespace Video4Linux.Analog.Kernel
 		public uint[] start;
 		[MarshalAs(UnmanagedType.ByValArray, SizeConst=2)]
 		public uint[] count;
+		public uint flags;
+		[MarshalAs(UnmanagedType.ByValArray, SizeConst=2)]
+		public uint[] reserved;
 	}
 }
