@@ -20,29 +20,34 @@
 #endregion LICENSE
 
 using System;
-using System.Runtime.InteropServices;
 
-namespace Video4Linux.Analog.Kernel
+namespace Video4Linux.Analog.Video
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct v4l2_format
+	abstract public class SlicedVBIFormat : BaseFormat
 	{
-		public v4l2_buf_type type;
-		public fmt_union fmt;
-	}
-	
-	[StructLayout(LayoutKind.Explicit)]
-	internal struct fmt_union
-	{
-		[FieldOffset(0)]
-		public v4l2_pix_format pix;           // V4L2_BUF_TYPE_VIDEO_CAPTURE
-		[FieldOffset(0)]
-		public v4l2_window win;               // V4L2_BUF_TYPE_VIDEO_OVERLAY
-		[FieldOffset(0)]
-		public v4l2_vbi_format vbi;           // V4L2_BUF_TYPE_VBI_CAPTURE
-		[FieldOffset(0)]
-		public v4l2_sliced_vbi_format sliced; // V4L2_BUF_TYPE_SLICED_VBI_CAPTURE
-		//[FieldOffset(0), MarshalAs(UnmanagedType.ByValArray, SizeConst=200)]
-		//public byte[] raw;
+		#region Constructors and Destructors
+		
+		internal SlicedVBIFormat()
+			: base()
+		{}
+		
+		#endregion Constructors and Destructors
+		
+		#region Public Properties
+		
+		public uint ServiceSet
+		{
+			get { return format.fmt.sliced.service_set; }
+			set { format.fmt.sliced.service_set = value; }
+		}
+		
+		/*public uint service_set;
+		[MarshalAs(UnmanagedType.ByValArray, SizeConst=48)]
+		public ushort[] service_lines;
+		public uint io_size;
+		[MarshalAs(UnmanagedType.ByValArray, SizeConst=2)]
+		public uint[] reserved;*/
+		
+		#endregion Public Properties
 	}
 }
