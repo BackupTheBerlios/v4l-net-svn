@@ -26,59 +26,26 @@ using Video4Linux.Analog.Kernel;
 namespace Video4Linux.Analog.Video
 {
 	/// <summary>
-	/// Represents a video overlay capture and output format.
+	/// Represents a video overlay format.
 	/// </summary>
-	public class OverlayFormat
+	abstract public class OverlayFormat : BaseFormat
 	{
-		#region Private Fields
-		
-		private Analog.Adapter adapter;
-		private v4l2_format format;
-		
-		#endregion Private Fields
-		
 		#region Constructors and Destructors
 		
-        /// <summary>
-        /// Creates a video capture/output format.
-        /// </summary>
-        /// <param name="device">The parental Video4Linux device.</param>
-		/// <param name="type">The buffer type the format belongs to.</param>
-		internal OverlayFormat(Analog.Adapter adapter, v4l2_buf_type type)
+		internal OverlayFormat()
+			: base()
+		{}
+		
+		/// <summary>
+		/// Creates a video overlay format.
+		/// </summary>
+		internal OverlayFormat(Analog.Video.Rectangle win)
+			: base()
 		{
-			this.adapter = adapter;
-			
-			format = new v4l2_format();
-			format.type = type;
+			format.fmt.win.w = win.ToStruct();
 		}
 		
 		#endregion Constructors and Destructors
-		
-		#region Private Methods
-		
-		/// <summary>
-		/// Gets the current v4l2_format settings.
-		/// </summary>
-		private void getFormat()
-		{
-			if (adapter.IoControl.GetFormat(ref format) < 0)
-				throw new Exception("VIDIOC_G_FMT");
-		}
-		
-		/// <summary>
-		/// Sets the current v4l2_format settings.
-		/// </summary>
-		private void setFormat()
-		{
-			if (adapter.IoControl.SetFormat(ref format) < 0)
-				throw new Exception("VIDIOC_S_FMT");
-		}
-		
-		#endregion Private Methods
-		
-		#region Public Methods
-		
-		#endregion Public Methods
 		
 		#region Public Properties
 		
@@ -88,17 +55,8 @@ namespace Video4Linux.Analog.Video
 		/// <value>The rectangle to be clipped.</value>
 		public Analog.Video.Rectangle Window
 		{
-			get
-			{
-				getFormat();
-				return new Analog.Video.Rectangle(format.fmt.win.w);
-			}
-			set
-			{
-				getFormat();
-				format.fmt.win.w = value.ToStruct();
-				setFormat();
-			}
+			get { return new Analog.Video.Rectangle(format.fmt.win.w); }
+			set { format.fmt.win.w = value.ToStruct(); }
 		}
 		
 		/*

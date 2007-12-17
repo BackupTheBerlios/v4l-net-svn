@@ -25,46 +25,22 @@ using Video4Linux.Analog.Kernel;
 
 namespace Video4Linux.Analog.Video
 {
-	abstract public class BaseFormat
+	sealed public class OverlayOutputFormat : OverlayFormat
 	{
-		#region Protected Fields
-		
-		internal v4l2_format format;
-		
-		#endregion Protected Fields
-		
 		#region Constructors and Destructors
 		
-		internal BaseFormat()
-			: this(new v4l2_format())
-		{}
-		
-		internal BaseFormat(v4l2_format format)
+		public OverlayOutputFormat()
+			: base()
 		{
-			this.format = format;
+			format.type = v4l2_buf_type.VideoOutputOverlay;
+		}
+		
+		public OverlayOutputFormat(Analog.Video.Rectangle win)
+			: base(win)
+		{
+			format.type = v4l2_buf_type.VideoOutputOverlay;
 		}
 		
 		#endregion Constructors and Destructors
-		
-		#region Internal Methods
-		
-		internal void Get(Analog.Adapter adapter)
-		{
-			if (adapter.IoControl.GetFormat(ref format) < 0)
-				throw new Exception("VIDIOC_G_FMT");
-		}
-		
-		internal void Set(Analog.Adapter adapter)
-		{
-			if (adapter.IoControl.SetFormat(ref format) < 0)
-				throw new Exception("VIDIOC_S_FMT");
-		}
-		
-		internal v4l2_format ToStruct()
-		{
-			return format;
-		}
-		
-		#endregion Internal Methods
 	}
 }

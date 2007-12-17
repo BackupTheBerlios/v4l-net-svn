@@ -40,15 +40,10 @@ namespace Video4Linux.Analog.Video
 		{}
 		
 		public VideoFormat(uint width, uint height)
-			: this(new v4l2_format())
+			: base()
 		{
 			format.fmt.pix.width = width;
 			format.fmt.pix.height = height;
-		}
-		
-		internal VideoFormat(v4l2_format format)
-		{
-			this.format = format;
 		}
 		
 		#endregion Constructors and Destructors
