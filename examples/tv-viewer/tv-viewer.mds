@@ -10,7 +10,8 @@
   <StartMode startupentry="tv-viewer" single="True">
     <Execute type="None" entry="tv-viewer" />
   </StartMode>
+  <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="NoChangeLog" />
   <Entries>
-    <Entry filename="./tv-viewer/tv-viewer.mdp" />
+    <Entry filename="tv-viewer/tv-viewer.mdp" />
   </Entries>
 </Combine>
