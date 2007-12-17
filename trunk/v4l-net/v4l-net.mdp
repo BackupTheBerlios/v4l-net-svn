@@ -1,5 +1,5 @@
 <Project name="v4l-net" fileversion="2.0" DefaultNamespace="Video4Linux" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
-  <Configurations active="Release">
+  <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Debug" assemblyKeyFile="." assembly="video4linux-net" />
       <Build debugmode="True" target="Library" />
@@ -82,6 +82,9 @@
     <File name="Analog/Video/VideoOutputFormat.cs" subtype="Code" buildaction="Compile" />
     <File name="Analog/Video/OverlayCaptureFormat.cs" subtype="Code" buildaction="Compile" />
     <File name="Analog/Video/OverlayOutputFormat.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/VBIFormat.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/VBICaptureFormat.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/VBIOutputFormat.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

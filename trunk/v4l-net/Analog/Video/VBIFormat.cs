@@ -20,29 +20,35 @@
 #endregion LICENSE
 
 using System;
-using System.Runtime.InteropServices;
 
-namespace Video4Linux.Analog.Kernel
+namespace Video4Linux.Analog.Video
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct v4l2_format
+	abstract public class VBIFormat : BaseFormat
 	{
-		public v4l2_buf_type type;
-		public fmt_union fmt;
-	}
-	
-	[StructLayout(LayoutKind.Explicit)]
-	internal struct fmt_union
-	{
-		[FieldOffset(0)]
-		public v4l2_pix_format pix;           // V4L2_BUF_TYPE_VIDEO_CAPTURE
-		[FieldOffset(0)]
-		public v4l2_window win;               // V4L2_BUF_TYPE_VIDEO_OVERLAY
-		[FieldOffset(0)]
-		public v4l2_vbi_format vbi;           // V4L2_BUF_TYPE_VBI_CAPTURE
-		//[FieldOffset(0)]
-		//public v4l2_sliced_vbi_format sliced; // V4L2_BUF_TYPE_SLICED_VBI_CAPTURE
-		//[FieldOffset(0), MarshalAs(UnmanagedType.ByValArray, SizeConst=200)]
-		//public byte[] raw;
+		#region Constructors and Destructors
+		
+		internal VBIFormat()
+			: base()
+		{}
+		
+		#endregion Constructors and Destructors
+		
+		#region Public Properties
+		
+		public uint SamplingRate
+		{
+			get { return format.fmt.vbi.sampling_rate; }
+			set { format.fmt.vbi.sampling_rate = value; }
+		}
+		
+		/*public uint offset;
+		public uint samples_per_line;
+		public uint sample_format;
+		[MarshalAs(UnmanagedType.ByValArray, SizeConst=2)]
+		public uint[] start;
+		[MarshalAs(UnmanagedType.ByValArray, SizeConst=2)]
+		public uint[] count;*/
+		
+		#endregion Public Properties
 	}
 }

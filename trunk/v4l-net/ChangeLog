@@ -1,5 +1,11 @@
 2007-12-17  Tim Taubert <twenty-three@users.berlios.de> 
 
+	* Analog/Kernel/v4l2_format.cs, Analog/Video/VBICaptureFormat.cs,
+	  Analog/Video/VBIFormat.cs, Analog/Video/VBIOutputFormat.cs: vbi
+	  capture/output format settings added
+
+2007-12-17  Tim Taubert <twenty-three@users.berlios.de> 
+
 	* Analog/Video/Rectangle.cs: public constructor missing
 
 2007-12-17  Tim Taubert <twenty-three@users.berlios.de> 
