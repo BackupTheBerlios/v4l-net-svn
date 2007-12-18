@@ -1,3 +1,8 @@
+2007-12-18  Tim Taubert <twenty-three@users.berlios.de> 
+
+	* Analog/Kernel/v4l2_format.cs, Analog/Video/SlicedVBIFormat.cs: problems
+	  with MarshalAs and arrays
+
 2007-12-17  Tim Taubert <twenty-three@users.berlios.de> 
 
 	* Analog/Kernel/v4l2_vbi_format.cs: missing fields added

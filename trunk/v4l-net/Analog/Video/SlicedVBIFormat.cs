@@ -35,11 +35,11 @@ namespace Video4Linux.Analog.Video
 		
 		#region Public Properties
 		
-		public uint ServiceSet
+		/*public uint ServiceSet
 		{
 			get { return format.fmt.sliced.service_set; }
 			set { format.fmt.sliced.service_set = value; }
-		}
+		}*/
 		
 		/*public uint service_set;
 		[MarshalAs(UnmanagedType.ByValArray, SizeConst=48)]

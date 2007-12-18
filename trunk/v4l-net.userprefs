@@ -1,10 +1,19 @@
 ﻿<UserCombinePreferences version="1.0" filename="/mnt/crypted/coding/mono/v4l-net/trunk/v4l-net.mds">
   <Files>
+    <File name="v4l-net/Analog/Kernel/v4l2_format.cs" line="42" column="5" />
     <File name="Welcome" />
   </Files>
   <Views>
     <ViewMemento id="ProjectPad">
-      <Node expanded="True" />
+      <Node expanded="True">
+        <Node name="v4l-net" expanded="True">
+          <Node name="Analog" expanded="True">
+            <Node name="Kernel" expanded="True">
+              <Node name="v4l2_format.cs" selected="True" />
+            </Node>
+          </Node>
+        </Node>
+      </Node>
     </ViewMemento>
     <ViewMemento id="ClassPad">
       <Node expanded="True" />
@@ -18,6 +27,6 @@
   </Views>
   <Properties>
     <Property key="ActiveWindow" value="Welcome" />
-    <Property key="ActiveConfiguration" value="Release" />
+    <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>

@@ -40,8 +40,8 @@ namespace Video4Linux.Analog.Kernel
 		public v4l2_window win;               // V4L2_BUF_TYPE_VIDEO_OVERLAY
 		[FieldOffset(0)]
 		public v4l2_vbi_format vbi;           // V4L2_BUF_TYPE_VBI_CAPTURE
-		[FieldOffset(0)]
-		public v4l2_sliced_vbi_format sliced; // V4L2_BUF_TYPE_SLICED_VBI_CAPTURE
+		//[FieldOffset(0)]
+		//public v4l2_sliced_vbi_format sliced; // V4L2_BUF_TYPE_SLICED_VBI_CAPTURE
 		//[FieldOffset(0), MarshalAs(UnmanagedType.ByValArray, SizeConst=200)]
 		//public byte[] raw;
 	}
