@@ -308,6 +308,25 @@ namespace Video4Linux.Analog
 		
 		#region Public Methods
 		
+		public int GetControlValue(Control ctrl)
+		{
+			v4l2_control cur = new v4l2_control();
+			cur.id = (uint)ctrl;
+			if (ioControl.GetControl(ref cur) < 0)
+				throw new Exception("VIDIOC_G_CTRL");
+			
+			return cur.value;
+		}
+		
+		public void SetControlValue(Control ctrl, int value)
+		{
+			v4l2_control cur = new v4l2_control();
+			cur.id = (uint)ctrl;
+			cur.value = value;
+			if (ioControl.SetControl(ref cur) < 0)
+				throw new Exception("VIDIOC_S_CTRL");
+		}
+		
 		/// <summary>
 		/// Starts the streaming I/O.
 		/// </summary>

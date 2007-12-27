@@ -95,8 +95,12 @@ namespace Video4Linux.Analog.Video
 			set { format.fmt.pix.pixelformat = value; }
 		}
 		
+		public uint SizeImage
+		{
+			get { return format.fmt.pix.sizeimage; }
+		}
+		
 		/*
-		 * public uint sizeimage [get]
 		 * public v4l2_colorspace colorspace [get]
 		 */
 		

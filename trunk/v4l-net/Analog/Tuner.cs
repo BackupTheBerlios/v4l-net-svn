@@ -20,7 +20,6 @@
 #endregion LICENSE
 
 using System;
-using System.Text;
 
 using Video4Linux.Analog.Kernel;
 

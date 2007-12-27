@@ -241,12 +241,12 @@ namespace Video4Linux.Core
 
 		public int GetControl(ref v4l2_control control)
 		{
-			return -1; // FIXME: Unimplemented;
+			return ioctl(deviceHandle, v4l2_operation.GetControl, ref control);
 		}
 
 		public int SetControl(ref v4l2_control control)
 		{
-			return -1; // FIXME: Unimplemented;
+			return ioctl(deviceHandle, v4l2_operation.SetControl, ref control);
 		}
 
 		public int GetAccessPriority(ref v4l2_priority priority)
@@ -352,6 +352,10 @@ namespace Video4Linux.Core
 		[DllImport("libc", SetLastError=true)]
 		private static extern int
 			ioctl(int device, v4l2_operation request, ref v4l2_buf_type argp);
+		
+		[DllImport("libc", SetLastError=true)]
+		private static extern int
+			ioctl(int device, v4l2_operation request, ref v4l2_control argp);
 		
 		[DllImport("libc", SetLastError=true)]
 		private static extern int

@@ -1,3 +1,10 @@
+2007-12-27  Tim Taubert <twenty-three@users.berlios.de> 
+
+	* Analog/Kernel/v4l2_operation.cs, Analog/Adapter.cs, Analog/Control.cs,
+	  Core/IOControl.cs: added control support
+	* Analog/Video/VideoFormat.cs: property sizeimage added
+	* Analog/Buffer.cs: documentation updated
+
 2007-12-18  Tim Taubert <twenty-three@users.berlios.de> 
 
 	* Analog/Kernel/v4l2_format.cs, Analog/Video/SlicedVBIFormat.cs: problems

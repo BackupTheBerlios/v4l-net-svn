@@ -48,6 +48,8 @@ namespace Video4Linux.Analog.Kernel
 		SetFrequency          =  1076647481, // VIDIOC_S_FREQUENCY
 		GetFramebuffer        = -2144578038, // VIDIOC_G_FBUF
 		SetFramebuffer        =  1076647435, // VIDIOC_S_FBUF
+		GetControl            = -1073195493, // VIDIOC_G_CTRL
+		SetControl            = -1073195492, // VIDIOC_S_CTRL
 		RequestBuffers        = -1072409080, // VIDIOC_REQBUFS
 		QueryBuffer           = -1069263351, // VIDIOC_QUERYBUF
 		StreamingOn           =  1074026002, // VIDIOC_STREAMON

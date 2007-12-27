@@ -88,6 +88,7 @@
     <File name="Analog/Video/SlicedVBIFormat.cs" subtype="Code" buildaction="Compile" />
     <File name="Analog/Video/SlicedVBICaptureFormat.cs" subtype="Code" buildaction="Compile" />
     <File name="Analog/Video/SlicedVBIOutputFormat.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Control.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

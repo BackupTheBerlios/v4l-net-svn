@@ -44,10 +44,10 @@ namespace Video4Linux.Analog
 		
 		#region Constructors and Destructors
 		
-        /// <summary>
-        /// Creates a buffer to be used with Video4Linux streaming I/O.
-        /// </summary>
-		/// <param name="device">The parental Video4Linux device.</param>
+		/// <summary>
+		/// Creates a buffer to be used with Video4Linux streaming I/O.
+		/// </summary>
+		/// <param name="adapter">The parental Video4Linux device.</param>
 		/// <param name="buffer">The struct holding the buffer information.</param>
 		internal Buffer(Analog.Adapter adapter, v4l2_buffer buffer)
 		{
