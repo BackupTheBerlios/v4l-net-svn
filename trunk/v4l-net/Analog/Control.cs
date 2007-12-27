@@ -21,7 +21,7 @@
 
 using System;
 
-namespace Video4Linux.Analog.Kernel
+namespace Video4Linux.Analog
 {
 	public enum Control : uint
 	{
