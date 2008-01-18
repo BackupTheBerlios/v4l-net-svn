@@ -72,6 +72,9 @@ namespace Video4Linux.Analog
 		public Adapter(string path)
 		{
 			deviceHandle = Syscall.open(path, OpenFlags.O_RDWR);
+			if (deviceHandle < 0)
+				throw new Exception("Adapter " + path + " cannot be found.");
+			
 			ioControl = new Core.IOControl(deviceHandle);
 		}
 		

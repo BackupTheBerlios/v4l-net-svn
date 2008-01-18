@@ -1,3 +1,7 @@
+2008-01-18  Tim Taubert <twenty-three@users.berlios.de> 
+
+	* Analog/Adapter.cs: check for errors when opening adapter
+
 2007-12-27  Tim Taubert <twenty-three@users.berlios.de> 
 
 	* Analog/Control.cs: namespace corrected
