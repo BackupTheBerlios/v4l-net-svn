@@ -34,7 +34,7 @@ namespace Video4Linux.Core
 		#region Private Fields
 		
 		private int deviceHandle;
-
+		
 		#endregion Private Fields
 		
 		#region Constructors and Destructors
@@ -210,17 +210,17 @@ namespace Video4Linux.Core
 		{
 			return ioctl(deviceHandle, v4l2_operation.SetFormat, ref fmt);
 		}
-
+		
 		public int GetOutput(ref int output)
 		{
 			return ioctl(deviceHandle, v4l2_operation.GetOutput, ref output);
 		}
-
+		
 		public int SetOutput(ref int output)
 		{
 			return ioctl(deviceHandle, v4l2_operation.SetOutput, ref output);
 		}
-
+		
 		public int QueryInputStandard(ref v4l2_std_id std)
 		{
 			return -1; // FIXME: Unimplemented;
@@ -233,97 +233,103 @@ namespace Video4Linux.Core
 		{
 			return ioctl(deviceHandle, v4l2_operation.EnumerateFormats, ref fmt);
 		}
-
+		
 		public int QuerySlicedVBICapabilities(ref v4l2_sliced_vbi_cap cap)
 		{
 			return -1; // FIXME: Unimplemented;
 		}
-
+		
+		/// <summary>
+		/// Calls VIDIOC_G_CTRL.
+		/// </summary>
 		public int GetControl(ref v4l2_control control)
 		{
 			return ioctl(deviceHandle, v4l2_operation.GetControl, ref control);
 		}
-
+		
+		/// <summary>
+		/// Calls VIDIOC_S_CTRL.
+		/// </summary>
 		public int SetControl(ref v4l2_control control)
 		{
 			return ioctl(deviceHandle, v4l2_operation.SetControl, ref control);
 		}
-
+		
 		public int GetAccessPriority(ref v4l2_priority priority)
 		{
 			return -1; // FIXME: Unimplemented;
 		}
-
+		
 		public int SetAccessPriority(ref v4l2_priority priority)
 		{
 			return -1; // FIXME: Unimplemented;
 		}
-
+		
 		public int WriteDebugInformation()
 		{
 			return -1; // FIXME: Unimplemented;
 		}
-
+		
 		public int GetModulator(ref v4l2_modulator mod)
 		{
 			return -1; // FIXME: Unimplemented;
 		}
-
+		
 		public int SetModulator(ref v4l2_modulator mod)
 		{
 			return -1; // FIXME: Unimplemented;
 		}
-
+		
 		public int GetCroppingRect(ref v4l2_crop crop)
 		{
 			return -1; // FIXME: Unimplemented;
 		}
-
+		
 		public int SetCroppingRect(ref v4l2_crop crop)
 		{
 			return -1; // FIXME: Unimplemented;
 		}
-
+		
 		public int GetAudioInput(ref v4l2_audio input)
 		{
 			return ioctl(deviceHandle, v4l2_operation.GetAudioInput, ref input);
 		}
-
+		
 		public int SetAudioInput(ref v4l2_audio input)
 		{
 			return ioctl(deviceHandle, v4l2_operation.SetAudioInput, ref input);
 		}
-
+		
 		public int GetAudioOutput(ref v4l2_audioout output)
 		{
 			return ioctl(deviceHandle, v4l2_operation.GetAudioOutput, ref output);
 		}
-
+		
 		public int SetAudioOutput(ref v4l2_audioout output)
 		{
 			return ioctl(deviceHandle, v4l2_operation.SetAudioOutput, ref output);
 		}
-
+		
 		public int EnumerateAudioInputs(ref v4l2_audio input)
 		{
 			return ioctl(deviceHandle, v4l2_operation.EnumerateAudioInputs, ref input);
 		}
-
+		
 		public int EnumerateAudioOutputs(ref v4l2_audioout output)
 		{
 			return ioctl(deviceHandle, v4l2_operation.EnumerateAudioOutputs, ref output);
 		}
-
+		
 		public int QueryCroppingCapabilities(ref v4l2_cropcap cap)
 		{
 			return -1; // FIXME: Unimplemented;
 		}
-
+		
 		public int GetFrameBufferOverlay(ref v4l2_framebuffer fbov)
 		{
 			return -1; // FIXME: Unimplemented;
 		}
-
+		
 		public int SetFrameBufferOverlay(ref v4l2_framebuffer fbov)
 		{
 			return -1; // FIXME: Unimplemented;
