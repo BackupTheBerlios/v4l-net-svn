@@ -1,0 +1,39 @@
+Video4Linux.Net - a Mono interface to Video4Linux
+Copyright (C) 2007-2008 Tim Taubert (twenty-three@users.berlios.de)
+Licensed under the GPLv3.
+
+Build
+=====
+
+Just type (as normal user):
+
+	./configure
+	make
+
+Install
+=======
+
+If you want to install Video4Linux.Net, login as root user
+and type:
+
+	make install
+
+Usage
+=====
+
+Be sure to reference "video4linux-net.dll" in your Mono code.
+Then just use the library as described in the Tutorials or in
+the Documentation.
+
+Bugs
+====
+
+Please report any bugs under:
+
+  http://developer.berlios.de/bugs/?group_id=8832
+
+Further Information
+===================
+
+http://v4l-net.berlios.de/
+http://developer.berlios.de/projects/v4l-net/
