@@ -15,7 +15,7 @@
   </Configurations>
   <Contents>
     <File name="Analog" subtype="Directory" buildaction="Compile" />
-    <File name="Digital" subtype="Directory" buildaction="Compile" />
+    <File name="DVB" subtype="Directory" buildaction="Compile" />
     <File name="Core" subtype="Directory" buildaction="Compile" />
     <File name="Core/SearchableList.cs" subtype="Code" buildaction="Compile" />
     <File name="Core/IOControl.cs" subtype="Code" buildaction="Compile" />
@@ -89,6 +89,8 @@
     <File name="Analog/Video/SlicedVBICaptureFormat.cs" subtype="Code" buildaction="Compile" />
     <File name="Analog/Video/SlicedVBIOutputFormat.cs" subtype="Code" buildaction="Compile" />
     <File name="Analog/Control.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Video/Stream.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/CaptureMethod.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

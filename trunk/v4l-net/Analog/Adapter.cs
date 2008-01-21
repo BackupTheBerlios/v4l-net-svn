@@ -53,15 +53,10 @@ namespace Video4Linux.Analog
 		private List<AdapterCapability> capabilities;
 		private List<Analog.Video.Format> formats;
 		
-		private Thread streamingThread;
+		private Analog.Video.Stream videoStream;
+		private CaptureMethod captureMethod = CaptureMethod.MemoryMapping;
 		
 		#endregion Private Fields
-		
-		public delegate void BufferFilledEventHandler(Adapter sender, Buffer buffer);
-		/// <summary>
-		/// Gets fired when a buffer was filled by the driver (when a frame was captured).
-		/// </summary>
-		public event BufferFilledEventHandler BufferFilled;
 		
 		#region Constructors and Destructors
 		
@@ -224,28 +219,6 @@ namespace Video4Linux.Analog
 		}
 		
 		/// <summary>
-		/// Tries to dequeue a buffer and fires the 'BufferFilled' event if the buffer was filled by the driver.
-		/// </summary>
-		private void captureFromBuffers()
-		{
-			v4l2_buffer buf = new v4l2_buffer();
-			buf.type = Buffers[0].Type;
-			buf.memory = Buffers[0].Memory;
-			
-			while (ioControl.DequeueBuffer(ref buf) == 0)
-			{
-				Analog.Buffer dbuf = Buffers[(int)buf.index];
-				
-				// invoke the event
-				if (BufferFilled != null)
-					BufferFilled(this, dbuf);
-				
-				// re-enqueue the buffer
-				dbuf.Enqueue();
-			}
-		}
-		
-		/// <summary>
 		/// Requests a given number of buffers for mmap data transfer.
 		/// </summary>
 		private void requestBuffers()
@@ -335,6 +308,10 @@ namespace Video4Linux.Analog
 		/// </summary>
 		public void StartStreaming()
 		{
+			// nothing to do here if we use read/write to capture
+			if (captureMethod == CaptureMethod.ReadWrite)
+				return;
+			
 			// request the streaming buffers if necessary
 			if (buffers == null || buffers.Count != bufferCount)
 				requestBuffers();
@@ -345,10 +322,6 @@ namespace Video4Linux.Analog
 			v4l2_buf_type type = v4l2_buf_type.VideoCapture;
 			if (ioControl.StreamingOn(ref type) < 0)
 				throw new Exception("VIDIOC_STREAMON");
-			
-			streamingThread = new Thread(new ThreadStart(captureFromBuffers));
-			streamingThread.Priority = ThreadPriority.Lowest;
-			streamingThread.Start();
 		}
 		
 		/// <summary>
@@ -356,9 +329,9 @@ namespace Video4Linux.Analog
 		/// </summary>
 		public void StopStreaming()
 		{
-			// abort checking for captured frames
-			streamingThread.Abort();
-			streamingThread = null;
+			// nothing to do here if we use read/write to capture
+			if (captureMethod == CaptureMethod.ReadWrite)
+				return;
 			
 			// destroy the buffers
 			buffers = new List<Analog.Buffer>();
@@ -445,6 +418,12 @@ namespace Video4Linux.Analog
 			}
 		}
 		
+		public CaptureMethod CaptureMethod
+		{
+			get { return captureMethod; }
+			set { captureMethod = value; }
+		}
+		
 		/// <summary>
 		/// Gets information about the device's capabilities.
 		/// </summary>
@@ -457,6 +436,17 @@ namespace Video4Linux.Analog
 					fetchCapabilities();
 				
 				return capabilities.AsReadOnly();
+			}
+		}
+		
+		public Analog.Video.Stream VideoStream
+		{
+			get
+			{
+				if (videoStream == null)
+					videoStream = new Analog.Video.Stream(this);
+				
+				return videoStream;
 			}
 		}
 		

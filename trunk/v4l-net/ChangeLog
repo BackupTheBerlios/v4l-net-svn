@@ -1,5 +1,12 @@
 2008-01-21  Tim Taubert <twenty-three@users.berlios.de> 
 
+	* Analog/Adapter.cs, Analog/Video/Stream.cs, Analog/CaptureMethod.cs:
+	  implemented new streaming interface, new capture method (read/write)
+	  supported
+	* DVB, Digital: digital renamed to dvb
+
+2008-01-21  Tim Taubert <twenty-three@users.berlios.de> 
+
 	* Core/IOControl.cs: documentation added, formatting corrected
 
 2008-01-18  Tim Taubert <twenty-three@users.berlios.de> 
