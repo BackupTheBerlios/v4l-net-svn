@@ -30,9 +30,8 @@ namespace tvviewer
 			adapter = new Adapter("/dev/video0");
 			adapter.SetControlValue(Control.Mute, 0);
 			
-			// we currently only support streaming
-			if (!adapter.Capabilities.Contains(AdapterCapability.Streaming))
-				throw new Exception("device is not able to do streaming!");
+			// set desired capture method
+			adapter.CaptureMethod = CaptureMethod.ReadWrite;
 			
 			// set video format
 			VideoCaptureFormat format = new VideoCaptureFormat(720, 576);
