@@ -1,5 +1,11 @@
 2008-04-24  Tim Taubert <ttmails@users.berlios.de> 
 
+	* Analog/Kernel/V4L1/video_capability.cs, Analog/Kernel/V4L1/video_type.cs,
+	  Analog/V4L1Adapter.cs, Core/V4L1IOControl.cs, v4l-net.mdp: some
+	  premature v4l1 tests implemented
+
+2008-04-24  Tim Taubert <ttmails@users.berlios.de> 
+
 	* Analog/Kernel/V4L1, Analog/Kernel/V4L1/video_capability.cs,
 	  Analog/Kernel/V4L2, Analog/Kernel/V4L2/v4l2_audio.cs,
 	  Analog/Kernel/V4L2/v4l2_audioout.cs,

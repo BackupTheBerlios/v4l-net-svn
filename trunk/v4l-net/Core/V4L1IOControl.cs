@@ -22,24 +22,26 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Video4Linux.Analog.Kernel.V4L1
+using Video4Linux.Analog.Kernel.V4L1;
+
+namespace Video4Linux.Core
 {
-	internal struct video_capability
+	internal class V4L1IOControl
 	{
-		[MarshalAs(UnmanagedType.ByValTStr, SizeConst=32)]
-		public string name;
-		public int type;
-		/* Number of channels */
-		public int channels;
-		/* Number of audio devices */
-		public int audios;
-		/* Maximum supported width */
-		public int maxwidth;
-		/* Maximum supported height */
-		public int maxheight;
-		/* Minimum supported width */
-		public int minwidth;
-		/* Minimum supported height */
-		public int minheight;
+		private int deviceHandle;
+		
+		public V4L1IOControl(int deviceHandle)
+		{
+			this.deviceHandle = deviceHandle;
+		}
+		
+		public int QueryDeviceCapabilities(ref video_capability cap)
+		{
+			return ioctl(deviceHandle, -2143521279, ref cap);
+		}
+		
+		[DllImport("libc", SetLastError=true)]
+		private static extern int
+			ioctl(int device, int request, ref video_capability argp);
 	}
 }

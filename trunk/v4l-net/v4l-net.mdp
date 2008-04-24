@@ -93,6 +93,9 @@
     <File name="Analog/Kernel/V4L2/v4l2_buffer.cs" subtype="Code" buildaction="Compile" />
     <File name="Analog/Kernel/V4L2/v4l2_window.cs" subtype="Code" buildaction="Compile" />
     <File name="Analog/Kernel/V4L2/v4l2_tuner_capability.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/V4L1Adapter.cs" subtype="Code" buildaction="Compile" />
+    <File name="Core/V4L1IOControl.cs" subtype="Code" buildaction="Compile" />
+    <File name="Analog/Kernel/V4L1/video_type.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

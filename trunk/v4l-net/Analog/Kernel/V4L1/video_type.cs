@@ -20,26 +20,30 @@
 #endregion LICENSE
 
 using System;
-using System.Runtime.InteropServices;
 
 namespace Video4Linux.Analog.Kernel.V4L1
 {
-	internal struct video_capability
+	public enum video_type : int
 	{
-		[MarshalAs(UnmanagedType.ByValTStr, SizeConst=32)]
-		public string name;
-		public int type;
-		/* Number of channels */
-		public int channels;
-		/* Number of audio devices */
-		public int audios;
-		/* Maximum supported width */
-		public int maxwidth;
-		/* Maximum supported height */
-		public int maxheight;
-		/* Minimum supported width */
-		public int minwidth;
-		/* Minimum supported height */
-		public int minheight;
+		/* Can capture to memory */
+		VID_TYPE_CAPTURE	= 1,
+		/* Has a tuner of some form */
+		VID_TYPE_TUNER		= 2,
+		/* Has teletext capability */
+		VID_TYPE_TELETEXT	= 4,
+		/* Can overlay its image onto the frame buffer */
+		VID_TYPE_OVERLAY	= 8,
+		/* Overlay is Chromakeyed */
+		VID_TYPE_CHROMAKEY	= 16,
+		/* Overlay clipping is supported */
+		VID_TYPE_CLIPPING	= 32,
+		/* Overlay overwrites frame buffer memory */
+		VID_TYPE_FRAMERAM	= 64,
+		/* The hardware supports image scaling */
+		VID_TYPE_SCALES		= 128,
+		/* Image capture is grey scale only */
+		VID_TYPE_MONOCHROME	= 256,
+		/* Capture can be of only part of the image */
+		VID_TYPE_SUBCAPTURE	= 512
 	}
 }
